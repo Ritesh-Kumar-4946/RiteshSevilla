@@ -117,6 +117,14 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.rl_dr_logout)
     RelativeLayout rl_Dr_Logout;
 
+    @BindView(R.id.rl_cart_icon_main)
+    RelativeLayout rl_cart_main;
+
+    @BindView(R.id.rl_badgeview_cart_item_main)
+    RelativeLayout rl_cart_badgeview_main;
+
+    @BindView(R.id.tv_badge_counter_main_category)
+    TextView TV_cart_badge_counter_textview;
 
     @BindView(R.id.profile_image)
     CircleImageView profileImageView;
@@ -141,12 +149,16 @@ public class MainActivity extends AppCompatActivity {
 
     String
             User_ID = "",
+            Str_Get_Cart_Deatil_User_ID = "",
+            Str_Get_Cart_Product_count = "",
             Str_Get_User_ID = "",
             Str_Get_user_image = "",
             Str_Get_user_name = "",
             Str_Set_user_name = "",
             Str_profileImage_path = "",
             result = "",
+            Str_Get_Cart_Detail_Status = "",
+            Str_Get_Cart_result = "",
             Str_Get_Status = "";
 
     List<MainActivity> rowItems;
@@ -200,6 +212,20 @@ public class MainActivity extends AppCompatActivity {
 
         if (Utils.isConnected(getApplicationContext())) {
             GetUserDetailJsontask task = new GetUserDetailJsontask();
+            task.execute();
+        } else {
+
+            SnackbarManager.show(
+                    Snackbar.with(MainActivity.this)
+                            .position(Snackbar.SnackbarPosition.TOP)
+                            .margin(15, 15)
+                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                            .text("Please Your Internet Connectivity..!!"));
+
+        }
+
+        if (Utils.isConnected(getApplicationContext())) {
+            MainCartDeatilJsontask task = new MainCartDeatilJsontask();
             task.execute();
         } else {
 
@@ -772,6 +798,81 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
                     Log.e("onPostExecute Sub_cat_id size is Zero ", "ooppss");
+                    SnackbarManager.show(
+                            Snackbar.with(MainActivity.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("No Data Found"));
+                }
+            }
+        }
+
+    }
+
+    private class MainCartDeatilJsontask extends AsyncTask<String, Void, String> {
+
+        boolean iserror = false;
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            //  loginprogressbar.setVisibility(View.VISIBLE);
+            Log.e("******* NOW MainCartDeatilJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW MainCartDeatilJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("User_ID onPreExecute :", "" + User_ID);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            Log.e("******* NOW Login TASK IS RUNNING *******", "YES");
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id="+User_ID);
+
+            /*http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id=286*/
+            Log.e("URL Cart Detail Main :", "" + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id="+User_ID);
+
+            try {
+                HttpResponse response = client.execute(post);
+                String object = EntityUtils.toString(response.getEntity());
+                Log.e("*******object******** :", "" + object);
+
+                //JSONArray js = new JSONArray(object);
+                JSONObject jobect = new JSONObject(object);
+                Str_Get_Cart_Detail_Status = jobect.getString("status");
+                if (Str_Get_Status.equalsIgnoreCase("OK")) {
+                    Str_Get_Cart_Deatil_User_ID = jobect.getString("user_id");
+                    Str_Get_Cart_Product_count = jobect.getString("no_of_prodcut");
+                    Str_Get_Cart_result = jobect.getString("single_product_result");
+
+                }
+
+            } catch (Exception e) {
+                Log.v("22", "22" + e.getMessage());
+                e.printStackTrace();
+                iserror = true;
+            }
+
+            return Str_Get_Cart_Detail_Status;
+        }
+
+        @Override
+        protected void onPostExecute(String result1) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result1);
+
+            if (!iserror) {
+                if (Str_Get_Cart_Detail_Status.equalsIgnoreCase("OK")) {
+
+                    Log.e("Str_Get_Cart_Deatil_User_ID :", "" + Str_Get_Cart_Deatil_User_ID);
+                    Log.e("Str_Get_Cart_Product_count :", "" + Str_Get_Cart_Product_count);
+                    Log.e("Str_Get_Cart_result :", "" + Str_Get_Cart_result);
+
+                    TV_cart_badge_counter_textview.setText(Str_Get_Cart_Product_count);
+
+                } else {
+                    Log.e("onPostExecute Error ", "ooppss");
                     SnackbarManager.show(
                             Snackbar.with(MainActivity.this)
                                     .position(Snackbar.SnackbarPosition.TOP)
