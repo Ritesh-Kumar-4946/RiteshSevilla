@@ -32,6 +32,10 @@
     <string name ="delivery_state_hint">State</string>
     <string name ="delivery_country_hint">Country</string>
     <string name ="delivery_zip_code_hint">Zip Code</string>
+    <string name ="dialog_banner_textview">Choose Image From</string>
+    <string name ="dialog_camera_textview">Camera</string>
+    <string name ="dialog_gallery_textview">Gallery</string>
+    <string name ="dialog_cancel_textview">Cancel</string>
 
 
     <!--drawer text (Start)-->
