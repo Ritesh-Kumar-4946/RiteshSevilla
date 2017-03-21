@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:background="@drawable/dialog_bg"
     android:padding="10dp">
 
 
@@ -10,9 +12,7 @@
         android:id="@+id/cv_et_sign_btn_edit_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cv_et_edit_profile_re_password"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
         android:background="?android:attr/selectableItemBackground"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="5dp"
@@ -28,7 +28,7 @@
                 android:id="@+id/rl_dialog_tittle"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="30dp"
+                android:background="@color/main_color"
                 android:padding="10dp">
 
                 <TextView
@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="@string/dialog_banner_textview"
-                    android:textColor="@color/text_black_color"
+                    android:textColor="@color/text_color_white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rl_dialog_tittle"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="5dp">
 
                 <RelativeLayout
                     android:id="@+id/rl_inner_camera"
@@ -55,19 +55,22 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_margin="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/dialog_bg"
                     android:padding="10dp">
 
                     <RelativeLayout
                         android:id="@+id/rl_picker_camera_imageview"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true">
 
                         <ImageView
                             android:id="@+id/iv_camera"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:background="@drawable/ic_picker_camera" />
 
                     </RelativeLayout>
@@ -76,16 +79,16 @@
                         android:id="@+id/rl_picker_camera_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_toEndOf="@id/rl_picker_camera_imageview">
+                        android:layout_below="@id/rl_picker_camera_imageview"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/dialog_camera_textview"
                             android:textColor="@color/text_black_color"
-                            android:textSize="18sp" />
+                            android:textSize="15sp" />
 
                     </RelativeLayout>
 
@@ -97,19 +100,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_margin="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/dialog_bg"
                     android:padding="10dp">
 
                     <RelativeLayout
                         android:id="@+id/rl_picker_gallery_imageview"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true">
 
                         <ImageView
                             android:id="@+id/iv_gallery"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:background="@drawable/ic_picker_gallery" />
 
                     </RelativeLayout>
@@ -118,16 +124,16 @@
                         android:id="@+id/rl_picker_gallery_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/rl_picker_gallery_imageview"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="10dp"
-                        android:layout_toEndOf="@id/rl_picker_gallery_imageview">
+                        android:layout_marginTop="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/dialog_gallery_textview"
                             android:textColor="@color/text_black_color"
-                            android:textSize="18sp" />
+                            android:textSize="15sp" />
 
                     </RelativeLayout>
 
@@ -144,16 +150,15 @@
                 android:layout_below="@id/rl_camera_gallery">
 
                 <TextView
-                    android:padding="10dp"
                     android:id="@+id/tv_dialog_cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="40dp"
+                    android:layout_centerInParent="true"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="40dp"
+                    android:padding="10dp"
                     android:text="@string/dialog_cancel_textview"
-                    android:textColor="@color/text_black_color"
+                    android:textColor="@color/text_color_signup"
                     android:textSize="18sp" />
 
             </RelativeLayout>

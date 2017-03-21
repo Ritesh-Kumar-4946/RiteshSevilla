@@ -1,7 +1,13 @@
 package com.ritesh.sevilla;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +15,12 @@ import android.support.v7.widget.CardView;
 import android.text.Html;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,6 +47,7 @@ import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import fr.castorflex.android.circularprogressbar.CircularProgressDrawable;
@@ -94,6 +105,8 @@ public class EditProfileActivity extends AppCompatActivity {
             Str_Get_user_name = "",
             Str_Get_phone_number = "",
             Str_Get_Status = "";
+
+    Dialog QuickTipDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,6 +197,8 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 Toast.makeText(EditProfileActivity.this, "Image Picker", Toast.LENGTH_SHORT).show();
+
+                quickpayment();
             }
         });
 
@@ -343,6 +358,82 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+
+    private void quickpayment() {
+        QuickTipDialog = new Dialog(EditProfileActivity.this);
+//                callFeeDialog = new Dialog(MainActivity.this);
+        QuickTipDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        QuickTipDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        QuickTipDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        QuickTipDialog.setContentView(R.layout.activity_dialog_image_picker);
+        final RelativeLayout RlCamera = (RelativeLayout) QuickTipDialog.findViewById(R.id.rl_inner_camera);
+        final RelativeLayout RlGallery = (RelativeLayout) QuickTipDialog.findViewById(R.id.rl_inner_gallery);
+        final TextView TvCancel = (TextView) QuickTipDialog.findViewById(R.id.tv_dialog_cancel);
+
+        TvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                QuickTipDialog.dismiss();
+            }
+        });
+
+        RlCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new PickerBuilder(EditProfileActivity.this, PickerBuilder.SELECT_FROM_CAMERA)
+                        .setOnImageReceivedListener(new PickerBuilder.onImageReceivedListener() {
+                            @Override
+                            public void onImageReceived(Uri imageUri) {
+//                                Toast.makeText(EditProfileActivity.this, "Got image - " + imageUri, Toast.LENGTH_LONG).show();
+                                Civ_edit_profile_image.setImageURI(imageUri);
+                                Log.e("imageUri path SELECT_FROM_CAMERA :", "" + imageUri);
+                                QuickTipDialog.dismiss();
+                            }
+                        })
+                        .setImageName("testImage")
+                        .setImageFolderName("testFolder")
+                        .withTimeStamp(false)
+                        .setCropScreenColor(Color.CYAN)
+                        .start();
+
+            }
+        });
+
+        RlGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new PickerBuilder(EditProfileActivity.this, PickerBuilder.SELECT_FROM_GALLERY)
+                        .setOnImageReceivedListener(new PickerBuilder.onImageReceivedListener() {
+                            @Override
+                            public void onImageReceived(Uri imageUri) {
+                                Civ_edit_profile_image.setImageURI(imageUri);
+//                                Toast.makeText(EditProfileActivity.this, "Got image - " + imageUri, Toast.LENGTH_LONG).show();
+                                Log.e("imageUri path SELECT_FROM_GALLERY :", "" + imageUri);
+                                QuickTipDialog.dismiss();
+                            }
+                        })
+                        .setImageName("test")
+                        .setImageFolderName("testFolder")
+                        .setCropScreenColor(Color.CYAN)
+                        .setOnPermissionRefusedListener(new PickerBuilder.onPermissionRefusedListener() {
+                            @Override
+                            public void onPermissionRefused() {
+
+                            }
+                        })
+                        .start();
+
+
+            }
+        });
+
+
+        QuickTipDialog.show();
     }
 
 
