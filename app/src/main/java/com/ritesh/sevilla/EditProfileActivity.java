@@ -39,11 +39,28 @@ import com.ritesh.sevilla.Constant.Appconstant;
 import com.ritesh.sevilla.Constant.Utils;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -102,11 +119,22 @@ public class EditProfileActivity extends AppCompatActivity {
             Str_Get_User_ID = "",
             Str_Get_message = "",
             Str_Get_user_image = "",
+            Str_Set_user_image = "",
             Str_Get_user_name = "",
+            Str_Set_user_name = "",
             Str_Get_phone_number = "",
+            Str_Set_phone_number = "",
+            Str_Set_password = "",
+            Str_Set_re_password = "",
+            Str_profileImage_path = "",
+            result = "",
             Str_Get_Status = "";
 
     Dialog QuickTipDialog;
+
+    File ProfileImage;
+    FileBody ProdileImagefilebody;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,6 +208,33 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
 
                     Log.e("Action ", "Up");
+
+                    Str_Set_user_name = EDT_et_edit_profile_username.getText().toString().trim();
+                    Str_Set_phone_number = EDT_et_edit_profile_phone_number.getText().toString().trim();
+                    Str_Set_password = EDT_et_edit_profile_password.getText().toString().trim();
+                    Str_Set_re_password = EDT_et_edit_profile_re_password.getText().toString().trim();
+
+                    Log.e(" Update Fields data :", "\n"
+                            + "Str_Set_user_name :" + "" + Str_Set_user_name + "\n"
+                            + "Str_Set_password :" + "" + Str_Set_password + "\n"
+                            + "Str_Set_re_password :" + "" + Str_Set_re_password + "\n"
+                            + "Str_Set_phone_number :" + "" + Str_Set_phone_number + "\n");
+
+                    if (Utils.isConnected(getApplicationContext())) {
+                        UpdateProfileJsontask task = new UpdateProfileJsontask();
+                        task.execute();
+                    } else {
+
+                        SnackbarManager.show(
+                                Snackbar.with(EditProfileActivity.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .text("Please Your Internet Connectivity..!!"));
+
+                    }
+
+
                     Toast.makeText(EditProfileActivity.this, "Comming Soon", Toast.LENGTH_SHORT).show();
                     CV_et_sign_btn_edit_profile_click.setVisibility(View.GONE);
                     CV_et_sign_btn_edit_profile.setVisibility(View.VISIBLE);
@@ -198,7 +253,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 Toast.makeText(EditProfileActivity.this, "Image Picker", Toast.LENGTH_SHORT).show();
 
-                quickpayment();
+                ProfileImagePicker();
             }
         });
 
@@ -324,7 +379,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
                     ImageLoader imageLoader = ImageLoader.getInstance();
-                    imageLoader.getInstance().displayImage(Str_Get_message, Civ_edit_profile_image, new ImageLoadingListener() {
+                    imageLoader.getInstance().displayImage(Str_Get_user_image, Civ_edit_profile_image, new ImageLoadingListener() {
                         @Override
                         public void onLoadingStarted(String imageUri, View view) {
                             RL_edit_profile_image_progress.setVisibility(View.VISIBLE);
@@ -360,8 +415,118 @@ public class EditProfileActivity extends AppCompatActivity {
 
     }
 
+    private class UpdateProfileJsontask extends AsyncTask<String, Void, String> {
 
-    private void quickpayment() {
+        boolean iserror = false;
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            //  loginprogressbar.setVisibility(View.VISIBLE);
+            Log.e("******* NOW UpdateProfileJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW UpdateProfileJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("User_ID onPreExecute :", "" + User_ID);
+            Log.e("Str_Set_user_name :","" + Str_Set_user_name);
+            Log.e("Str_Set_password :", "" + Str_Set_password);
+            Log.e("Str_Set_re_password :", "" + Str_Set_re_password);
+            Log.e("Str_Set_phone_number :", "" + Str_Set_phone_number);
+            Log.e("Str_profileImage_path :", "" + Str_profileImage_path);
+
+            if (Str_profileImage_path.equalsIgnoreCase("")){
+                Str_profileImage_path = "Ritesh";
+            }
+            RL_edit_profile_main_progress.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            Log.e("******* NOW Login TASK IS RUNNING *******", "YES");
+
+
+            try {
+                HttpClient client = new DefaultHttpClient();
+                HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/edit_user.php?user_id="+User_ID);
+                Log.e("URL :", "" + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/edit_user.php?user_id="+User_ID+
+                        "&user_name="+Str_Set_user_name+"&phone_number="+Str_Set_phone_number+"&user_pass="+Str_Set_password+"&user_image="+ProdileImagefilebody);
+
+                MultipartEntity reqEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+                reqEntity.addPart("user_name", new StringBody(Str_Set_user_name));
+                reqEntity.addPart("phone_number", new StringBody(Str_Set_phone_number));
+                reqEntity.addPart("user_pass", new StringBody(Str_Set_password));
+
+                if (ProfileImage == null) {
+                    Log.e("ProfileImage File is :", "NULL");
+                    Str_profileImage_path = "Ritesh";
+
+                } else {
+                    /******************* file for post the profile image to the server *******************/
+                    ProdileImagefilebody = new FileBody(ProfileImage);
+                    reqEntity.addPart("user_image", ProdileImagefilebody);
+                    Log.e("ProdileImagefilebody image :", "" + ProdileImagefilebody.toString());
+                    /******************* file for post the profile image to the server *******************/
+                }
+
+                /*List<NameValuePair> nameValuePairs = new ArrayList<>();
+                nameValuePairs.add(new BasicNameValuePair("user_id", User_ID));
+                Log.e("******* ID TO SERVER FOR MACHING*******", "" + User_ID);*/
+
+                post.setEntity(reqEntity);
+                HttpResponse response = client.execute(post);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                String sResponse;
+                StringBuilder s = new StringBuilder();
+                while ((sResponse = reader.readLine()) != null) {
+                    s = s.append(sResponse);
+                }
+
+                String Jsondata = s.toString();
+                Log.e("Jsondata : ", Jsondata);
+                JSONObject parentObject = new JSONObject(Jsondata);
+                result = parentObject.getString("status");
+                Log.e("*********** RESULT *********** : ", result);
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result1) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result1);
+            RL_edit_profile_main_progress.setVisibility(View.GONE);
+
+            if (!iserror) {
+                if (result.equalsIgnoreCase("1")) {
+
+
+
+
+                } else {
+                    Log.e("onPostExecute Sub_cat_id size is Zero ", "ooppss");
+                    SnackbarManager.show(
+                            Snackbar.with(EditProfileActivity.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("No Data Found"));
+                }
+            }
+        }
+
+    }
+
+
+    private void ProfileImagePicker() {
         QuickTipDialog = new Dialog(EditProfileActivity.this);
 //                callFeeDialog = new Dialog(MainActivity.this);
         QuickTipDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -391,6 +556,11 @@ public class EditProfileActivity extends AppCompatActivity {
 //                                Toast.makeText(EditProfileActivity.this, "Got image - " + imageUri, Toast.LENGTH_LONG).show();
                                 Civ_edit_profile_image.setImageURI(imageUri);
                                 Log.e("imageUri path SELECT_FROM_CAMERA :", "" + imageUri);
+                                File f = new File(imageUri.getPath());
+                                Str_profileImage_path = imageUri.getPath();
+                                Log.e("Str_profileImage_path SELECT_FROM_CAMERA :", "" + Str_profileImage_path);
+                                ProfileImage = new File(Str_profileImage_path);
+                                Log.e("profile File Image:", "" + ProfileImage);
                                 QuickTipDialog.dismiss();
                             }
                         })
@@ -414,6 +584,11 @@ public class EditProfileActivity extends AppCompatActivity {
                                 Civ_edit_profile_image.setImageURI(imageUri);
 //                                Toast.makeText(EditProfileActivity.this, "Got image - " + imageUri, Toast.LENGTH_LONG).show();
                                 Log.e("imageUri path SELECT_FROM_GALLERY :", "" + imageUri);
+                                File f = new File(imageUri.getPath());
+                                Str_profileImage_path = imageUri.getPath();
+                                Log.e("Str_profileImage_path SELECT_FROM_GALLERY :", "" + Str_profileImage_path);
+                                ProfileImage = new File(Str_profileImage_path);
+                                Log.e("profile File Image:", "" + ProfileImage);
                                 QuickTipDialog.dismiss();
                             }
                         })

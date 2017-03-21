@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.rl_dr_logout)
     RelativeLayout rl_Dr_Logout;
 
+
     @BindView(R.id.profile_image)
     CircleImageView profileImageView;
 
@@ -136,6 +137,17 @@ public class MainActivity extends AppCompatActivity {
     String Product_Catagories = "", Product_Catagories_result = "", Category_Id = "",
             Category_Name = "", Category_Img_Src = "", Category_Name_for_Sub_Category = "",
             MainCategory_ID = "";
+
+
+    String
+            User_ID = "",
+            Str_Get_User_ID = "",
+            Str_Get_user_image = "",
+            Str_Get_user_name = "",
+            Str_Set_user_name = "",
+            Str_profileImage_path = "",
+            result = "",
+            Str_Get_Status = "";
 
     List<MainActivity> rowItems;
     private ArrayList<String> cat_images;
@@ -181,9 +193,24 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
         Appconstant.sh = getSharedPreferences(Appconstant.MyPREFERENCES, Context.MODE_PRIVATE);
+        User_ID = Appconstant.sh.getString("id", null);
+        Log.e("User_ID from SharedPref :", "" + User_ID);
 
+        if (Utils.isConnected(getApplicationContext())) {
+            GetUserDetailJsontask task = new GetUserDetailJsontask();
+            task.execute();
+        } else {
 
+            SnackbarManager.show(
+                    Snackbar.with(MainActivity.this)
+                            .position(Snackbar.SnackbarPosition.TOP)
+                            .margin(15, 15)
+                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                            .text("Please Your Internet Connectivity..!!"));
+
+        }
 
 
         /*recycler data (Start 02 of 03)*/
@@ -234,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (Appconstant.sh.contains("F_username")) {
             STR_Fb_Name = Appconstant.sh.getString("F_username", "");
-            TV_user_profile_name.setText(STR_Fb_Name);
+//            TV_user_profile_name.setText(STR_Fb_Name);
         }
 
         if (Appconstant.sh.contains("F_email")) {
@@ -659,6 +686,106 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private class GetUserDetailJsontask extends AsyncTask<String, Void, String> {
+
+        boolean iserror = false;
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            //  loginprogressbar.setVisibility(View.VISIBLE);
+            Log.e("******* NOW EditProfileGetUserDetailJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW EditProfileGetUserDetailJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("User_ID onPreExecute :", "" + User_ID);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            Log.e("******* NOW Login TASK IS RUNNING *******", "YES");
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_user.php?user_id=" + User_ID);
+
+            Log.e("URL :", "" + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_user.php?user_id=" + User_ID);
+
+            try {
+                HttpResponse response = client.execute(post);
+                String object = EntityUtils.toString(response.getEntity());
+                Log.e("*******object******** :", "" + object);
+
+                //JSONArray js = new JSONArray(object);
+                JSONObject jobect = new JSONObject(object);
+                Str_Get_Status = jobect.getString("status");
+                if (Str_Get_Status.equalsIgnoreCase("1")) {
+                    Str_Get_User_ID = jobect.getString("ID");
+                    Str_Get_user_name = jobect.getString("user_name");
+                    Str_Get_user_image = jobect.getString("user_image");
+
+                }
+
+            } catch (Exception e) {
+                Log.v("22", "22" + e.getMessage());
+                e.printStackTrace();
+                iserror = true;
+            }
+
+            return Str_Get_Status;
+        }
+
+        @Override
+        protected void onPostExecute(String result1) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result1);
+
+            if (!iserror) {
+                if (Str_Get_Status.equalsIgnoreCase("1")) {
+
+                    Log.e("Str_Get_User_ID :", "" + Str_Get_User_ID);
+                    Log.e("Str_Get_user_name :", "" + Str_Get_user_name);
+                    Log.e("Str_Get_user_image :", "" + Str_Get_user_image);
+
+                    TV_user_profile_name.setText(Str_Get_user_name);
+
+
+                    ImageLoader imageLoader = ImageLoader.getInstance();
+                    imageLoader.getInstance().displayImage(Str_Get_user_image, profileImageView, new ImageLoadingListener() {
+                        @Override
+                        public void onLoadingStarted(String imageUri, View view) {
+//                            RL_edit_profile_image_progress.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+//                            RL_edit_profile_image_progress.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+//                            RL_edit_profile_image_progress.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onLoadingCancelled(String imageUri, View view) {
+//                            RL_edit_profile_image_progress.setVisibility(View.GONE);
+                        }
+                    });
+
+                } else {
+                    Log.e("onPostExecute Sub_cat_id size is Zero ", "ooppss");
+                    SnackbarManager.show(
+                            Snackbar.with(MainActivity.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("No Data Found"));
+                }
+            }
+        }
+
+    }
+
+
+
 
     private class CategoryAdapter extends RecyclerView.Adapter<MainActivity.CategoryAdapter.MyViewHolder> {
 
@@ -815,8 +942,8 @@ public class MainActivity extends AppCompatActivity {
 //
 //        switch (item.getItemId()) {
 //            case R.id.menu_search:
-                // Single menu item is selected do something
-                // Ex: launching new activity/screen or show alert message
+    // Single menu item is selected do something
+    // Ex: launching new activity/screen or show alert message
 //                Toast.makeText(MainActivity.this, "Search is Selected", Toast.LENGTH_SHORT).show();
 //                return true;
 
@@ -833,8 +960,6 @@ public class MainActivity extends AppCompatActivity {
 //                return super.onOptionsItemSelected(item);
 //        }
 //    }
-
-
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
