@@ -179,6 +179,15 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
 
+        Rl_edit_profile_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                Toast.makeText(EditProfileActivity.this, "Image Picker", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
 
