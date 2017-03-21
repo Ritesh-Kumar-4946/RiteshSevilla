@@ -224,20 +224,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        if (Utils.isConnected(getApplicationContext())) {
-            MainCartDeatilJsontask task = new MainCartDeatilJsontask();
-            task.execute();
-        } else {
-
-            SnackbarManager.show(
-                    Snackbar.with(MainActivity.this)
-                            .position(Snackbar.SnackbarPosition.TOP)
-                            .margin(15, 15)
-                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                            .text("Please Your Internet Connectivity..!!"));
-
-        }
-
 
         /*recycler data (Start 02 of 03)*/
         /*image settin by universal image loader */
@@ -806,6 +792,21 @@ public class MainActivity extends AppCompatActivity {
                                     .text("No Data Found"));
                 }
             }
+
+
+            if (Utils.isConnected(getApplicationContext())) {
+                MainCartDeatilJsontask task = new MainCartDeatilJsontask();
+                task.execute();
+            } else {
+
+                SnackbarManager.show(
+                        Snackbar.with(MainActivity.this)
+                                .position(Snackbar.SnackbarPosition.TOP)
+                                .margin(15, 15)
+                                .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                .text("Please Your Internet Connectivity..!!"));
+
+            }
         }
 
     }
@@ -841,7 +842,7 @@ public class MainActivity extends AppCompatActivity {
                 //JSONArray js = new JSONArray(object);
                 JSONObject jobect = new JSONObject(object);
                 Str_Get_Cart_Detail_Status = jobect.getString("status");
-                if (Str_Get_Status.equalsIgnoreCase("OK")) {
+                if (Str_Get_Cart_Detail_Status.equalsIgnoreCase("OK")) {
                     Str_Get_Cart_Deatil_User_ID = jobect.getString("user_id");
                     Str_Get_Cart_Product_count = jobect.getString("no_of_prodcut");
                     Str_Get_Cart_result = jobect.getString("single_product_result");
