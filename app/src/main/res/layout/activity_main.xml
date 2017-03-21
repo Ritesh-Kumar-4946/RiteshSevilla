@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="MainActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainscreen_toolbar"
+        android:elevation="7dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/txt_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="@string/dr_tv_home"
+                android:textColor="@color/text_color_white"
+                android:textSize="18sp" />
+
+            <!--cart imageview (Start)-->
+            <RelativeLayout
+                android:id="@+id/rl_cart_icon_main"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="2dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_cart" />
+
+            </RelativeLayout>
+            <!--cart imageview (End)-->
+
+            <!--cartitem badge counter (Start)-->
+            <RelativeLayout
+                android:id="@+id/rl_badgeview_cart_item_main"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/badge_bg"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tv_badge_counter_main_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/tv_add_cart_total_items"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+            <!--cartitem badge counter (End)-->
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_main">
+
+
+        <!--main screen dashboard items (Start)-->
+        <FrameLayout
+            android:id="@+id/containerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="-5dp">
+
+            <RelativeLayout
+                android:id="@+id/rl_main_dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/fl_banner_slid"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/vp_viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/ci_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        app:ci_animator="@animator/indicator_animator"
+                        app:ci_animator_reverse="@animator/indicator_animator_reverse"
+                        app:ci_drawable="@drawable/black_radius_square"
+                        app:ci_height="6dp"
+                        app:ci_margin="6dp"
+                        app:ci_width="15dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_main_recyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/fl_banner_slid">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="vertical" />
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_gridview_main_progress"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:padding="3dp"
+                android:visibility="gone">
+
+                <fr.castorflex.android.circularprogressbar.CircularProgressBar
+                    android:id="@+id/gridview_main_progressbar_circular"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:indeterminate="true"
+                    android:indeterminateOnly="false"
+                    app:cpb_colors="@array/gplus_colors" />
+
+            </RelativeLayout>
+
+        </FrameLayout>
+        <!--main screen dashboard items (End)-->
+
+
+        <!--left <drawer oppen items> -->
+        <RelativeLayout
+            android:id="@+id/rl_left_slidingdrawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start">
+
+            <!-- android:layout_gravity="start" -->
+
+            <RelativeLayout
+                android:id="@+id/SliderRelativelayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_dr_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/mainscreen_toolbar">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_profiel_imageview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/profile_image"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/ic_profile_image_bg"
+                            android:src="@drawable/the_app_guru"
+                            app:civ_border_color="#FFFFFFFF"
+                            app:civ_border_width="2dp" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_profileprogressbar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true">
+
+                            <ProgressBar
+                                android:id="@+id/profileprogressbar"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_centerHorizontal="true"
+                                android:indeterminate="false"
+                                android:max="100"
+                                android:progressDrawable="@drawable/circular_progress_bar" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_user_detail_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toEndOf="@id/rl_profiel_imageview"
+                        android:layout_toRightOf="@id/rl_profiel_imageview">
+
+                        <TextView
+                            android:id="@+id/tv_user_progile_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="3"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="@string/user_name"
+                            android:textColor="#FFFFFFFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_user_profile_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_user_progile_name"
+                            android:ems="3"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="@string/user_account_type"
+                            android:textColor="#FFFFFFFF"
+                            android:textSize="15sp"
+                            android:textStyle="normal" />
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+                <ScrollView
+                    android:id="@+id/sv_dr_items"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_dr_header"
+                    android:background="@color/sb__text_color">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_drawer_items"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_home"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_home"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_home"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_home"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_home"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_home"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_home"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_place_seller"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_home"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_place_seller"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_place_seller"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_place_holder"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_place_seller"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_place_seller"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_place_seller"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_inventory"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_place_seller"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_inventory"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_inventory"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_inventry"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_inventory"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_inventory"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_inventry"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_publicate_new"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_inventory"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_publicate_new"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_publicate_new"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_publicate_new"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_publicate_new"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_publicate_new"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_publicate_new"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_edit_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_publicate_new"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_edit_profile"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_edit_profile"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_edit_profile"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_edit_profile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_edit_profile"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_edit_profile"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_message"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_edit_profile"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_message"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_message"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_message"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_message"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_message"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_message"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_contact_support"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_message"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_contact_support"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_contact_support"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_contact_support"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_contact_support"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_contact_support"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_contact_support"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_about_us"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_contact_support"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_about_us"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_about_us"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_about_us"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_about_us"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_about_us"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_about_us"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_news_event"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_about_us"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_news_event"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_news_event"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_news_event"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_news_event"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_news_event"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_news_event"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_logout"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_news_event"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_logout"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_logout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_logout"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_logout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_logout"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_logout"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </ScrollView>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+        <!--left <drawer oppen items> -->
+
+
+    </android.support.v4.widget.DrawerLayout>
+
+
+
+
+</RelativeLayout>

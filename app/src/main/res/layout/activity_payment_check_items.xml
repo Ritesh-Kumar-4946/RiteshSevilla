@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_payment_check_grid_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
+        app:cardMaxElevation="3dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:id="@+id/rl_payment_check_main_image"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_gravity="center">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_payment_check_inner_imageview"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+
+                    <ImageView
+                        android:id="@+id/iv_payment_check_inner_imageview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_noo_image" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_payment_check_image_progress"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_centerInParent="true"
+                        android:padding="3dp"
+                        android:visibility="visible">
+
+                        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+                            android:id="@+id/cpb_payment_check_progressbar_circular"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:indeterminate="true"
+                            android:indeterminateOnly="false"
+                            app:cpb_colors="@array/gplus_colors" />
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_payment_check_name_quantity_price_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/rl_payment_check_inner_imageview"
+                    android:layout_toRightOf="@id/rl_payment_check_inner_imageview">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_payment_check_item_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="20dp">
+
+                        <TextView
+                            android:id="@+id/tv_payment_check_item_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginStart="10dp"
+                            android:ellipsize="end"
+                            android:ems="3"
+                            android:gravity="start"
+                            android:lines="1"
+                            android:text="@string/tv_patment_check_item_name"
+                            android:textColor="@color/text_black_color"
+                            android:textSize="18sp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_payment_check_item_quantity_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="20dp">
+
+                        <TextView
+                            android:id="@+id/tv_payment_check_item_quantity_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/tv_my_cart_product_quantity"
+                            android:textColor="@color/text_black_color"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_payment_check_item_quantity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@id/tv_payment_check_item_quantity_text"
+                            android:layout_toRightOf="@id/tv_payment_check_item_quantity_text"
+                            android:text="@string/tv_add_cart_total_items"
+                            android:textColor="@color/text_black_color"
+                            android:textSize="18sp" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_payment_check_item_price"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/rl_payment_check_main_image"
+                android:layout_marginTop="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_payment_check_item_price_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_payment_check_item_quantity_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/tv_my_cart_total_items_price"
+                        android:textColor="@color/text_black_color"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_payment_check_item_delivery_date"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/cv_payment_check_item_price"
+                android:layout_marginTop="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_payment_check_item_delivery_date_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_payment_check_item_delivery_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/tv_payment_check_delivery_date_textview"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</RelativeLayout>

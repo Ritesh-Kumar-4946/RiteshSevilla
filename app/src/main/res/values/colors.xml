@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="semi_transparent_white">#4DFFFFFF</color>
+
+    <color name="mainscreen_toolbar">#FF289604</color>
+    <color name="drawer_click_effect">#8ccc77</color>
+
+    <color name="main_color">#008B4B</color>
+    <color name="main_color_dark">#01743F</color>
+
+    <!--login screen color-->
+    <color name="login_email">#CD2228</color>
+    <color name="chcekout">#c6002e</color>
+    <color name="signup_toolbar_yellow">#d7c203</color>
+    <color name="login_facebook">#3D5A98</color>
+    <color name="login_facebook_focus">#5577bd</color>
+    <color name="text_color_white">#FFFFFFFF</color>
+    <color name="text_color_hint">#a3a3a3</color>
+    <color name="text_color_black">#000000</color>
+    <color name="text_black_color">#000000</color>
+    <color name="text_light_black_color">#707070</color>
+    <!--login screen color-->
+
+
+    <color name="main_grid_overlay_semitransparent">#403b333b</color>
+    <color name="sub_cat_single_product_quantity">#4052a669</color>
+    <color name="tv_sub_category_product_list_items">#615e61</color>
+    <color name="tv_sub_category_product_price">#038f60</color>
+    <color name="cv_sub_category_product_buy">#e49c17</color>
+    <color name="snackbar_semitransparent">#B94983</color>
+
+    <!--google type progress bar color (Start)-->
+    <integer-array name="gplus_colors">
+        <item>@color/gplus_color_1</item>
+        <item>@color/gplus_color_2</item>
+        <item>@color/gplus_color_3</item>
+        <item>@color/gplus_color_4</item>
+        <item>@color/gplus_color_5</item>
+
+    </integer-array>
+    <color name="gplus_color_1">#3e802f</color>
+    <color name="gplus_color_2">#f4b400</color>
+    <color name="gplus_color_3">#427fed</color>
+    <color name="gplus_color_4">#FF4081</color>
+    <color name="gplus_color_5">#b23424</color>
+    <!--google type progress bar color (End)-->
+
+</resources>

@@ -1,0 +1,115 @@
+<resources>
+    <string name="app_name">Sevilla</string>
+    <string name="splash_image">Splash Image</string>
+    <string name="login_email">Login With Email</string>
+    <string name="text_login">Login</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="signup_below">SIGN UP FOR NEW ACCOUNT</string>
+    <string name="txt_or">Or</string>
+    <string name="login_facebook">Login With Facebook</string>
+    <string name="login_email_user">Email Address</string>
+    <string name="login_password">Password</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="user_name">User Name</string>
+    <string name="user_account_type">Account Type</string>
+    <string name="btn_signup">Sign Up</string>
+    <string name="btn_update">Update</string>
+    <string name="spinner_hint">Buyer</string>
+    <string name="text_seller_type">Seller Type</string>
+    <string name="toolbar_add_to_cart">Add to cart</string>
+    <string name="toolbar_search">Search</string>
+    <string name ="facebook_app_id">374065589646556</string>
+    <string name ="please_wait_facebooklogin">Please Waite Facebook Login</string>
+    <string name ="login_canceled_facebooklogin">Login Canceled</string>
+    <string name ="login_failed_facebooklogin">Login Failed</string>
+    <string name ="toolbar_text_edit_profile">Profile </string>
+    <string name ="text_edit_profile">Edit Profile </string>
+    <string name ="delivery_first_name_hint">First Name </string>
+    <string name ="delivery_last_name_hint">Last Name </string>
+    <string name ="delivery_address_hint">Address</string>
+    <string name ="delivery_city_hint">City</string>
+    <string name ="delivery_state_hint">State</string>
+    <string name ="delivery_country_hint">Country</string>
+    <string name ="delivery_zip_code_hint">Zip Code</string>
+
+
+    <!--drawer text (Start)-->
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="toolbar_image">Logo Image</string>
+    <string name="drawer_image_home">Home Image</string>
+    <string name="dr_tv_home">Home</string>
+    <string name="dr_tv_delivery">Delivery</string>
+    <string name="toolbar_tv_payment_check">Payment</string>
+    <string name="dr_tv_place_seller">Place Seller</string>
+    <string name="dr_tv_inventry">Inventory</string>
+    <string name="dr_tv_publicate_new">Publicate New</string>
+    <string name="dr_tv_edit_profile">Edit Profile</string>
+    <string name="dr_tv_message">Messages</string>
+    <string name="dr_tv_contact_support">Contact Support</string>
+    <string name="dr_tv_about_us">About Us</string>
+    <string name="dr_tv_news_event">News Events</string>
+    <string name="dr_tv_logout">Logout</string>
+    <string name="tv_payment_check_textview">Delivery Address</string>
+    <string name="tv_payment_check_delivery_date_textview">Delivery Date</string>
+    <string name="tv_payment_check_payment_summary_textview">Payment Summary</string>
+    <string name="tv_payment_check_textview_street">Street</string>
+    <string name="tv_payment_check_textview_country">Country</string>
+    <string name="tv_payment_check_order_total">Order Total</string>
+    <string name="tv_payment_check_delivery_charge">Delivery Charge</string>
+    <string name="tv_payment_check_total_amount">Total Amount</string>
+    <!--drawer text (End)-->
+
+
+    <!--Main Landing page string for category (Start)-->
+    <string name="tv_category_one_one">Alimentacion</string>
+    <string name="tv_category_one_two">Alojamiento</string>
+
+    <string name="tv_category_two_one">Bellezay estética</string>
+    <string name="tv_category_two_two">Comer y beber</string>
+    <string name="tv_category_three_one">Motor</string>
+    <string name="tv_category_three_two">Establecimientos sanitarios</string>
+    <string name="tv_category_four_one">Servicios prefesionales</string>
+    <string name="tv_category_four_two">Otros</string>
+    <!--Main Landing page string for category (End)-->
+
+
+    <string name="tv_toolbar_subcategory">SubCategory</string>
+    <string name="tv_toolbar_subcategory_name">SubCategory Name</string>
+    <string name="tv_toolbar_my_cart">My Cart</string>
+    <string name="tv_toolbar_subcategory_product">SubCategory Product</string>
+    <string name="tv_subcategory_product_list_tittle">Product Name</string>
+    <string name="tv_subcategory_single_product_discription_tittle">Description</string>
+    <string name="tv_subcategory_single_product_quantity">Qty:- </string>
+    <string name="tv_my_cart_product_quantity">Quantity:</string>
+    <string name="tv_my_cart_delivery_time">Standard delivery by July 05th, 2017</string>
+    <string name="tv_my_cart_delivery_text">Delivery :</string>
+    <string name="tv_my_cart_remove_item">REMOVE</string>
+    <string name="tv_my_cart_checkout">TOTAL</string>
+    <string name="tv_my_cart_checkout_text">Checkout</string>
+    <string name="tv_my_cart_checkout_bracket_open">(</string>
+    <string name="tv_my_cart_checkout_bracket_closed">)</string>
+    <string name="tv_subcategory_single_product_add_cart">ADD TO CART</string>
+    <string name="tv_subcategory_single_product_quantity_number">00</string>
+    <string name="tv_subcategory_product_price">00$</string>
+    <string name="tv_my_cart_delivery_charges">00$</string>
+    <string name="tv_add_cart_total_items">0</string>
+    <string name="tv_my_cart_total_items_price">$ 00</string>
+    <string name="tv_patment_check_item_name">Item Name</string>
+    <string name="tv_subcategory_single_product_discription">Product Description</string>
+
+
+
+    <!-- quantity picker on add to cart -->
+    <!-- Font -->
+    <string name="roboto_regular">sans-serif</string>
+    <string name="roboto_light">sans-serif-light</string>
+    <string name="roboto_condensed">sans-serif-condensed</string>
+    <string name="roboto_thin">sans-serif-thin</string>
+    <string name="roboto_medium">sans-serif-medium</string>
+
+    <string name="number_picker_formatter">%02d</string>
+
+
+</resources>

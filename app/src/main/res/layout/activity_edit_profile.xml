@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_edit_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainscreen_toolbar"
+        android:elevation="7dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/white">
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/toolbar_tv_edit_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="@string/toolbar_text_edit_profile"
+                android:textColor="@color/text_color_white"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_edit_profile">
+
+
+        <RelativeLayout
+            android:id="@+id/rl_main_edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_edit_profile_image"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_edit_profile_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_edit_profile_center_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/mainscreen_toolbar">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_edit_profile_imageview"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/civ_edit_profile_image"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:background="@drawable/ic_profile_image_bg"
+                                android:src="@drawable/the_app_guru"
+                                app:civ_border_color="#FFFFFFFF"
+                                app:civ_border_width="2dp" />
+
+                            <RelativeLayout
+                                android:id="@+id/rl_edit_profile_image_progress"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"
+                                android:padding="3dp"
+                                android:visibility="gone">
+
+                                <fr.castorflex.android.circularprogressbar.CircularProgressBar
+                                    android:id="@+id/civ_edit_profile_image_progressbar_circular"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:indeterminate="true"
+                                    android:indeterminateOnly="false"
+                                    app:cpb_colors="@array/gplus_colors" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_edit_profile_btn"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="-40dp"
+                            android:layout_marginStart="-40dp"
+                            android:layout_toEndOf="@id/rl_edit_profile_imageview"
+                            android:layout_toRightOf="@id/rl_edit_profile_imageview">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/ic_picker_imagee" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_user_detail_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/rl_edit_profile_imageview"
+                            android:layout_marginTop="5dp">
+
+                            <TextView
+                                android:id="@+id/tv_edit_user_profile_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="3"
+                                android:gravity="center"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="@string/user_name"
+                                android:textColor="#FFFFFFFF"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_edit_profile_fields"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/cv_edit_profile_image"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tv_edit_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="@string/text_edit_profile"
+                    android:textColor="@color/login_email"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_et_edit_profile_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_edit_profile"
+                    android:layout_marginTop="10dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_et_edit_profile_username"
+                        android:layout_width="50dp"
+                        android:layout_height="60dp"
+                        android:layout_centerVertical="true"
+                        android:paddingBottom="15dp"
+                        android:paddingEnd="15dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingStart="15dp"
+                        android:paddingTop="25dp">
+
+                        <ImageView
+                            android:id="@+id/iv_et_edit_profile_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/ic_user"
+                            android:contentDescription="@string/login_email_user" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tin_et_edit_profile_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginStart="50dp"
+                        android:textColorHint="@color/text_color_hint">
+
+                        <EditText
+                            android:id="@+id/edt_et_edit_profile_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:ellipsize="start"
+                            android:gravity="clip_horizontal"
+                            android:hint="@string/user_name"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:textColor="@color/text_black_color"
+                            android:textColorHint="@color/text_color_hint"
+                            android:textSize="15sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <!--<android.support.v7.widget.CardView
+                    android:id="@+id/cv_et_edit_profile_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cv_et_edit_profile_username"
+                    android:layout_marginTop="15dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_et_edit_profile_email"
+                        android:layout_width="50dp"
+                        android:layout_height="60dp"
+                        android:layout_centerVertical="true"
+                        android:paddingBottom="15dp"
+                        android:paddingEnd="17dp"
+                        android:paddingLeft="17dp"
+                        android:paddingRight="17dp"
+                        android:paddingStart="17dp"
+                        android:paddingTop="20dp">
+
+                        <ImageView
+                            android:id="@+id/iv_et_edit_profile_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/ic_email_addresss"
+                            android:contentDescription="@string/login_email_user" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tin_et_edit_profile_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginStart="50dp"
+                        android:textColorHint="@color/text_color_hint">
+
+                        <EditText
+                            android:id="@+id/edt_et_edit_profile_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:ellipsize="start"
+                            android:gravity="clip_horizontal"
+                            android:hint="@string/login_email_user"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1"
+                            android:textColor="@color/text_black_color"
+                            android:textColorHint="@color/text_color_hint"
+                            android:textSize="15sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </android.support.v7.widget.CardView>-->
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_et_edit_profile_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cv_et_edit_profile_username"
+                    android:layout_marginTop="15dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_et_edit_profile_phone_number"
+                        android:layout_width="50dp"
+                        android:layout_height="60dp"
+                        android:layout_centerVertical="true"
+                        android:paddingBottom="15dp"
+                        android:paddingEnd="15dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingStart="15dp"
+                        android:paddingTop="25dp">
+
+                        <ImageView
+                            android:id="@+id/iv_et_edit_profile_phone_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/ic_phone_number"
+                            android:contentDescription="@string/login_email_user" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tin_et_edit_profile_phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginStart="50dp"
+                        android:textColorHint="@color/text_color_hint">
+
+                        <EditText
+                            android:id="@+id/edt_et_edit_profile_phone_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:ellipsize="start"
+                            android:gravity="clip_horizontal"
+                            android:hint="@string/phone_number"
+                            android:inputType="phone"
+                            android:maxLines="1"
+                            android:textColor="@color/text_black_color"
+                            android:textColorHint="@color/text_color_hint"
+                            android:textSize="15sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_et_edit_profile_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cv_et_edit_profile_phone_number"
+                    android:layout_marginTop="15dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_et_edit_profile_password"
+                        android:layout_width="50dp"
+                        android:layout_height="60dp"
+                        android:layout_centerVertical="true"
+                        android:paddingBottom="15dp"
+                        android:paddingEnd="18dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="18dp"
+                        android:paddingStart="15dp"
+                        android:paddingTop="25dp">
+
+                        <ImageView
+                            android:id="@+id/iv_et_edit_profile_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/ic_password"
+                            android:contentDescription="@string/login_password" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tin_et_sign_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="50dp"
+                        android:textColorHint="@color/text_color_hint">
+
+                        <in.anshul.libray.PasswordEditText
+                            android:id="@+id/edt_et_edit_profile_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/login_password"
+                            android:inputType="textPassword"
+                            android:textColor="@color/text_black_color"
+                            android:textSize="15sp"
+                            app:hide_drawable="@drawable/show_password"
+                            app:password_visible="false"
+                            app:show_drawable="@drawable/hide_password" />
+
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </android.support.v7.widget.CardView>
+
+<!--
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_et_edit_profile_re_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cv_et_edit_profile_password"
+                    android:layout_marginTop="15dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_et_edit_profile_re_password"
+                        android:layout_width="50dp"
+                        android:layout_height="60dp"
+                        android:layout_centerVertical="true"
+                        android:paddingBottom="15dp"
+                        android:paddingEnd="18dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="18dp"
+                        android:paddingStart="15dp"
+                        android:paddingTop="25dp">
+
+                        <ImageView
+                            android:id="@+id/iv_et_edit_profile_re_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/ic_password"
+                            android:contentDescription="@string/login_password" />
+
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tin_et_edit_profile_re_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="50dp"
+                        android:textColorHint="@color/text_color_hint">
+
+                        <in.anshul.libray.PasswordEditText
+                            android:id="@+id/edt_et_edit_profile_re_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/confirm_password"
+                            android:inputType="textPassword"
+                            android:textColor="@color/text_black_color"
+                            android:textSize="15sp"
+                            app:hide_drawable="@drawable/show_password"
+                            app:password_visible="false"
+                            app:show_drawable="@drawable/hide_password" />
+
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </android.support.v7.widget.CardView>-->
+
+                <!--<RelativeLayout
+                    android:id="@+id/rl_seller_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cv_et_edit_profile_re_password"
+                    android:layout_marginTop="20dp">
+
+
+                    <TextView
+                        android:id="@+id/tv_seller_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="@string/text_seller_type"
+                        android:textColor="@color/text_color_effect"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_edit_profile_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_seller_type"
+                    android:background="@color/semi_transparent_white">
+
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_edit_profile_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/spinner_hint"
+                        android:textSize="15sp"
+                        app:ms_arrow_tint="@color/text_color_black"
+                        app:ms_background_color="@android:color/transparent"
+                        app:ms_dropdown_height="wrap_content"
+                        app:ms_dropdown_max_height="300dp"
+                        app:ms_hide_arrow="false"
+                        app:ms_text_color="@color/text_color_black" />
+
+
+                </RelativeLayout>-->
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_et_sign_btn_edit_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cv_et_edit_profile_password"
+                    android:layout_marginBottom="50dp"
+                    android:layout_marginTop="30dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/login_email"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp">
+
+                    <TextView
+                        android:id="@+id/tv_edit_profile_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:text="@string/btn_update"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_et_sign_btn_edit_profile_click"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cv_et_edit_profile_password"
+                    android:layout_marginBottom="55dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="35dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/login_email"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="3dp"
+                    app:cardMaxElevation="3dp">
+
+                    <TextView
+                        android:id="@+id/tv_et_edit_profile_btn_click"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:text="@string/btn_update"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </android.support.v7.widget.CardView>
+
+
+            </RelativeLayout>
+
+            <!--<android.support.v7.widget.CardView
+                android:id="@+id/cv_sub_category_item_tittle_price"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@id/cv_sub_category_single_item_image"
+                android:layout_marginTop="5dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_single_product_item_tittle_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/tv_sub_category_product_tittle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:ellipsize="end"
+                        android:ems="3"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:text="@string/tv_subcategory_product_list_tittle"
+                        android:textColor="@color/tv_sub_category_product_list_items"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_sub_category_single_product_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="85dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="85dp"
+                        android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:text="@string/tv_subcategory_product_price"
+                        android:textColor="@color/tv_sub_category_product_price"
+                        android:textSize="18sp" />
+
+                    <RelativeLayout
+                        android:layout_width="45dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/cv_sub_cat_product_buy_bg"
+                        android:paddingBottom="5dp"
+                        android:paddingEnd="12dp"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:paddingStart="12dp"
+                        android:paddingTop="5dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_cart" />
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_sub_category_item_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_sub_category_item_tittle_price"
+                android:layout_marginTop="5dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_single_product_item_discription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_sub_category_product_discription_tittle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:ellipsize="end"
+                        android:ems="3"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:text="@string/tv_subcategory_single_product_discription_tittle"
+                        android:textColor="@color/tv_sub_category_product_list_items"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_sub_category_product_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_sub_category_product_discription_tittle"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/tv_subcategory_single_product_discription"
+                        android:textColor="@color/tv_sub_category_product_list_items"
+                        android:textSize="14sp" />
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_sub_category_product_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_sub_category_item_description"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="100dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="4dp"
+                app:cardMaxElevation="4dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_quantity_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_single_product_item_quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true">
+
+                        <TextView
+                            android:id="@+id/tv_sub_category_product_quantity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical"
+                            android:text="@string/tv_subcategory_single_product_quantity"
+                            android:textColor="@color/tv_sub_category_product_list_items"
+                            android:textSize="16sp" />
+
+                        &lt;!&ndash;<TextView
+                            android:id="@+id/tv_add_cart_quantity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_toEndOf="@id/tv_sub_category_product_quantity"
+                            android:layout_toRightOf="@id/tv_sub_category_product_quantity"
+                            android:gravity="center_vertical"
+                            android:text="@string/tv_subcategory_single_product_quantity_number"
+                            android:textColor="@color/tv_sub_category_product_list_items"
+                            android:textSize="18sp" />&ndash;&gt;
+
+                        <TextView
+                            android:id="@+id/tv_ity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_toEndOf="@id/tv_sub_category_product_quantity"
+                            android:layout_toRightOf="@id/tv_sub_category_product_quantity"
+                            android:gravity="center_vertical"
+                            android:text="@string/tv_subcategory_single_product_quantity_number"
+                            android:textColor="@color/tv_sub_category_product_list_items"
+                            android:textSize="18sp" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_number_picker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_toEndOf="@id/rl_single_product_item_quantity"
+                        android:layout_toRightOf="@id/rl_single_product_item_quantity">
+
+                        <com.shawnlin.numberpicker.NumberPicker
+                            android:id="@+id/np_quantity_numbers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            app:np_dividerColor="@color/colorAccent"
+                            app:np_height="50dp"
+                            app:np_max="10"
+                            app:np_min="0"
+                            app:np_orientation="horizontal"
+                            app:np_textColor="@color/colorAccent"
+                            app:np_textSize="20sp"
+                            app:np_typeface="@string/roboto_light"
+                            app:np_width="180dp" />
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>-->
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rl_edit_profile_main_progress"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:padding="3dp"
+        android:visibility="gone">
+
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+            android:id="@+id/civ_edit_profile_main_progressbar_circular"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminate="true"
+            android:indeterminateOnly="false"
+            app:cpb_colors="@array/gplus_colors" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
