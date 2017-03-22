@@ -235,7 +235,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
 
 
-                    Toast.makeText(EditProfileActivity.this, "Comming Soon", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(EditProfileActivity.this, "Comming Soon", Toast.LENGTH_SHORT).show();
                     CV_et_sign_btn_edit_profile_click.setVisibility(View.GONE);
                     CV_et_sign_btn_edit_profile.setVisibility(View.VISIBLE);
                     return true;

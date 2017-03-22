@@ -32,6 +32,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
@@ -212,6 +214,22 @@ public class MainActivity extends AppCompatActivity {
 
         if (Utils.isConnected(getApplicationContext())) {
             GetUserDetailJsontask task = new GetUserDetailJsontask();
+            task.execute();
+        } else {
+
+            SnackbarManager.show(
+                    Snackbar.with(MainActivity.this)
+                            .position(Snackbar.SnackbarPosition.TOP)
+                            .margin(15, 15)
+                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                            .text("Please Your Internet Connectivity..!!"));
+
+        }
+
+
+        if (Utils.isConnected(getApplicationContext())) {
+            Log.e("MainCartDetailJsontask Call :", "OK");
+            MainCartDetailJsontask task = new MainCartDetailJsontask();
             task.execute();
         } else {
 
@@ -599,7 +617,7 @@ public class MainActivity extends AppCompatActivity {
     }
     /*progressbar data (End)*/
 
-    public class MainCategoryJsontask extends AsyncTask<String, Void, List<BeanMainCategory>> {
+    private class MainCategoryJsontask extends AsyncTask<String, Void, List<BeanMainCategory>> {
 
         boolean iserror = false;
         String result = " ";
@@ -682,6 +700,14 @@ public class MainActivity extends AppCompatActivity {
             if (cat_id.size() > 0) {
                 Log.e(" ********** cat_id ********** ", "" + cat_id);
 
+                /**************** Start Animation **************  **/
+                YoYo.with(Techniques.Wobble)
+                        .duration(700)
+                        .playOn(rl_cart_main);
+                YoYo.with(Techniques.Wobble)
+                        .duration(700)
+                        .playOn(rl_cart_badgeview_main);
+                /**************** End Animation ****************/
                 CategoryAdapter categoryAdapter = new MainActivity.CategoryAdapter(MainActivity.this, mystring);
                 main_recylerView.setAdapter(categoryAdapter);
 
@@ -691,6 +717,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(" ********** listvideoid.size() > 0 **********", "YES");
             } else {
 
+                /**************** Start Animation **************  **/
+                YoYo.with(Techniques.Wobble)
+                        .duration(700)
+                        .playOn(rl_cart_main);
+                YoYo.with(Techniques.Wobble)
+                        .duration(700)
+                        .playOn(rl_cart_badgeview_main);
+                /**************** End Animation ****************/
                 Log.e("cat_id size is :", "0");
 
             }
@@ -794,24 +828,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            if (Utils.isConnected(getApplicationContext())) {
-                MainCartDeatilJsontask task = new MainCartDeatilJsontask();
-                task.execute();
-            } else {
 
-                SnackbarManager.show(
-                        Snackbar.with(MainActivity.this)
-                                .position(Snackbar.SnackbarPosition.TOP)
-                                .margin(15, 15)
-                                .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                .text("Please Your Internet Connectivity..!!"));
-
-            }
         }
 
     }
 
-    private class MainCartDeatilJsontask extends AsyncTask<String, Void, String> {
+    private class MainCartDetailJsontask extends AsyncTask<String, Void, String> {
 
         boolean iserror = false;
 
@@ -827,7 +849,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            Log.e("******* NOW Login TASK IS RUNNING *******", "YES");
+            Log.e("******* NOW MainCartDeatilJsontask IS doInBackground RUNNING *******", "YES");
             HttpClient client = new DefaultHttpClient();
             HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id="+User_ID);
 
@@ -836,11 +858,11 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 HttpResponse response = client.execute(post);
-                String object = EntityUtils.toString(response.getEntity());
-                Log.e("*******object******** :", "" + object);
+                String CartDetailobject = EntityUtils.toString(response.getEntity());
+                Log.e("*******Cart Detail object******** :", "" + CartDetailobject);
 
                 //JSONArray js = new JSONArray(object);
-                JSONObject jobect = new JSONObject(object);
+                JSONObject jobect = new JSONObject(CartDetailobject);
                 Str_Get_Cart_Detail_Status = jobect.getString("status");
                 if (Str_Get_Cart_Detail_Status.equalsIgnoreCase("OK")) {
                     Str_Get_Cart_Deatil_User_ID = jobect.getString("user_id");
@@ -1004,7 +1026,7 @@ public class MainActivity extends AppCompatActivity {
 
     /*this is used to set the equal space between grid items (Start)*/
                                         /*    02     */
-    public class EqualSpaceItemDecoration extends RecyclerView.ItemDecoration {
+    private class EqualSpaceItemDecoration extends RecyclerView.ItemDecoration {
 
         private final int mSpaceHeight;
 
