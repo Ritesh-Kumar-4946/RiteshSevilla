@@ -90,12 +90,12 @@ public class EditProfileActivity extends AppCompatActivity {
 
     @BindView(R.id.edt_et_edit_profile_phone_number)
     EditText EDT_et_edit_profile_phone_number;
-
+/*
     @BindView(R.id.edt_et_edit_profile_password)
     EditText EDT_et_edit_profile_password;
 
     @BindView(R.id.edt_et_edit_profile_re_password)
-    EditText EDT_et_edit_profile_re_password;
+    EditText EDT_et_edit_profile_re_password;*/
 
     @BindView(R.id.cv_et_sign_btn_edit_profile)
     CardView CV_et_sign_btn_edit_profile;
@@ -211,8 +211,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
                     Str_Set_user_name = EDT_et_edit_profile_username.getText().toString().trim();
                     Str_Set_phone_number = EDT_et_edit_profile_phone_number.getText().toString().trim();
-                    Str_Set_password = EDT_et_edit_profile_password.getText().toString().trim();
-                    Str_Set_re_password = EDT_et_edit_profile_re_password.getText().toString().trim();
+//                    Str_Set_password = EDT_et_edit_profile_password.getText().toString().trim();
+//                    Str_Set_re_password = EDT_et_edit_profile_re_password.getText().toString().trim();
 
                     Log.e(" Update Fields data :", "\n"
                             + "Str_Set_user_name :" + "" + Str_Set_user_name + "\n"
