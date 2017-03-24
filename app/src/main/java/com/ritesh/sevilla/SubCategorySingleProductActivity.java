@@ -1,5 +1,6 @@
 package com.ritesh.sevilla;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -119,7 +120,24 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
     CircularProgressBar CircularProBar_singleProductImage;
 
 
+    @BindView(R.id.rl_cart_icon_sub_category_single_product)
+    RelativeLayout RL_cart_icon_sub_category_single_product;
+
+    @BindView(R.id.rl_badgeview_cart_item_sub_category_single_product)
+    RelativeLayout RL_badgeview_cart_item_sub_category_single_product;
+
+    @BindView(R.id.tv_badge_counter_sub_category_single_product)
+    TextView TV_badge_counter_sub_category_single_product;
+
+
     String
+            User_ID = "",
+            Str_Get_Cart_Detail_Status = "",
+            Str_Get_Cart_result = "",
+            Str_Get_Status = "",
+            Str_Get_Cart_Deatil_User_ID = "",
+            Str_Get_Cart_Product_count = "",
+
             SubCategorySingleProductId_Recived = "",
             SubCategoryName_Recived = "",
             StatusSingle = "",
@@ -138,7 +156,6 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
             Single_Item_product_price = "",
             Single_Item_img = "",
             Single_Item_total_price = "",
-            User_ID = "",
             SingleProductResult = "";
 
     @Override
@@ -154,6 +171,29 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
         Log.e("SubCategorySingleProductId_Recived from List :", "" + SubCategorySingleProductId_Recived);
         Log.e("SubCategoryName_Recived from List :", "" + SubCategoryName_Recived);
 
+
+        Appconstant.sh = getSharedPreferences(Appconstant.MyPREFERENCES, Context.MODE_PRIVATE);
+        User_ID = Appconstant.sh.getString("id", null);
+        Log.e("User_ID from SharedPref :", "" + User_ID);
+
+
+
+        if (Utils.isConnected(getApplicationContext())) {
+            Log.e("SubCategorySingleProductCartDetailJsontask Call :", "OK");
+            SubCategorySingleProductCartDetailJsontask task = new SubCategorySingleProductCartDetailJsontask();
+            task.execute();
+        } else {
+
+            SnackbarManager.show(
+                    Snackbar.with(SubCategorySingleProductActivity.this)
+                            .position(Snackbar.SnackbarPosition.TOP)
+                            .margin(15, 15)
+                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                            .text("Please Your Internet Connectivity..!!"));
+
+        }
+
+
 //        TV_single_product_Toolbar_text.setText(SubCategoryName_Recived);
 
 
@@ -162,6 +202,9 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);*/
 
 //        toolbar_sub_category.setNavigationIcon(R.drawable.ic_back_arrow); // your drawable
+
+
+
 
 
          /*circular progress bar (Start)*/
@@ -364,6 +407,90 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+
+    private class SubCategorySingleProductCartDetailJsontask extends AsyncTask<String, Void, String> {
+
+        boolean iserror = false;
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            //  loginprogressbar.setVisibility(View.VISIBLE);
+            Log.e("******* NOW SubCategorySingleProductCartDetailJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW SubCategorySingleProductCartDetailJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("User_ID onPreExecute :", "" + User_ID);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            Log.e("******* NOW SubCategorySingleProductCartDetailJsontask IS doInBackground RUNNING *******", "YES");
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id="+User_ID);
+
+            /*http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id=286*/
+            Log.e("URL Cart Detail SubCategorySingleProductCartDetailJsontask :", "" + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id="+User_ID);
+
+            try {
+                HttpResponse response = client.execute(post);
+                String CartDetailobject = EntityUtils.toString(response.getEntity());
+                Log.e("*******Cart Detail object******** :", "" + CartDetailobject);
+
+                //JSONArray js = new JSONArray(object);
+                JSONObject jobect = new JSONObject(CartDetailobject);
+                Str_Get_Cart_Detail_Status = jobect.getString("status");
+                if (Str_Get_Cart_Detail_Status.equalsIgnoreCase("OK")) {
+                    Str_Get_Cart_Deatil_User_ID = jobect.getString("user_id");
+                    Str_Get_Cart_Product_count = jobect.getString("no_of_prodcut");
+                    Str_Get_Cart_result = jobect.getString("single_product_result");
+
+                }
+
+            } catch (Exception e) {
+                Log.v("22", "22" + e.getMessage());
+                e.printStackTrace();
+                iserror = true;
+            }
+
+            return Str_Get_Cart_Detail_Status;
+        }
+
+        @Override
+        protected void onPostExecute(String result1) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result1);
+
+            if (!iserror) {
+                if (Str_Get_Cart_Detail_Status.equalsIgnoreCase("OK")) {
+
+                    Log.e("Str_Get_Cart_Deatil_User_ID :", "" + Str_Get_Cart_Deatil_User_ID);
+                    Log.e("Str_Get_Cart_Product_count :", "" + Str_Get_Cart_Product_count);
+                    Log.e("Str_Get_Cart_result :", "" + Str_Get_Cart_result);
+
+                    TV_badge_counter_sub_category_single_product.setText(Str_Get_Cart_Product_count);
+                    /**************** Start Animation **************  **/
+                    YoYo.with(Techniques.Wobble)
+                            .duration(700)
+                            .playOn(RL_cart_icon_sub_category_single_product);
+                    YoYo.with(Techniques.Wobble)
+                            .duration(700)
+                            .playOn(RL_badgeview_cart_item_sub_category_single_product);
+                    /**************** End Animation ****************/
+
+                } else {
+                    Log.e("onPostExecute Error ", "ooppss");
+                    SnackbarManager.show(
+                            Snackbar.with(SubCategorySingleProductActivity.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("No Data Found"));
+                }
+            }
+        }
 
     }
 

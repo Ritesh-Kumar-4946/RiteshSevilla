@@ -24,6 +24,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -31,6 +33,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ritesh.sevilla.Constant.Appconstant;
 import com.ritesh.sevilla.Constant.Utils;
 
 import org.apache.http.HttpResponse;
@@ -63,6 +66,13 @@ public class SubCategoryProductListActivity extends AppCompatActivity {
 
     /*recycler data (Start 01 of 03)*/
     String
+            User_ID = "",
+            Str_Get_Cart_Detail_Status = "",
+            Str_Get_Cart_result = "",
+            Str_Get_Status = "",
+            Str_Get_Cart_Deatil_User_ID = "",
+            Str_Get_Cart_Product_count = "",
+
             StatusSubCategoryProductlist = "",
             SubCategoryID = "",
             SubCategoryProductCount = "",
@@ -75,6 +85,20 @@ public class SubCategoryProductListActivity extends AppCompatActivity {
             Sub_Category_Product_Price = "",
             Product_Name_For_Buy = "",
             Sub_Category_Product_Img_Src = "";
+
+
+
+    @BindView(R.id.rl_cart_icon_sub_category_product_list)
+    RelativeLayout Rl_cart_icon_sub_category_product_list;
+
+    @BindView(R.id.rl_badgeview_cart_item_sub_category_product_list)
+    RelativeLayout RL_badgeview_cart_item_sub_category_product_list;
+
+    @BindView(R.id.tv_badge_counter_sub_category_product_list)
+    TextView TV_badge_counter_sub_category_product_list;
+
+
+
 
 
     List<SubCategoryProductListActivity> Sub_Category_Pro_rowItems;
@@ -104,6 +128,11 @@ public class SubCategoryProductListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sub_category_product_list);
         ButterKnife.bind(this);
 
+        Appconstant.sh = getSharedPreferences(Appconstant.MyPREFERENCES, Context.MODE_PRIVATE);
+        User_ID = Appconstant.sh.getString("id", null);
+        Log.e("User_ID from SharedPref :", "" + User_ID);
+
+
 //        SubCategoryID = getIntent().getExtras().getString("SubCatID");
         SubCategoryID = getIntent().getStringExtra("SubCatID");
         MainCategory_Id_Recived = getIntent().getStringExtra("MainCategoryID");
@@ -113,6 +142,23 @@ public class SubCategoryProductListActivity extends AppCompatActivity {
         Log.e("Recieved SubCategoryName from MainCategory :", "" + SubCategoryName);
 
         toolbar_tv_sub_category_product.setText(SubCategoryName);
+
+        if (Utils.isConnected(getApplicationContext())) {
+            Log.e("SubCategoryProductListDetailJsontask Call :", "OK");
+            SubCategoryProductListCartDetailJsontask task = new SubCategoryProductListCartDetailJsontask();
+            task.execute();
+        } else {
+
+            SnackbarManager.show(
+                    Snackbar.with(SubCategoryProductListActivity.this)
+                            .position(Snackbar.SnackbarPosition.TOP)
+                            .margin(15, 15)
+                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                            .text("Please Your Internet Connectivity..!!"));
+
+        }
+
+
 
 
         /*recycler data (Start 02 of 03)*/
@@ -213,6 +259,94 @@ public class SubCategoryProductListActivity extends AppCompatActivity {
         mCircularProgressBarGridview_sub_cat_pro.setVisibility(View.VISIBLE);
     }
     /*progressbar data (End)*/
+
+
+
+
+    private class SubCategoryProductListCartDetailJsontask extends AsyncTask<String, Void, String> {
+
+        boolean iserror = false;
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            //  loginprogressbar.setVisibility(View.VISIBLE);
+            Log.e("******* NOW SubCategoryProductListDetailJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW SubCategoryProductListDetailJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("User_ID onPreExecute :", "" + User_ID);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            Log.e("******* NOW SubCategoryProductListDetailJsontask IS doInBackground RUNNING *******", "YES");
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id="+User_ID);
+
+            /*http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id=286*/
+            Log.e("URL Cart Detail SubCategoryProductListDetailJsontask :", "" + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id="+User_ID);
+
+            try {
+                HttpResponse response = client.execute(post);
+                String CartDetailobject = EntityUtils.toString(response.getEntity());
+                Log.e("*******Cart Detail object******** :", "" + CartDetailobject);
+
+                //JSONArray js = new JSONArray(object);
+                JSONObject jobect = new JSONObject(CartDetailobject);
+                Str_Get_Cart_Detail_Status = jobect.getString("status");
+                if (Str_Get_Cart_Detail_Status.equalsIgnoreCase("OK")) {
+                    Str_Get_Cart_Deatil_User_ID = jobect.getString("user_id");
+                    Str_Get_Cart_Product_count = jobect.getString("no_of_prodcut");
+                    Str_Get_Cart_result = jobect.getString("single_product_result");
+
+                }
+
+            } catch (Exception e) {
+                Log.v("22", "22" + e.getMessage());
+                e.printStackTrace();
+                iserror = true;
+            }
+
+            return Str_Get_Cart_Detail_Status;
+        }
+
+        @Override
+        protected void onPostExecute(String result1) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result1);
+
+            if (!iserror) {
+                if (Str_Get_Cart_Detail_Status.equalsIgnoreCase("OK")) {
+
+                    Log.e("Str_Get_Cart_Deatil_User_ID :", "" + Str_Get_Cart_Deatil_User_ID);
+                    Log.e("Str_Get_Cart_Product_count :", "" + Str_Get_Cart_Product_count);
+                    Log.e("Str_Get_Cart_result :", "" + Str_Get_Cart_result);
+
+                    TV_badge_counter_sub_category_product_list.setText(Str_Get_Cart_Product_count);
+                    /**************** Start Animation **************  **/
+                    YoYo.with(Techniques.Wobble)
+                            .duration(700)
+                            .playOn(Rl_cart_icon_sub_category_product_list);
+                    YoYo.with(Techniques.Wobble)
+                            .duration(700)
+                            .playOn(RL_badgeview_cart_item_sub_category_product_list);
+                    /**************** End Animation ****************/
+
+                } else {
+                    Log.e("onPostExecute Error ", "ooppss");
+                    SnackbarManager.show(
+                            Snackbar.with(SubCategoryProductListActivity.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("No Data Found"));
+                }
+            }
+        }
+
+    }
+
+
 
 
     public class SubCategoryProductJsontask extends AsyncTask<String, Void, List<BeanSubCategoryProduct>> {

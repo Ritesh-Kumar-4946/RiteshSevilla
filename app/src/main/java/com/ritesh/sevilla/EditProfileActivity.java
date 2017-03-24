@@ -508,7 +508,26 @@ public class EditProfileActivity extends AppCompatActivity {
             if (!iserror) {
                 if (result.equalsIgnoreCase("1")) {
 
+                    SnackbarManager.show(
+                            Snackbar.with(EditProfileActivity.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("Profile Updated..!!"));
 
+                    if (Utils.isConnected(getApplicationContext())) {
+                        EditProfileGetUserDetailJsontask task = new EditProfileGetUserDetailJsontask();
+                        task.execute();
+                    } else {
+
+                        SnackbarManager.show(
+                                Snackbar.with(EditProfileActivity.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .text("Please Your Internet Connectivity..!!"));
+
+                    }
 
 
                 } else {

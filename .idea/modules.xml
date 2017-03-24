@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CircularProgress-google/CircularProgress-google.iml" filepath="$PROJECT_DIR$/CircularProgress-google/CircularProgress-google.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CircularProgress-google/CircularProgress-google.iml" filepath="$PROJECT_DIR$/CircularProgress-google/CircularProgress-google.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RiteshSevilla.iml" filepath="$PROJECT_DIR$/RiteshSevilla.iml" />
       <module fileurl="file://$PROJECT_DIR$/RiteshSevilla (18-03-2017).iml" filepath="$PROJECT_DIR$/RiteshSevilla (18-03-2017).iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -33,7 +33,7 @@
 
             <!--cart imageview (Start)-->
             <RelativeLayout
-                android:id="@+id/rl_cart_icon_sub_category_product_list"
+                android:id="@+id/rl_cart_icon_sub_category_single_product"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
@@ -54,7 +54,7 @@
 
             <!--cartitem badge counter (Start)-->
             <RelativeLayout
-                android:id="@+id/rl_badgeview_cart_item_sub_category_product_list"
+                android:id="@+id/rl_badgeview_cart_item_sub_category_single_product"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_alignParentEnd="true"
@@ -66,7 +66,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    android:id="@+id/tv_badge_counter_sub_category_product_list"
+                    android:id="@+id/tv_badge_counter_sub_category_single_product"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
