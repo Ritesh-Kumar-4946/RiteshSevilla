@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -124,6 +125,12 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.rl_badgeview_cart_item_main)
     RelativeLayout rl_cart_badgeview_main;
+
+    @BindView(R.id.rl_cart_icon_main_click)
+    RelativeLayout rl_cart_main_click;
+
+    @BindView(R.id.rl_badgeview_cart_item_main_click)
+    RelativeLayout rl_cart_badgeview_main_click;
 
     @BindView(R.id.tv_badge_counter_main_category)
     TextView TV_cart_badge_counter_textview;
@@ -359,6 +366,61 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentprofileimage);
             }
         });
+
+
+        rl_cart_main.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    Log.e("Action ", "Down");
+                    rl_cart_main_click.setVisibility(View.VISIBLE);
+                    rl_cart_main.setVisibility(View.GONE);
+
+                    rl_cart_badgeview_main_click.setVisibility(View.VISIBLE);
+                    rl_cart_badgeview_main.setVisibility(View.GONE);
+                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+
+//                    Toast.makeText(getApplicationContext(), "Add to cart Clicked", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_MOVE) {
+
+                    Log.e("Action ", "Move");
+                    rl_cart_main_click.setVisibility(View.VISIBLE);
+                    rl_cart_main.setVisibility(View.GONE);
+
+                    rl_cart_badgeview_main_click.setVisibility(View.VISIBLE);
+                    rl_cart_badgeview_main.setVisibility(View.GONE);
+
+                    return true;
+
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                    Log.e("Action ", "Up");
+
+                    rl_cart_main_click.setVisibility(View.GONE);
+                    rl_cart_main.setVisibility(View.VISIBLE);
+
+                    rl_cart_badgeview_main_click.setVisibility(View.GONE);
+                    rl_cart_badgeview_main.setVisibility(View.VISIBLE);
+
+
+                    Intent MyCartPage = new Intent(getApplicationContext(), MyCart.class);
+                    MainActivity.this.startActivity(MyCartPage);
+
+                    return true;
+                }
+
+
+                return false;
+            }
+        });
+
+
 
 
         rl_Dr_Home.setOnClickListener(new View.OnClickListener() {

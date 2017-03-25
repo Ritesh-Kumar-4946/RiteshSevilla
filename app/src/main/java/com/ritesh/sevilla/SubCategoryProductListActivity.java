@@ -12,10 +12,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -93,6 +95,14 @@ public class SubCategoryProductListActivity extends AppCompatActivity {
 
     @BindView(R.id.rl_badgeview_cart_item_sub_category_product_list)
     RelativeLayout RL_badgeview_cart_item_sub_category_product_list;
+
+
+
+    @BindView(R.id.rl_cart_icon_sub_category_product_list_click)
+    RelativeLayout Rl_cart_icon_sub_category_product_list_click;
+
+    @BindView(R.id.rl_badgeview_cart_item_sub_category_product_list_click)
+    RelativeLayout RL_badgeview_cart_item_sub_category_product_list_click;
 
     @BindView(R.id.tv_badge_counter_sub_category_product_list)
     TextView TV_badge_counter_sub_category_product_list;
@@ -191,6 +201,58 @@ public class SubCategoryProductListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed(); // Implemented by activity
+            }
+        });
+
+        Rl_cart_icon_sub_category_product_list.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    Log.e("Action ", "Down");
+                    Rl_cart_icon_sub_category_product_list_click.setVisibility(View.VISIBLE);
+                    Rl_cart_icon_sub_category_product_list.setVisibility(View.GONE);
+
+                    RL_badgeview_cart_item_sub_category_product_list_click.setVisibility(View.VISIBLE);
+                    RL_badgeview_cart_item_sub_category_product_list.setVisibility(View.GONE);
+                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+
+//                    Toast.makeText(getApplicationContext(), "Add to cart Clicked", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_MOVE) {
+
+                    Log.e("Action ", "Move");
+                    Rl_cart_icon_sub_category_product_list_click.setVisibility(View.VISIBLE);
+                    Rl_cart_icon_sub_category_product_list.setVisibility(View.GONE);
+
+                    RL_badgeview_cart_item_sub_category_product_list_click.setVisibility(View.VISIBLE);
+                    RL_badgeview_cart_item_sub_category_product_list.setVisibility(View.GONE);
+
+                    return true;
+
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                    Log.e("Action ", "Up");
+
+                    Rl_cart_icon_sub_category_product_list_click.setVisibility(View.GONE);
+                    Rl_cart_icon_sub_category_product_list.setVisibility(View.VISIBLE);
+
+                    RL_badgeview_cart_item_sub_category_product_list_click.setVisibility(View.GONE);
+                    RL_badgeview_cart_item_sub_category_product_list.setVisibility(View.VISIBLE);
+
+
+                    Intent MyCartPage = new Intent(getApplicationContext(), MyCart.class);
+                    SubCategoryProductListActivity.this.startActivity(MyCartPage);
+
+                    return true;
+                }
+
+
+                return false;
             }
         });
 

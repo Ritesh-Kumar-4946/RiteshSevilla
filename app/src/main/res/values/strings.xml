@@ -87,7 +87,8 @@
     <string name="tv_subcategory_single_product_discription_tittle">Description</string>
     <string name="tv_subcategory_single_product_quantity">Qty:- </string>
     <string name="tv_my_cart_product_quantity">Quantity:</string>
-    <string name="tv_my_cart_delivery_time">Standard delivery by July 05th, 2017</string>
+    <string name="tv_my_cart_delivery_time_text">Standard delivery by :</string>
+    <string name="tv_my_cart_delivery_time">July 05th, 2017</string>
     <string name="tv_my_cart_delivery_text">Delivery :</string>
     <string name="tv_my_cart_remove_item">REMOVE</string>
     <string name="tv_my_cart_checkout">TOTAL</string>

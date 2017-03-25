@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
     <android.support.v7.widget.CardView
@@ -12,8 +12,8 @@
         android:background="?android:attr/selectableItemBackground"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="0dp"
-        app:cardElevation="3dp"
-        app:cardMaxElevation="3dp">
+        app:cardElevation="2dp"
+        app:cardMaxElevation="2dp">
 
         <RelativeLayout
             android:id="@+id/rl_my_cart_single_product_main"
@@ -28,8 +28,8 @@
 
                 <ImageView
                     android:id="@+id/iv_my_cart_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_centerInParent="true"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
@@ -60,30 +60,37 @@
                 android:id="@+id/rl_single_product_item_discription"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_toRightOf="@id/rl_my_cart_single_product_image">
+                android:layout_toEndOf="@id/rl_my_cart_single_product_image">
 
-                <TextView
-                    android:id="@+id/tv_my_cart_single_product_name"
+                <RelativeLayout
+                    android:id="@+id/rl_my_cart_single_product_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:ellipsize="end"
-                    android:ems="3"
-                    android:gravity="center_vertical"
-                    android:lines="1"
-                    android:text="@string/tv_subcategory_product_list_tittle"
-                    android:textColor="@color/tv_sub_category_product_list_items"
-                    android:textSize="18sp" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_my_cart_single_product_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:ellipsize="end"
+                        android:ems="3"
+                        android:gravity="center_vertical"
+                        android:lines="2"
+                        android:text="@string/tv_subcategory_product_list_tittle"
+                        android:textColor="@color/tv_sub_category_product_list_items"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/tv_my_cart_single_product_name">
+                    android:layout_below="@id/rl_my_cart_single_product_name">
 
 
                     <TextView
@@ -120,14 +127,20 @@
                         app:cardElevation="7dp"
                         app:cardMaxElevation="7dp">
 
-                        <TextView
-                            android:id="@+id/tv_item_quantity_number"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:text="@string/tv_subcategory_single_product_quantity_number"
-                            android:textColor="@color/tv_sub_category_product_list_items"
-                            android:textSize="14sp" />
+                        <RelativeLayout
+                            android:layout_width="30dp"
+                            android:layout_height="30dp">
+
+                            <TextView
+                                android:id="@+id/tv_item_quantity_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="@string/tv_subcategory_single_product_quantity_number"
+                                android:textColor="@color/tv_sub_category_product_list_items"
+                                android:textSize="15sp" />
+
+                        </RelativeLayout>
 
                     </android.support.v7.widget.CardView>
 
@@ -147,12 +160,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/cv_my_cart_top"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="1dp"
         android:background="?android:attr/selectableItemBackground"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="0dp"
-        app:cardElevation="3dp"
-        app:cardMaxElevation="3dp">
+        app:cardElevation="2dp"
+        app:cardMaxElevation="2dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -185,12 +198,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/cv_sub_category_item_description"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="1dp"
         android:background="?android:attr/selectableItemBackground"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="0dp"
-        app:cardElevation="3dp"
-        app:cardMaxElevation="3dp">
+        app:cardElevation="2dp"
+        app:cardMaxElevation="2dp">
 
         <RelativeLayout
             android:id="@+id/rl_my_cart_delivery_main"
@@ -238,7 +251,7 @@
 
 
                     <TextView
-                        android:id="@+id/tv_my_cart_delivery_date"
+                        android:id="@+id/tv_my_cart_delivery_date_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="5dp"
@@ -246,6 +259,22 @@
                         android:layout_marginRight="5dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/tv_my_cart_delivery_time_text"
+                        android:textColor="@color/tv_sub_category_product_list_items"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:id="@+id/tv_my_cart_delivery_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_my_cart_delivery_date_text"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="1dp"
                         android:gravity="center_vertical"
                         android:text="@string/tv_my_cart_delivery_time"
                         android:textColor="@color/tv_sub_category_product_list_items"
@@ -267,7 +296,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/cv_my_cart_delivery"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="1dp"
         android:background="?android:attr/selectableItemBackground"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="0dp"

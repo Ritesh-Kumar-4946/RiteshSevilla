@@ -80,6 +80,57 @@
             </RelativeLayout>
             <!--cartitem badge counter (End)-->
 
+
+
+            <!--cart imageview (Start)-->
+            <RelativeLayout
+                android:id="@+id/rl_cart_icon_sub_category_product_list_click"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="2dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:padding="5dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_cart" />
+
+            </RelativeLayout>
+            <!--cart imageview (End)-->
+
+            <!--cartitem badge counter (Start)-->
+            <RelativeLayout
+                android:id="@+id/rl_badgeview_cart_item_sub_category_product_list_click"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/badge_bg"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_badge_counter_sub_category_product_list_click"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/tv_add_cart_total_items"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+            <!--cartitem badge counter (End)-->
+
+
+
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>

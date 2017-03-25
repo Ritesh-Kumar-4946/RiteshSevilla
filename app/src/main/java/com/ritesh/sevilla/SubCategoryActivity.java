@@ -13,7 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Base64;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -95,6 +97,13 @@ public class SubCategoryActivity extends AppCompatActivity {
 
     @BindView(R.id.rl_badgeview_cart_item_sub_category)
     RelativeLayout RL_badgeview_cart_item_sub_category;
+
+
+    @BindView(R.id.rl_cart_icon_sub_category_click)
+    RelativeLayout Rl_cart_icon_sub_category_click;
+
+    @BindView(R.id.rl_badgeview_cart_item_sub_category_click)
+    RelativeLayout RL_badgeview_cart_item_sub_category_click;
 
     @BindView(R.id.tv_badge_counter_sub_category)
     TextView TV_badge_counter_sub_category;
@@ -182,6 +191,65 @@ public class SubCategoryActivity extends AppCompatActivity {
                 onBackPressed(); // Implemented by activity
             }
         });
+
+
+
+
+
+        Rl_cart_icon_sub_category.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    Log.e("Action ", "Down");
+                    Rl_cart_icon_sub_category_click.setVisibility(View.VISIBLE);
+                    Rl_cart_icon_sub_category.setVisibility(View.GONE);
+
+                    RL_badgeview_cart_item_sub_category_click.setVisibility(View.VISIBLE);
+                    RL_badgeview_cart_item_sub_category.setVisibility(View.GONE);
+                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+
+//                    Toast.makeText(getApplicationContext(), "Add to cart Clicked", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_MOVE) {
+
+                    Log.e("Action ", "Move");
+                    Rl_cart_icon_sub_category_click.setVisibility(View.VISIBLE);
+                    Rl_cart_icon_sub_category.setVisibility(View.GONE);
+
+                    RL_badgeview_cart_item_sub_category_click.setVisibility(View.VISIBLE);
+                    RL_badgeview_cart_item_sub_category.setVisibility(View.GONE);
+
+                    return true;
+
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                    Log.e("Action ", "Up");
+
+                    Rl_cart_icon_sub_category_click.setVisibility(View.GONE);
+                    Rl_cart_icon_sub_category.setVisibility(View.VISIBLE);
+
+                    RL_badgeview_cart_item_sub_category_click.setVisibility(View.GONE);
+                    RL_badgeview_cart_item_sub_category.setVisibility(View.VISIBLE);
+
+
+                    Intent MyCartPage = new Intent(getApplicationContext(), MyCart.class);
+                    SubCategoryActivity.this.startActivity(MyCartPage);
+
+                    return true;
+                }
+
+
+                return false;
+            }
+        });
+
+
+
 
 
         Sub_Category_rowItems = new ArrayList<SubCategoryActivity>();

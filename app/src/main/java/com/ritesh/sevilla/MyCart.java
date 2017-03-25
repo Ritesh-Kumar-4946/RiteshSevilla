@@ -1,13 +1,13 @@
 package com.ritesh.sevilla;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -22,6 +22,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -30,7 +32,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ritesh.sevilla.Constant.Appconstant;
-import com.ritesh.sevilla.Constant.HttpUrlPath;
 import com.ritesh.sevilla.Constant.Utils;
 
 import org.apache.http.HttpResponse;
@@ -64,6 +65,12 @@ public class MyCart extends AppCompatActivity {
 
     @BindView(R.id.toolbar_my_cart)
     Toolbar toolbar_MyCart;
+
+    @BindView(R.id.tv_total_number)
+    TextView TV_total_number;
+
+    @BindView(R.id.tv_total_items_price)
+    TextView TV_total_items_price;
 
     String
             User_ID = "",
@@ -101,8 +108,6 @@ public class MyCart extends AppCompatActivity {
     RecyclerView mycartlist_recylerView;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,7 +135,6 @@ public class MyCart extends AppCompatActivity {
         /*circular progress bar (End)*/
 
 
-
         mycartlistrowItems = new ArrayList<MainActivity>();
         MyCartSingleProduct_id = new ArrayList<>();
         MyCartSingleProduct_Name = new ArrayList<>();
@@ -141,9 +145,12 @@ public class MyCart extends AppCompatActivity {
         MyCartSingleProduct_DeliveryDate = new ArrayList<>();
 
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mycartlist_recylerView.setHasFixedSize(true);
         mycartlist_recylerView.setLayoutManager(mLayoutManager);
-        mycartlist_recylerView.addItemDecoration(new MyCart.EqualSpaceItemDecoration(5));
+        mycartlist_recylerView.addItemDecoration(new MyCart.EqualSpaceItemDecoration(15));
+
+
 
 
         if (Utils.isConnected(getApplicationContext())) {
@@ -159,15 +166,6 @@ public class MyCart extends AppCompatActivity {
                             .text("Please Your Internet Connectivity..!!"));
 
         }
-
-
-
-
-
-
-
-
-
 
 
         Rl_checkout.setOnTouchListener(new View.OnTouchListener() {
@@ -210,7 +208,6 @@ public class MyCart extends AppCompatActivity {
     }
 
 
-
     /*progressbar data (Start)*/
     private void updateValues() {
         CircularProgressDrawable circularProgressDrawable;
@@ -236,7 +233,6 @@ public class MyCart extends AppCompatActivity {
     /*progressbar data (End)*/
 
 
-
     private class EqualSpaceItemDecoration extends RecyclerView.ItemDecoration {
 
         private final int mSpaceHeight;
@@ -250,8 +246,6 @@ public class MyCart extends AppCompatActivity {
                                    RecyclerView.State state) {
             outRect.bottom = mSpaceHeight;
             outRect.top = mSpaceHeight;
-            outRect.left = mSpaceHeight;
-            outRect.right = mSpaceHeight;
         }
 
     }
@@ -273,9 +267,9 @@ public class MyCart extends AppCompatActivity {
         @Override
         protected List<BeanMyCartList> doInBackground(String... params) {
             HttpClient client = new DefaultHttpClient();
-            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product_list.php?user_id="+User_ID);
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product_list.php?user_id=" + User_ID);
 
-            Log.e(" URL :", " " + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product_list.php?user_id="+User_ID);
+            Log.e(" URL :", " " + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product_list.php?user_id=" + User_ID);
 
             try {
                 HttpResponse response = client.execute(post);
@@ -293,7 +287,7 @@ public class MyCart extends AppCompatActivity {
 
                 JSONArray jaaray = new JSONArray(Str_My_Cart_List_detail);
 
-                if (status.equalsIgnoreCase("OK")){
+                if (status.equalsIgnoreCase("OK")) {
                     Log.e("Status is :", "OK");
                     for (int i = 0; i < jaaray.length(); i++) {
                         Str_My_Cart_List_result = jaaray.getJSONObject(i).getString("result");
@@ -333,7 +327,6 @@ public class MyCart extends AppCompatActivity {
                             Log.e(" ********** MyCartSingleProduct_Quantity List**********", "" + MyCartSingleProduct_Quantity);
                             Log.e(" ********** MyCartSingleProduct_DeliveryCharge List**********", "" + MyCartSingleProduct_DeliveryCharge);
                             Log.e(" ********** MyCartSingleProduct_DeliveryDate List**********", "" + MyCartSingleProduct_DeliveryDate);
-
 
 
                             String MyCartSingleProduct_idlist = MyCartSingleProduct_id.get(i);
@@ -378,6 +371,9 @@ public class MyCart extends AppCompatActivity {
             if (MyCartSingleProduct_id.size() > 0) {
                 Log.e(" ********** MyCartSingleProduct_id Size********** ", "" + MyCartSingleProduct_id);
 
+                Log.e(" **********onPostExecute Str_My_Cart_product_count**********", "" + Str_My_Cart_product_count);
+                Log.e(" **********onPostExecute Str_My_Cart_total_price**********", "" + Str_My_Cart_total_price);
+
                 Log.e(" **********onPostExecute MyCartSingleProduct_id List**********", "" + MyCartSingleProduct_id);
                 Log.e(" **********onPostExecute MyCartSingleProduct_Name List**********", "" + MyCartSingleProduct_Name);
                 Log.e(" **********onPostExecute MyCartSingleProduct_Price List**********", "" + MyCartSingleProduct_Price);
@@ -385,6 +381,12 @@ public class MyCart extends AppCompatActivity {
                 Log.e(" **********onPostExecute MyCartSingleProduct_Quantity List**********", "" + MyCartSingleProduct_Quantity);
                 Log.e(" **********onPostExecute MyCartSingleProduct_DeliveryCharge List**********", "" + MyCartSingleProduct_DeliveryCharge);
                 Log.e(" **********onPostExecute MyCartSingleProduct_DeliveryDate List**********", "" + MyCartSingleProduct_DeliveryDate);
+
+
+
+                TV_total_number.setText(Html.fromHtml(Str_My_Cart_product_count));
+                TV_total_items_price.setText(Html.fromHtml("\u20ac"+ " " +Str_My_Cart_total_price));
+
 
                 CategoryAdapter categoryAdapter = new MyCart.CategoryAdapter(MyCart.this, mystring);
                 mycartlist_recylerView.setAdapter(categoryAdapter);
@@ -403,8 +405,6 @@ public class MyCart extends AppCompatActivity {
     }
 
 
-
-
     private class CategoryAdapter extends RecyclerView.Adapter<MyCart.CategoryAdapter.MyViewHolder> {
 
         private Context mContext;
@@ -419,6 +419,7 @@ public class MyCart extends AppCompatActivity {
             TextView MyCartItem_Delivery_date;
             ImageView MyCartItem_image;
             RelativeLayout Rl_MyCartItem_image_loader;
+            CardView CV_DeleteItem;
             CircularProgressBar CPB_MyCartItem_image_circular_loader;
 
             public MyViewHolder(View view) {
@@ -431,6 +432,7 @@ public class MyCart extends AppCompatActivity {
                 CPB_MyCartItem_image_circular_loader = (CircularProgressBar) view.findViewById(R.id.cpb_my_cart_grid_item_image_progressbar_circular);
                 Rl_MyCartItem_image_loader = (RelativeLayout) view.findViewById(R.id.rl_my_cart_grid_item_image_progress);
                 MyCartItem_image = (ImageView) view.findViewById(R.id.iv_my_cart_item);
+                CV_DeleteItem = (CardView) view.findViewById(R.id.cv_my_cart_remove_item);
 
 
             }
@@ -445,7 +447,34 @@ public class MyCart extends AppCompatActivity {
         @Override
         public MyCart.CategoryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.activity_my_cart_grid_items, parent, false);
+                    .inflate(R.layout.activity_my_cart_list_items, parent, false);
+
+            final ItemClickSupport itemClick = ItemClickSupport.addTo(mycartlist_recylerView);
+
+            itemClick.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                @Override
+                public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+
+                    Log.e("Item Clicked :", "" + position);
+                }
+            });
+
+
+            itemClick.setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClicked(RecyclerView recyclerView, int position, View v) {
+
+                    Log.e("Item Long Clicked :", "" + position);
+
+                    return true;
+                }
+            });
+
+
+
+
+
+
 
             return new MyCart.CategoryAdapter.MyViewHolder(itemView);
         }
@@ -482,6 +511,63 @@ public class MyCart extends AppCompatActivity {
 
                 }
             });
+
+
+
+
+            /*itemClick.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(RecyclerView parent, View child, int position, long id) {
+                    mToast.setText("Item clicked: " + position);
+                    mToast.show();
+                }
+            });
+
+            itemClick.setOnItemLongClickListener(new OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(RecyclerView parent, View child, int position, long id) {
+                    mToast.setText("Item long pressed: " + position);
+                    mToast.show();
+                    return true;
+                }
+            });*/
+
+            holder.CV_DeleteItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = holder.getAdapterPosition();
+                    Log.e("CV_DeleteItem Item Position :", "" + arrayList.get(holder.getLayoutPosition()));
+                    Log.e("CV_DeleteItem Adapter Position :", "" + position);
+
+                    Str_My_Cart_List_single_product_id = arrayList.get(position).getMyCartSingleProductid();
+                    Log.e("CV_DeleteItem Item ID Str_My_Cart_List_single_product_id :", "" + Str_My_Cart_List_single_product_id);
+                    Str_My_Cart_List_single_product_title = arrayList.get(position).getMyCartSingleProductName();
+                    Log.e("CV_DeleteItem Item TITTLE Str_My_Cart_List_single_product_title :", "" + Str_My_Cart_List_single_product_title);
+
+
+
+                    Toast.makeText(getApplicationContext(), "Comming Soon", Toast.LENGTH_SHORT).show();
+
+                    /*if (Utils.isConnected(getApplicationContext())) {
+                        MyCartListItemDeleteJsontask task = new MyCartListItemDeleteJsontask();
+                        task.execute();
+                    } else {
+
+                        SnackbarManager.show(
+                                Snackbar.with(MyCart.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .text("Please Your Internet Connectivity..!!"));
+
+                    }*/
+
+
+
+                }
+            });
+
+
 
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -528,6 +614,102 @@ public class MyCart extends AppCompatActivity {
 
 
     }
+
+
+
+/*
+
+
+    private class MyCartListItemDeleteJsontask extends AsyncTask<String, Void, String> {
+
+        boolean iserror = false;
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            //  loginprogressbar.setVisibility(View.VISIBLE);
+            Log.e("******* NOW MyCartListItemDeleteJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW MyCartListItemDeleteJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("User_ID onPreExecute :", "" + User_ID);
+            Log.e("Str_My_Cart_List_single_product_id onPreExecute :", "" + Str_My_Cart_List_single_product_id);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            Log.e("******* NOW MyCartListItemDeleteJsontask IS doInBackground RUNNING *******", "YES");
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/delete_cart.php?product_id="+Str_My_Cart_List_single_product_id+"&user_id="+User_ID);
+
+            */
+/*http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id=286*//*
+
+            Log.e("URL Cart Detail MyCartListItemDeleteJsontask :", "" + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/delete_cart.php?product_id="+Str_My_Cart_List_single_product_id+"&user_id="+User_ID);
+
+            try {
+                HttpResponse response = client.execute(post);
+                String CartDeleteobject = EntityUtils.toString(response.getEntity());
+                Log.e("*******Cart Item Delete object******** :", "" + CartDeleteobject);
+
+                //JSONArray js = new JSONArray(object);
+                JSONObject jobect = new JSONObject(CartDeleteobject);
+                Str_Get_Cart_Detail_Status = jobect.getString("status");
+                if (Str_Get_Cart_Detail_Status.equalsIgnoreCase("OK")) {
+                    Str_Get_Cart_Deatil_User_ID = jobect.getString("user_id");
+                    Str_Get_Cart_Product_count = jobect.getString("no_of_prodcut");
+                    Str_Get_Cart_result = jobect.getString("single_product_result");
+
+                }
+
+            } catch (Exception e) {
+                Log.v("22", "22" + e.getMessage());
+                e.printStackTrace();
+                iserror = true;
+            }
+
+            return Str_Get_Cart_Detail_Status;
+        }
+
+        @Override
+        protected void onPostExecute(String result1) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result1);
+
+            if (!iserror) {
+                if (Str_Get_Cart_Detail_Status.equalsIgnoreCase("OK")) {
+
+                    Log.e("Str_Get_Cart_Deatil_User_ID :", "" + Str_Get_Cart_Deatil_User_ID);
+                    Log.e("Str_Get_Cart_Product_count :", "" + Str_Get_Cart_Product_count);
+                    Log.e("Str_Get_Cart_result :", "" + Str_Get_Cart_result);
+
+                    TV_badge_counter_sub_category_product_list.setText(Str_Get_Cart_Product_count);
+                    */
+/**************** Start Animation **************  **//*
+
+                    YoYo.with(Techniques.Wobble)
+                            .duration(700)
+                            .playOn(Rl_cart_icon_sub_category_product_list);
+                    YoYo.with(Techniques.Wobble)
+                            .duration(700)
+                            .playOn(RL_badgeview_cart_item_sub_category_product_list);
+                    */
+/**************** End Animation ****************//*
+
+
+                } else {
+                    Log.e("onPostExecute Error ", "ooppss");
+                    SnackbarManager.show(
+                            Snackbar.with(SubCategoryProductListActivity.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("No Data Found"));
+                }
+            }
+        }
+
+    }
+*/
 
 
 }
