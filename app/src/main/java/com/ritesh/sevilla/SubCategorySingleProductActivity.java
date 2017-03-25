@@ -126,6 +126,13 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
     @BindView(R.id.rl_badgeview_cart_item_sub_category_single_product)
     RelativeLayout RL_badgeview_cart_item_sub_category_single_product;
 
+
+    @BindView(R.id.rl_cart_icon_sub_category_single_product_click)
+    RelativeLayout RL_cart_icon_sub_category_single_product_click;
+
+    @BindView(R.id.rl_badgeview_cart_item_sub_category_single_product_click)
+    RelativeLayout RL_badgeview_cart_item_sub_category_single_product_click;
+
     @BindView(R.id.tv_badge_counter_sub_category_single_product)
     TextView TV_badge_counter_sub_category_single_product;
 
@@ -138,7 +145,7 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
             Str_Get_Cart_Deatil_User_ID = "",
             Str_Get_Cart_Product_count = "",
 
-            SubCategorySingleProductId_Recived = "",
+    SubCategorySingleProductId_Recived = "",
             SubCategoryName_Recived = "",
             StatusSingle = "",
             SingleProductID = "",
@@ -175,7 +182,6 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
         Appconstant.sh = getSharedPreferences(Appconstant.MyPREFERENCES, Context.MODE_PRIVATE);
         User_ID = Appconstant.sh.getString("id", null);
         Log.e("User_ID from SharedPref :", "" + User_ID);
-
 
 
         if (Utils.isConnected(getApplicationContext())) {
@@ -283,6 +289,7 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
             }
         });*/
 
+
         CV_add_cart.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -358,6 +365,59 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
         });
 
 
+        RL_cart_icon_sub_category_single_product.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    Log.e("Action ", "Down");
+                    RL_cart_icon_sub_category_single_product_click.setVisibility(View.VISIBLE);
+                    RL_cart_icon_sub_category_single_product.setVisibility(View.GONE);
+
+                    RL_badgeview_cart_item_sub_category_single_product_click.setVisibility(View.VISIBLE);
+                    RL_badgeview_cart_item_sub_category_single_product.setVisibility(View.GONE);
+                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+
+//                    Toast.makeText(getApplicationContext(), "Add to cart Clicked", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_MOVE) {
+
+                    Log.e("Action ", "Move");
+                    RL_cart_icon_sub_category_single_product_click.setVisibility(View.VISIBLE);
+                    RL_cart_icon_sub_category_single_product.setVisibility(View.GONE);
+
+                    RL_badgeview_cart_item_sub_category_single_product_click.setVisibility(View.VISIBLE);
+                    RL_badgeview_cart_item_sub_category_single_product.setVisibility(View.GONE);
+
+                    return true;
+
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                    Log.e("Action ", "Up");
+
+                    RL_cart_icon_sub_category_single_product_click.setVisibility(View.GONE);
+                    RL_cart_icon_sub_category_single_product.setVisibility(View.VISIBLE);
+
+                    RL_badgeview_cart_item_sub_category_single_product_click.setVisibility(View.GONE);
+                    RL_badgeview_cart_item_sub_category_single_product.setVisibility(View.VISIBLE);
+
+
+                     Intent MyCartPage = new Intent(getApplicationContext(), MyCart.class);
+                    SubCategorySingleProductActivity.this.startActivity(MyCartPage);
+
+                    return true;
+                }
+
+
+                return false;
+            }
+        });
+
+
         CV_sub_category_single_item_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -411,6 +471,58 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("SubCategorySingleProductActivity lifecycle", "onStart invoked");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("SubCategorySingleProductActivity lifecycle", "onResume invoked");
+
+        if (Utils.isConnected(getApplicationContext())) {
+            Log.e("onResume SubCategorySingleProductCartDetailJsontask Call :", "OK");
+            SubCategorySingleProductCartDetailJsontask task = new SubCategorySingleProductCartDetailJsontask();
+            task.execute();
+        } else {
+
+            SnackbarManager.show(
+                    Snackbar.with(SubCategorySingleProductActivity.this)
+                            .position(Snackbar.SnackbarPosition.TOP)
+                            .margin(15, 15)
+                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                            .text("Please Your Internet Connectivity..!!"));
+
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("SubCategorySingleProductActivity lifecycle", "onPause invoked");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("SubCategorySingleProductActivity lifecycle", "onStop invoked");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("SubCategorySingleProductActivity lifecycle", "onRestart invoked");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("SubCategorySingleProductActivity lifecycle", "onDestroy invoked");
+    }
+
+
     private class SubCategorySingleProductCartDetailJsontask extends AsyncTask<String, Void, String> {
 
         boolean iserror = false;
@@ -429,10 +541,10 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             Log.e("******* NOW SubCategorySingleProductCartDetailJsontask IS doInBackground RUNNING *******", "YES");
             HttpClient client = new DefaultHttpClient();
-            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id="+User_ID);
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id=" + User_ID);
 
             /*http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id=286*/
-            Log.e("URL Cart Detail SubCategorySingleProductCartDetailJsontask :", "" + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id="+User_ID);
+            Log.e("URL Cart Detail SubCategorySingleProductCartDetailJsontask :", "" + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id=" + User_ID);
 
             try {
                 HttpResponse response = client.execute(post);
@@ -688,6 +800,21 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
                                     .margin(15, 15)
                                     .backgroundDrawable(R.drawable.snackbar_custom_layout)
                                     .text("Adding product To Cart"));
+
+                    if (Utils.isConnected(getApplicationContext())) {
+                        Log.e("SubCategorySingleProductCartDetailJsontask Call :", "OK");
+                        SubCategorySingleProductCartDetailJsontask task = new SubCategorySingleProductCartDetailJsontask();
+                        task.execute();
+                    } else {
+
+                        SnackbarManager.show(
+                                Snackbar.with(SubCategorySingleProductActivity.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .text("Please Your Internet Connectivity..!!"));
+
+                    }
 
 
                 } else {

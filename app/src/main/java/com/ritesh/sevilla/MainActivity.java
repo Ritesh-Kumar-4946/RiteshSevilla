@@ -483,37 +483,54 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.e("lifecycle", "onStart invoked");
+        Log.e("Main Activity lifecycle", "onStart invoked");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("lifecycle", "onResume invoked");
+        Log.e("Main Activity lifecycle", "onResume invoked");
+
+        if (Utils.isConnected(getApplicationContext())) {
+            Log.e("onResume MainCartDetailJsontask Call :", "OK");
+            MainCartDetailJsontask task = new MainCartDetailJsontask();
+            task.execute();
+        } else {
+
+            SnackbarManager.show(
+                    Snackbar.with(MainActivity.this)
+                            .position(Snackbar.SnackbarPosition.TOP)
+                            .margin(15, 15)
+                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                            .text("Please Your Internet Connectivity..!!"));
+
+        }
+
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.e("lifecycle", "onPause invoked");
+        Log.e("Main Activity lifecycle", "onPause invoked");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.e("lifecycle", "onStop invoked");
+        Log.e("Main Activity lifecycle", "onStop invoked");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.e("lifecycle", "onRestart invoked");
+        Log.e("Main Activity lifecycle", "onRestart invoked");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.e("lifecycle", "onDestroy invoked");
+        Log.e("Main Activity lifecycle", "onDestroy invoked");
     }
 
 

@@ -237,6 +237,61 @@ public class SubCategoryProductListActivity extends AppCompatActivity {
 */
     }
 
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("SubCategoryProductListActivity lifecycle", "onStart invoked");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onResume SubCategoryProductListActivity lifecycle", "onResume invoked");
+
+        if (Utils.isConnected(getApplicationContext())) {
+            Log.e("SubCategoryProductListDetailJsontask Call :", "OK");
+            SubCategoryProductListCartDetailJsontask task = new SubCategoryProductListCartDetailJsontask();
+            task.execute();
+        } else {
+
+            SnackbarManager.show(
+                    Snackbar.with(SubCategoryProductListActivity.this)
+                            .position(Snackbar.SnackbarPosition.TOP)
+                            .margin(15, 15)
+                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                            .text("Please Your Internet Connectivity..!!"));
+
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("SubCategoryProductListActivity lifecycle", "onPause invoked");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("SubCategoryProductListActivity lifecycle", "onStop invoked");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("SubCategoryProductListActivity lifecycle", "onRestart invoked");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("SubCategoryProductListActivity lifecycle", "onDestroy invoked");
+    }
+
+
+
     /*progressbar data (Start)*/
     private void updateValues() {
         CircularProgressDrawable circularProgressDrawable;

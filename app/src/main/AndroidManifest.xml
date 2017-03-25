@@ -108,6 +108,13 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
+        <activity
+            android:name=".MyCart"
+            android:label="@string/app_name"
+            android:largeHeap="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
 
         <activity
             android:name=".TempActivity"

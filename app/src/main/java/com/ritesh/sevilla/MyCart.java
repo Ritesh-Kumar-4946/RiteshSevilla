@@ -256,6 +256,7 @@ public class MyCart extends AppCompatActivity {
 
     }
 
+
     private class MyCartListJsontask extends AsyncTask<String, Void, List<BeanMyCartList>> {
 
         boolean iserror = false;
@@ -266,6 +267,7 @@ public class MyCart extends AppCompatActivity {
             super.onPreExecute();
             pv_gridview_mycartlist_progressview.setVisibility(View.VISIBLE);
             Log.e(" ************ MyCartListJsontask AsyncTask Start ************ :", "yes");
+            Log.e("USER_ID :", "" + User_ID);
         }
 
         @Override
@@ -283,77 +285,84 @@ public class MyCart extends AppCompatActivity {
 
                 Log.e("************Json data*******************", " " + obj);
                 JSONObject jsonObject = new JSONObject(obj);
+                status = jsonObject.getString("status");
+                Str_My_Cart_product_count = jsonObject.getString("cart_prodcut_count");
+                Str_My_Cart_total_price = jsonObject.getString("total_price");
                 Str_My_Cart_List_detail = jsonObject.getString("Product_cart_detail");
                 Log.e("Json Str_My_Cart_List_detail data :", " " + Str_My_Cart_List_detail);
 
                 JSONArray jaaray = new JSONArray(Str_My_Cart_List_detail);
 
-                for (int i = 0; i < jaaray.length(); i++) {
-                    Str_My_Cart_List_result = jaaray.getJSONObject(i).getString("result");
+                if (status.equalsIgnoreCase("OK")){
+                    Log.e("Status is :", "OK");
+                    for (int i = 0; i < jaaray.length(); i++) {
+                        Str_My_Cart_List_result = jaaray.getJSONObject(i).getString("result");
 
-                    if (Str_My_Cart_List_result.equalsIgnoreCase("successful")) {
-                        BeanMyCartList beanMyCartList = new BeanMyCartList();
-                        beanMyCartList.setMyCartSingleProductid(jaaray.getJSONObject(i).getString("single_product_id"));
-                        beanMyCartList.setMyCartSingleProductName(jaaray.getJSONObject(i).getString("single_product_title"));
-                        beanMyCartList.setMyCartSingleProductImage(jaaray.getJSONObject(i).getString("single_product_img"));
-                        beanMyCartList.setMyCartSingleProductPrice(jaaray.getJSONObject(i).getString("single_product_price"));
-                        beanMyCartList.setMyCartSingleProductQuantity(jaaray.getJSONObject(i).getString("item_quantity"));
-                        beanMyCartList.setMyCartSingleProductDeliveryCharge(jaaray.getJSONObject(i).getString("    "));
-                        beanMyCartList.setMyCartSingleProductDeliveryDate(jaaray.getJSONObject(i).getString("     "));
-                        beanMyCartlist0.add(beanMyCartList);
-
-
-                        Str_My_Cart_List_single_product_id = jaaray.getJSONObject(i).getString("single_product_id");
-                        Str_My_Cart_List_single_product_title = jaaray.getJSONObject(i).getString("single_product_title");
-                        Str_My_Cart_List_single_product_price = jaaray.getJSONObject(i).getString("single_product_price");
-                        Str_My_Cart_List_single_product_img = jaaray.getJSONObject(i).getString("single_product_img");
-                        Str_My_Cart_List_single_item_quantity = jaaray.getJSONObject(i).getString("item_quantity");
-                        Str_My_Cart_List_DeliveryCharge = jaaray.getJSONObject(i).getString("     ");
-                        Str_My_Cart_List_DeliveryDate = jaaray.getJSONObject(i).getString("      ");
-
-                        MyCartSingleProduct_id.add(Str_My_Cart_List_single_product_id);
-                        MyCartSingleProduct_Name.add(Str_My_Cart_List_single_product_title);
-                        MyCartSingleProduct_Price.add(Str_My_Cart_List_single_product_price);
-                        MyCartSingleProduct_Image.add(Str_My_Cart_List_single_product_img);
-                        MyCartSingleProduct_Quantity.add(Str_My_Cart_List_single_item_quantity);
-                        MyCartSingleProduct_DeliveryCharge.add(Str_My_Cart_List_DeliveryCharge);
-                        MyCartSingleProduct_DeliveryDate.add(Str_My_Cart_List_DeliveryDate);
-
-                        Log.e(" ********** MyCartSingleProduct_id List**********", "" + MyCartSingleProduct_id);
-                        Log.e(" ********** MyCartSingleProduct_Name List**********", "" + MyCartSingleProduct_Name);
-                        Log.e(" ********** MyCartSingleProduct_Price List**********", "" + MyCartSingleProduct_Price);
-                        Log.e(" ********** MyCartSingleProduct_Image List**********", "" + MyCartSingleProduct_Image);
-                        Log.e(" ********** MyCartSingleProduct_Quantity List**********", "" + MyCartSingleProduct_Quantity);
-                        Log.e(" ********** MyCartSingleProduct_DeliveryCharge List**********", "" + MyCartSingleProduct_DeliveryCharge);
-                        Log.e(" ********** MyCartSingleProduct_DeliveryDate List**********", "" + MyCartSingleProduct_DeliveryDate);
+                        if (Str_My_Cart_List_result.equalsIgnoreCase("successful")) {
+                            BeanMyCartList beanMyCartList = new BeanMyCartList();
+                            beanMyCartList.setMyCartSingleProductid(jaaray.getJSONObject(i).getString("single_product_id"));
+                            beanMyCartList.setMyCartSingleProductQuantity(jaaray.getJSONObject(i).getString("item_quantity"));
+                            beanMyCartList.setMyCartSingleProductName(jaaray.getJSONObject(i).getString("single_product_title"));
+                            beanMyCartList.setMyCartSingleProductPrice(jaaray.getJSONObject(i).getString("single_product_price"));
+                            beanMyCartList.setMyCartSingleProductImage(jaaray.getJSONObject(i).getString("single_product_img"));
+                            beanMyCartList.setMyCartSingleProductDeliveryCharge(jaaray.getJSONObject(i).getString("delivery_price"));
+                            beanMyCartList.setMyCartSingleProductDeliveryDate(jaaray.getJSONObject(i).getString("delivery_date"));
+                            beanMyCartlist0.add(beanMyCartList);
 
 
+                            Str_My_Cart_List_single_product_id = jaaray.getJSONObject(i).getString("single_product_id");
+                            Str_My_Cart_List_single_product_title = jaaray.getJSONObject(i).getString("single_product_title");
+                            Str_My_Cart_List_single_product_price = jaaray.getJSONObject(i).getString("single_product_price");
+                            Str_My_Cart_List_single_product_img = jaaray.getJSONObject(i).getString("single_product_img");
+                            Str_My_Cart_List_single_item_quantity = jaaray.getJSONObject(i).getString("item_quantity");
+                            Str_My_Cart_List_DeliveryCharge = jaaray.getJSONObject(i).getString("delivery_price");
+                            Str_My_Cart_List_DeliveryDate = jaaray.getJSONObject(i).getString("delivery_date");
 
-                        String MyCartSingleProduct_idlist = MyCartSingleProduct_id.get(i);
-                        Log.e(" ********** MyCartSingleProduct_idlist **********", "" + MyCartSingleProduct_idlist);
+                            MyCartSingleProduct_id.add(Str_My_Cart_List_single_product_id);
+                            MyCartSingleProduct_Name.add(Str_My_Cart_List_single_product_title);
+                            MyCartSingleProduct_Price.add(Str_My_Cart_List_single_product_price);
+                            MyCartSingleProduct_Image.add(Str_My_Cart_List_single_product_img);
+                            MyCartSingleProduct_Quantity.add(Str_My_Cart_List_single_item_quantity);
+                            MyCartSingleProduct_DeliveryCharge.add(Str_My_Cart_List_DeliveryCharge);
+                            MyCartSingleProduct_DeliveryDate.add(Str_My_Cart_List_DeliveryDate);
 
-                        String MyCartSingleProduct_Namelist = MyCartSingleProduct_Name.get(i);
-                        Log.e(" ********** MyCartSingleProduct_Namelist **********", "" + MyCartSingleProduct_Namelist);
+                            Log.e(" ********** MyCartSingleProduct_id List**********", "" + MyCartSingleProduct_id);
+                            Log.e(" ********** MyCartSingleProduct_Name List**********", "" + MyCartSingleProduct_Name);
+                            Log.e(" ********** MyCartSingleProduct_Price List**********", "" + MyCartSingleProduct_Price);
+                            Log.e(" ********** MyCartSingleProduct_Image List**********", "" + MyCartSingleProduct_Image);
+                            Log.e(" ********** MyCartSingleProduct_Quantity List**********", "" + MyCartSingleProduct_Quantity);
+                            Log.e(" ********** MyCartSingleProduct_DeliveryCharge List**********", "" + MyCartSingleProduct_DeliveryCharge);
+                            Log.e(" ********** MyCartSingleProduct_DeliveryDate List**********", "" + MyCartSingleProduct_DeliveryDate);
 
-                        String MyCartSingleProduct_Pricelist = MyCartSingleProduct_Price.get(i);
-                        Log.e(" ********** MyCartSingleProduct_Pricelist **********", "" + MyCartSingleProduct_Pricelist);
 
-                        String MyCartSingleProduct_Imagelist = MyCartSingleProduct_Image.get(i);
-                        Log.e(" ********** MyCartSingleProduct_Imagelist **********", "" + MyCartSingleProduct_Imagelist);
 
-                        String MyCartSingleProduct_Quantitylist = MyCartSingleProduct_Quantity.get(i);
-                        Log.e(" ********** MyCartSingleProduct_Quantitylist **********", "" + MyCartSingleProduct_Quantitylist);
+                            String MyCartSingleProduct_idlist = MyCartSingleProduct_id.get(i);
+                            Log.e(" ********** MyCartSingleProduct_idlist **********", "" + MyCartSingleProduct_idlist);
 
-                        String MyCartSingleProduct_DeliveryChargelist = MyCartSingleProduct_DeliveryCharge.get(i);
-                        Log.e(" ********** MyCartSingleProduct_DeliveryChargelist **********", "" + MyCartSingleProduct_DeliveryChargelist);
+                            String MyCartSingleProduct_Namelist = MyCartSingleProduct_Name.get(i);
+                            Log.e(" ********** MyCartSingleProduct_Namelist **********", "" + MyCartSingleProduct_Namelist);
 
-                        String MyCartSingleProduct_DeliveryDatelist = MyCartSingleProduct_DeliveryDate.get(i);
-                        Log.e(" ********** MyCartSingleProduct_DeliveryDatelist **********", "" + MyCartSingleProduct_DeliveryDatelist);
+                            String MyCartSingleProduct_Pricelist = MyCartSingleProduct_Price.get(i);
+                            Log.e(" ********** MyCartSingleProduct_Pricelist **********", "" + MyCartSingleProduct_Pricelist);
+
+                            String MyCartSingleProduct_Imagelist = MyCartSingleProduct_Image.get(i);
+                            Log.e(" ********** MyCartSingleProduct_Imagelist **********", "" + MyCartSingleProduct_Imagelist);
+
+                            String MyCartSingleProduct_Quantitylist = MyCartSingleProduct_Quantity.get(i);
+                            Log.e(" ********** MyCartSingleProduct_Quantitylist **********", "" + MyCartSingleProduct_Quantitylist);
+
+                            String MyCartSingleProduct_DeliveryChargelist = MyCartSingleProduct_DeliveryCharge.get(i);
+                            Log.e(" ********** MyCartSingleProduct_DeliveryChargelist **********", "" + MyCartSingleProduct_DeliveryChargelist);
+
+                            String MyCartSingleProduct_DeliveryDatelist = MyCartSingleProduct_DeliveryDate.get(i);
+                            Log.e(" ********** MyCartSingleProduct_DeliveryDatelist **********", "" + MyCartSingleProduct_DeliveryDatelist);
+                        }
                     }
                 }
 
+
             } catch (Exception e) {
-                System.out.println("Errror in gettting by ID" + e);
+                System.out.println("Errror Status Is Fail" + e);
                 Log.e("22", "22" + e.getMessage());
                 e.printStackTrace();
                 iserror = true;
@@ -368,6 +377,14 @@ public class MyCart extends AppCompatActivity {
 
             if (MyCartSingleProduct_id.size() > 0) {
                 Log.e(" ********** MyCartSingleProduct_id Size********** ", "" + MyCartSingleProduct_id);
+
+                Log.e(" **********onPostExecute MyCartSingleProduct_id List**********", "" + MyCartSingleProduct_id);
+                Log.e(" **********onPostExecute MyCartSingleProduct_Name List**********", "" + MyCartSingleProduct_Name);
+                Log.e(" **********onPostExecute MyCartSingleProduct_Price List**********", "" + MyCartSingleProduct_Price);
+                Log.e(" **********onPostExecute MyCartSingleProduct_Image List**********", "" + MyCartSingleProduct_Image);
+                Log.e(" **********onPostExecute MyCartSingleProduct_Quantity List**********", "" + MyCartSingleProduct_Quantity);
+                Log.e(" **********onPostExecute MyCartSingleProduct_DeliveryCharge List**********", "" + MyCartSingleProduct_DeliveryCharge);
+                Log.e(" **********onPostExecute MyCartSingleProduct_DeliveryDate List**********", "" + MyCartSingleProduct_DeliveryDate);
 
                 CategoryAdapter categoryAdapter = new MyCart.CategoryAdapter(MyCart.this, mystring);
                 mycartlist_recylerView.setAdapter(categoryAdapter);
@@ -384,7 +401,6 @@ public class MyCart extends AppCompatActivity {
         }
 
     }
-
 
 
 
