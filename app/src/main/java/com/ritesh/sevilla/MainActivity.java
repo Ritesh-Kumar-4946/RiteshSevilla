@@ -159,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
     String
             User_ID = "",
             Str_Get_Cart_Deatil_User_ID = "",
+            Str_Get_CartCount_Shared = "",
             Str_Get_Cart_Product_count = "",
             Str_Get_User_ID = "",
             Str_Get_user_image = "",
@@ -218,6 +219,8 @@ public class MainActivity extends AppCompatActivity {
         Appconstant.sh = getSharedPreferences(Appconstant.MyPREFERENCES, Context.MODE_PRIVATE);
         User_ID = Appconstant.sh.getString("id", null);
         Log.e("User_ID from SharedPref :", "" + User_ID);
+        Str_Get_CartCount_Shared = Appconstant.sh.getString("cart_count", null);
+        Log.e("Cart Count From Shared Preference:", "" + Str_Get_CartCount_Shared);
 
         if (Utils.isConnected(getApplicationContext())) {
             GetUserDetailJsontask task = new GetUserDetailJsontask();

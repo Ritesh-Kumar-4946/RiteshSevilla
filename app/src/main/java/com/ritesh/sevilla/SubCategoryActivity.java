@@ -66,6 +66,7 @@ public class SubCategoryActivity extends AppCompatActivity {
     /*recycler data (Start 01 of 03)*/
     String
             User_ID = "",
+            Str_Get_CartCount_Shared = "",
             Str_Get_Cart_Detail_Status = "",
             Str_Get_Cart_result = "",
             Str_Get_Status = "",
@@ -130,6 +131,8 @@ public class SubCategoryActivity extends AppCompatActivity {
         Appconstant.sh = getSharedPreferences(Appconstant.MyPREFERENCES, Context.MODE_PRIVATE);
         User_ID = Appconstant.sh.getString("id", null);
         Log.e("User_ID from SharedPref :", "" + User_ID);
+        Str_Get_CartCount_Shared = Appconstant.sh.getString("cart_count", null);
+        Log.e("Cart Count From Shared Preference:", "" + Str_Get_CartCount_Shared);
 
 
 //        SubCategoryID = getIntent().getExtras().getString("SubCatID");

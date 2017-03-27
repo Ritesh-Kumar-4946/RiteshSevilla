@@ -708,7 +708,21 @@ public class MyCart extends AppCompatActivity {
                     mycartlist_recylerView.setAdapter(categoryAdapter);
                     mycartlist_recylerView.setLayoutManager(mLayoutManager);
                     categoryAdapter.notifyDataSetChanged();*/
-                    categoryAdapter.notifyDataSetChanged();
+
+                    if (Utils.isConnected(getApplicationContext())) {
+                        MyCartListJsontask task = new MyCartListJsontask();
+                        task.execute();
+                    } else {
+
+                        SnackbarManager.show(
+                                Snackbar.with(MyCart.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .text("Please Your Internet Connectivity..!!"));
+
+                    }
+//                    categoryAdapter.notifyDataSetChanged();
 
                 } else {
                     Log.e("onPostExecute Error ", "ooppss");

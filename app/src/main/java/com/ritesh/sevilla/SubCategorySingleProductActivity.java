@@ -141,7 +141,7 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
             User_ID = "",
             Str_Get_Cart_Detail_Status = "",
             Str_Get_Cart_result = "",
-            Str_Get_Status = "",
+            Str_Get_CartCount_Shared = "",
             Str_Get_Cart_Deatil_User_ID = "",
             Str_Get_Cart_Product_count = "",
 
@@ -181,7 +181,9 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
 
         Appconstant.sh = getSharedPreferences(Appconstant.MyPREFERENCES, Context.MODE_PRIVATE);
         User_ID = Appconstant.sh.getString("id", null);
+        Str_Get_CartCount_Shared = Appconstant.sh.getString("cart_count", null);
         Log.e("User_ID from SharedPref :", "" + User_ID);
+        Log.e("Cart Count From Shared Preference:", "" + Str_Get_CartCount_Shared);
 
 
         if (Utils.isConnected(getApplicationContext())) {
@@ -582,6 +584,10 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
                     Log.e("Str_Get_Cart_Product_count :", "" + Str_Get_Cart_Product_count);
                     Log.e("Str_Get_Cart_result :", "" + Str_Get_Cart_result);
 
+
+                    Appconstant.editor.putString("cart_count", Str_Get_Cart_Product_count);
+                    Appconstant.editor.commit();
+
                     TV_badge_counter_sub_category_single_product.setText(Str_Get_Cart_Product_count);
                     /**************** Start Animation **************  **/
                     YoYo.with(Techniques.Wobble)
@@ -591,6 +597,9 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
                             .duration(700)
                             .playOn(RL_badgeview_cart_item_sub_category_single_product);
                     /**************** End Animation ****************/
+
+
+
 
                 } else {
                     Log.e("onPostExecute Error ", "ooppss");
