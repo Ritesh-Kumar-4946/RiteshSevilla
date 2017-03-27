@@ -551,10 +551,12 @@ public class MainActivity extends AppCompatActivity {
         Log.e("Main Activity lifecycle", "onStart invoked");
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
         Log.e("Main Activity lifecycle", "onResume invoked");
+//        TV_cart_badge_counter_textview.setText(Str_Get_CartCount_Shared);
 
         if (Utils.isConnected(getApplicationContext())) {
             Log.e("onResume MainCartDetailJsontask Call :", "OK");

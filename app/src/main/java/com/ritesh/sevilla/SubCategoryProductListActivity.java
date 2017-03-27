@@ -314,6 +314,7 @@ public class SubCategoryProductListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.e("onResume SubCategoryProductListActivity lifecycle", "onResume invoked");
+//        TV_badge_counter_sub_category_product_list.setText(Str_Get_CartCount_Shared);
 
         if (Utils.isConnected(getApplicationContext())) {
             Log.e("SubCategoryProductListDetailJsontask Call :", "OK");
@@ -441,6 +442,7 @@ public class SubCategoryProductListActivity extends AppCompatActivity {
                     Log.e("Str_Get_Cart_Deatil_User_ID :", "" + Str_Get_Cart_Deatil_User_ID);
                     Log.e("Str_Get_Cart_Product_count :", "" + Str_Get_Cart_Product_count);
                     Log.e("Str_Get_Cart_result :", "" + Str_Get_Cart_result);
+
 
                     TV_badge_counter_sub_category_product_list.setText(Str_Get_Cart_Product_count);
                     /**************** Start Animation **************  **/

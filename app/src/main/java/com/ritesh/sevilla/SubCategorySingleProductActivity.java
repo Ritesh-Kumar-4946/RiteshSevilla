@@ -483,6 +483,7 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.e("SubCategorySingleProductActivity lifecycle", "onResume invoked");
+//        TV_badge_counter_sub_category_single_product.setText(Str_Get_CartCount_Shared);
 
         if (Utils.isConnected(getApplicationContext())) {
             Log.e("onResume SubCategorySingleProductCartDetailJsontask Call :", "OK");
