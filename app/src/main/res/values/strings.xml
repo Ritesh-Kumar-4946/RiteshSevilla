@@ -80,10 +80,14 @@
 
 
     <string name="tv_toolbar_subcategory">SubCategory</string>
+    <string name="tv_toolbar_news_event">News/Events</string>
     <string name="tv_toolbar_subcategory_name">SubCategory Name</string>
     <string name="tv_toolbar_my_cart">My Cart</string>
     <string name="tv_toolbar_subcategory_product">SubCategory Product</string>
     <string name="tv_subcategory_product_list_tittle">Product Name</string>
+    <string name="tv_news_event_tittle">News/Event Name</string>
+    <string name="tv_news_event_date">News/Event Date</string>
+    <string name="tv_news_event_description">News/Event Description</string>
     <string name="tv_subcategory_single_product_discription_tittle">Description</string>
     <string name="tv_subcategory_single_product_quantity">Qty:- </string>
     <string name="tv_my_cart_product_quantity">Quantity:</string>

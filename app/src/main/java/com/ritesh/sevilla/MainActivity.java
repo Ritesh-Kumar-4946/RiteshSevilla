@@ -506,7 +506,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                Toast.makeText(getApplicationContext(), "News Event Clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "News Event Clicked", Toast.LENGTH_SHORT).show();
+
+                Intent GoNewsEventScreen = new Intent(getApplicationContext(), NewsEventActivity.class);
+                startActivity(GoNewsEventScreen);
+
+
+
             }
         });
 

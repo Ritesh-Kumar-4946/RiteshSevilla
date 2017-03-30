@@ -620,7 +620,7 @@ public class SubCategoryActivity extends AppCompatActivity {
     }
 
 
-    private class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.MyViewHolder> {
+    private class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryActivity.SubCategoryAdapter.MyViewHolder> {
 
         private Context mContext;
         private List<BeanSubCategory> subCatarrayList;
@@ -650,7 +650,7 @@ public class SubCategoryActivity extends AppCompatActivity {
 
 
         @Override
-        public SubCategoryActivity.SubCategoryAdapter.MyViewHolder onCreateViewHolder
+        public MyViewHolder onCreateViewHolder
                 (ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.activity_sub_category_grid_items, parent, false);
@@ -805,6 +805,8 @@ public class SubCategoryActivity extends AppCompatActivity {
 
         finish();
     }
+
+
 
 }
 
