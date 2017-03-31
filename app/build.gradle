@@ -172,4 +172,9 @@ dependencies {
 //    compile files('libs/httpmime-4.3.6.jar')
 //    compile 'org.apache.httpcomponents:httpcore:4.4.4'
     /*this is needed for using multipart option for sending image to server so we add 3 jar files in lib folder and add dependency from project structure (End)*/
+
+
+
+    compile 'com.paypal.sdk:paypal-android-sdk:2.15.3'
+
 }

@@ -1,6 +1,8 @@
 package com.ritesh.sevilla;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.AsyncTask;
@@ -29,6 +31,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
 import com.ritesh.sevilla.Beans.BeanMyCartList;
 import com.ritesh.sevilla.Constant.Appconstant;
 import com.ritesh.sevilla.Constant.Utils;
@@ -39,8 +46,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,6 +121,16 @@ public class MyCartActivity extends AppCompatActivity {
 
     RecyclerView.LayoutManager mLayoutManager;
 
+    public static final int PAYPAL_REQUEST_CODE = 123;
+    //Paypal Configuration Object
+    private static PayPalConfiguration config = new PayPalConfiguration()
+            // Start with mock environment.  When ready, switch to sandbox (ENVIRONMENT_SANDBOX)
+            // or live (ENVIRONMENT_PRODUCTION)
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .clientId(PayPalConfig.PAYPAL_CLIENT_ID);
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +142,10 @@ public class MyCartActivity extends AppCompatActivity {
         User_ID = Appconstant.sh.getString("id", null);
         Log.e("User_ID from SharedPref :", "" + User_ID);
 
+
+        Intent intent = new Intent(this, PayPalService.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+        startService(intent);
 
         /*recycler data (Start 02 of 03)*/
         /*image settin by universal image loader */
@@ -138,6 +161,8 @@ public class MyCartActivity extends AppCompatActivity {
         updateValues();
         /*circular progress bar (End)*/
 
+
+        // getPayment();
 
         mycartlistrowItems = new ArrayList<MainActivity>();
         MyCartSingleProduct_id = new ArrayList<>();
@@ -171,6 +196,7 @@ public class MyCartActivity extends AppCompatActivity {
 
         }
 
+//        Rl_checkout.setClickable(false);
 
         Rl_checkout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -200,6 +226,7 @@ public class MyCartActivity extends AppCompatActivity {
                     Log.e("Action ", "Up");
                     Rl_checkout_zoom.setVisibility(View.GONE);
                     Rl_checkout.setVisibility(View.VISIBLE);
+                    getPayment();
                     return true;
                 }
 
@@ -679,9 +706,6 @@ public class MyCartActivity extends AppCompatActivity {
     }
 
 
-
-
-
     private class MyCartListItemDeleteJsontask extends AsyncTask<String, Void, String> {
 
         boolean iserror = false;
@@ -777,6 +801,111 @@ public class MyCartActivity extends AppCompatActivity {
         }
 
     }
+
+
+    private void getPayment() {
+        //Getting the amount from editText
+        //Creating a paypalpayment
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(Str_My_Cart_total_price), "USD", "Amount Payable For Sevilla", PayPalPayment.PAYMENT_INTENT_SALE);
+
+        //Creating Paypal Payment activity intent
+        Intent intent = new Intent(this, PaymentActivity.class);
+
+        //putting the paypal configuration to the intent
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+
+        //Puting paypal payment to the intent
+        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
+
+        //Starting the intent activity for result
+        //the request code will be used on the method onActivityResult
+        startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+
+    }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //If the result is from paypal
+        if (requestCode == PAYPAL_REQUEST_CODE) {
+
+            //If the result is OK i.e. user has not canceled the payment
+            if (resultCode == Activity.RESULT_OK) {
+                //Getting the payment confirmation
+                PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+
+                //if confirmation is not null
+                if (confirm != null) {
+                    try {
+                        //Getting the payment details
+                        String paymentDetails = confirm.toJSONObject().toString();
+                        Log.e("paymentExample :", "" + paymentDetails);
+
+/*
+                        {
+                            "response": {
+                            "state": "approved",
+                                    "id": "PAY-4H348668VK615112JK7N7DEY",
+                                    "create_time": "2016-09-16T13:20:27Z",
+                                    "intent": "sale"
+                        },
+                            "client": {
+                            "platform": "Android",
+                                    "paypal_sdk_version": "2.14.5",
+                                    "product_name": "PayPal-Android-SDK",
+                                    "environment": "sandbox"
+                        },
+                            "response_type": "payment"
+                        }*/
+
+
+                        JSONObject ParentObject = new JSONObject(paymentDetails);
+                        JSONObject ResponseObject = ParentObject.getJSONObject("response");
+
+                        String Status = ResponseObject.getString("state");
+                        String id = ResponseObject.getString("id");
+                        String create_time = ResponseObject.getString("create_time");
+
+
+                        if (Status.equalsIgnoreCase("approved")) {
+                            Log.e("Approved", "YES");
+//                            Toast.makeText(BuyCoinsActivity.this, "Amount Has Been Paid", Toast.LENGTH_SHORT).show();
+
+                            SnackbarManager.show(
+                                    Snackbar.with(MyCartActivity.this)
+                                            .position(Snackbar.SnackbarPosition.TOP)
+                                            .margin(15, 15)
+                                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                            .text("Payment Complete..!!"));
+//                            new JsonAddCoin().execute();
+
+                        } else {
+
+//                            Toast.makeText(BuyCoinsActivity.this, "Error in transaction", Toast.LENGTH_SHORT).show();
+                            SnackbarManager.show(
+                                    Snackbar.with(MyCartActivity.this)
+                                            .position(Snackbar.SnackbarPosition.TOP)
+                                            .margin(15, 15)
+                                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                            .text("Payment Error!!"));
+
+                        }
+
+
+                    } catch (JSONException e) {
+                        Log.e("paymentExample", "an extremely unlikely failure occurred: ", e);
+                    }
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                Log.e("paymentExample", "The user canceled.");
+            } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
+                Log.e("paymentExample", "An invalid Payment or PayPalConfiguration was submitted. Please see the docs.");
+            }
+        }
+    }
+
+
 
 
 }

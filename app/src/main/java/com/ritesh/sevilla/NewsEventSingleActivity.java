@@ -1,12 +1,16 @@
 package com.ritesh.sevilla;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -48,10 +52,13 @@ public class NewsEventSingleActivity extends AppCompatActivity {
 
     @BindView(R.id.rl_cart_icon_news_event_single)
     RelativeLayout RL_cart_icon_news_event_single;
+
     @BindView(R.id.rl_badgeview_cart_item_news_event_single)
     RelativeLayout RL_badgeview_cart_item_news_event_single;
+
     @BindView(R.id.rl_cart_icon_news_event_single_click)
     RelativeLayout RL_cart_icon_news_event_single_click;
+
     @BindView(R.id.rl_badgeview_cart_item_news_event_single_click)
     RelativeLayout RL_badgeview_cart_item_news_event_single_click;
 
@@ -174,6 +181,62 @@ public class NewsEventSingleActivity extends AppCompatActivity {
                             .text("Please Your Internet Connectivity..!!"));
 
         }
+
+
+
+        RL_cart_icon_news_event_single.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    Log.e("Action ", "Down");
+                    RL_cart_icon_news_event_single_click.setVisibility(View.VISIBLE);
+                    RL_cart_icon_news_event_single.setVisibility(View.GONE);
+
+                    RL_badgeview_cart_item_news_event_single_click.setVisibility(View.VISIBLE);
+                    RL_badgeview_cart_item_news_event_single.setVisibility(View.GONE);
+                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+
+//                    Toast.makeText(getApplicationContext(), "Add to cart Clicked", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_MOVE) {
+
+                    Log.e("Action ", "Move");
+                    RL_cart_icon_news_event_single_click.setVisibility(View.VISIBLE);
+                    RL_cart_icon_news_event_single.setVisibility(View.GONE);
+
+                    RL_badgeview_cart_item_news_event_single_click.setVisibility(View.VISIBLE);
+                    RL_badgeview_cart_item_news_event_single.setVisibility(View.GONE);
+
+                    return true;
+
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                    Log.e("Action ", "Up");
+
+                    RL_cart_icon_news_event_single_click.setVisibility(View.GONE);
+                    RL_cart_icon_news_event_single.setVisibility(View.VISIBLE);
+
+                    RL_badgeview_cart_item_news_event_single_click.setVisibility(View.GONE);
+                    RL_badgeview_cart_item_news_event_single.setVisibility(View.VISIBLE);
+
+
+                    Intent MyCartPage = new Intent(getApplicationContext(), MyCartActivity.class);
+                    NewsEventSingleActivity.this.startActivity(MyCartPage);
+
+                    return true;
+                }
+
+
+                return false;
+            }
+        });
+
+
 
         
 
@@ -324,7 +387,8 @@ public class NewsEventSingleActivity extends AppCompatActivity {
                     Log.e("Str_Get_Cart_Product_count :", "" + Str_Get_Cart_Product_count);
                     Log.e("Str_Get_Cart_result :", "" + Str_Get_Cart_result);
 
-                    TV_badge_counter_news_event_single.setText(Str_Get_Cart_Product_count);
+                    TV_badge_counter_news_event_single.setText(Html.fromHtml(Str_Get_Cart_Product_count));
+                    TV_badge_counter_news_event_single_click.setText(Html.fromHtml(Str_Get_Cart_Product_count));
 
                 } else {
                     Log.e("onPostExecute Error ", "ooppss");

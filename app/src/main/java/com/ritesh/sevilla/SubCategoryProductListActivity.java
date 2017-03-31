@@ -105,6 +105,9 @@ public class SubCategoryProductListActivity extends AppCompatActivity {
     @BindView(R.id.tv_badge_counter_sub_category_product_list)
     TextView TV_badge_counter_sub_category_product_list;
 
+    @BindView(R.id.tv_badge_counter_sub_category_product_list_click)
+    TextView TV_badge_counter_sub_category_product_list_click;
+
 
 
 
@@ -442,6 +445,7 @@ public class SubCategoryProductListActivity extends AppCompatActivity {
 
 
                     TV_badge_counter_sub_category_product_list.setText(Str_Get_Cart_Product_count);
+                    TV_badge_counter_sub_category_product_list_click.setText(Str_Get_Cart_Product_count);
                     /**************** Start Animation **************  **/
                     YoYo.with(Techniques.Wobble)
                             .duration(700)

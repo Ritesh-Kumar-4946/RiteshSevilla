@@ -126,6 +126,9 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
     @BindView(R.id.tv_badge_counter_sub_category_single_product)
     TextView TV_badge_counter_sub_category_single_product;
 
+    @BindView(R.id.tv_badge_counter_sub_category_single_product_click)
+    TextView TV_badge_counter_sub_category_single_product_click;
+
 
     String
             User_ID = "",
@@ -580,6 +583,7 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
                     Appconstant.editor.commit();
 
                     TV_badge_counter_sub_category_single_product.setText(Str_Get_Cart_Product_count);
+                    TV_badge_counter_sub_category_single_product_click.setText(Str_Get_Cart_Product_count);
                     /**************** Start Animation **************  **/
                     YoYo.with(Techniques.Wobble)
                             .duration(700)

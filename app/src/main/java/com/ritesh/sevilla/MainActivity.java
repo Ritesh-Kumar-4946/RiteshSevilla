@@ -133,6 +133,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tv_badge_counter_main_category)
     TextView TV_cart_badge_counter_textview;
 
+    @BindView(R.id.tv_badge_counter_main_category_click)
+    TextView TV_badge_counter_main_category_click;
+
     @BindView(R.id.profile_image)
     CircleImageView profileImageView;
 
@@ -981,6 +984,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("Str_Get_Cart_result :", "" + Str_Get_Cart_result);
 
                     TV_cart_badge_counter_textview.setText(Str_Get_Cart_Product_count);
+                    TV_badge_counter_main_category_click.setText(Str_Get_Cart_Product_count);
 
                 } else {
                     Log.e("onPostExecute Error ", "ooppss");

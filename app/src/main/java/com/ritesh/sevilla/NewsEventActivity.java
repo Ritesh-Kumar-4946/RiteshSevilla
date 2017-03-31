@@ -12,7 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -204,6 +206,61 @@ public class NewsEventActivity extends AppCompatActivity {
                 onBackPressed(); // Implemented by activity
             }
         });
+
+
+
+        RL_cart_icon_news_event.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    Log.e("Action ", "Down");
+                    RL_cart_icon_news_event_click.setVisibility(View.VISIBLE);
+                    RL_cart_icon_news_event.setVisibility(View.GONE);
+
+                    RL_badgeview_cart_item_news_event_click.setVisibility(View.VISIBLE);
+                    RL_badgeview_cart_item_news_event.setVisibility(View.GONE);
+                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+
+//                    Toast.makeText(getApplicationContext(), "Add to cart Clicked", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_MOVE) {
+
+                    Log.e("Action ", "Move");
+                    RL_cart_icon_news_event_click.setVisibility(View.VISIBLE);
+                    RL_cart_icon_news_event.setVisibility(View.GONE);
+
+                    RL_badgeview_cart_item_news_event_click.setVisibility(View.VISIBLE);
+                    RL_badgeview_cart_item_news_event.setVisibility(View.GONE);
+
+                    return true;
+
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                    Log.e("Action ", "Up");
+
+                    RL_cart_icon_news_event_click.setVisibility(View.GONE);
+                    RL_cart_icon_news_event.setVisibility(View.VISIBLE);
+
+                    RL_badgeview_cart_item_news_event_click.setVisibility(View.GONE);
+                    RL_badgeview_cart_item_news_event.setVisibility(View.VISIBLE);
+
+
+                    Intent MyCartPage = new Intent(getApplicationContext(), MyCartActivity.class);
+                    NewsEventActivity.this.startActivity(MyCartPage);
+
+                    return true;
+                }
+
+
+                return false;
+            }
+        });
+
 
 
     }
@@ -418,7 +475,7 @@ public class NewsEventActivity extends AppCompatActivity {
                     Log.e("Str_Get_Cart_Product_count :", "" + Str_Get_Cart_Product_count);
                     Log.e("Str_Get_Cart_result :", "" + Str_Get_Cart_result);
 
-                    TV_badge_counter_news_event.setText(Str_Get_Cart_Product_count);
+                    TV_badge_counter_news_event.setText(Html.fromHtml(Str_Get_Cart_Product_count));
 
                 } else {
                     Log.e("onPostExecute Error ", "ooppss");
