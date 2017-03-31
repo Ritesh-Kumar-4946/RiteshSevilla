@@ -6,11 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.IntDef;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
@@ -35,23 +33,15 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ritesh.sevilla.Constant.Appconstant;
-import com.ritesh.sevilla.Constant.HttpUrlPath;
 import com.ritesh.sevilla.Constant.Utils;
 import com.shawnlin.numberpicker.NumberPicker;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -408,7 +398,7 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
                     RL_badgeview_cart_item_sub_category_single_product.setVisibility(View.VISIBLE);
 
 
-                     Intent MyCartPage = new Intent(getApplicationContext(), MyCart.class);
+                     Intent MyCartPage = new Intent(getApplicationContext(), MyCartActivity.class);
                     SubCategorySingleProductActivity.this.startActivity(MyCartPage);
 
                     return true;

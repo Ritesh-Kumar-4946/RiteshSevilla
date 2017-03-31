@@ -22,8 +22,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -31,6 +29,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ritesh.sevilla.Beans.BeanMyCartList;
 import com.ritesh.sevilla.Constant.Appconstant;
 import com.ritesh.sevilla.Constant.Utils;
 
@@ -54,7 +53,7 @@ import fr.castorflex.android.circularprogressbar.CircularProgressDrawable;
  * Created by ritesh on 25/2/17.
  */
 @SuppressWarnings("deprecation")
-public class MyCart extends AppCompatActivity {
+public class MyCartActivity extends AppCompatActivity {
 
 
     @BindView(R.id.rl_sub_category_button_cart)
@@ -128,7 +127,7 @@ public class MyCart extends AppCompatActivity {
         /*recycler data (Start 02 of 03)*/
         /*image settin by universal image loader */
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).build();
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(MyCart.this).defaultDisplayImageOptions(defaultOptions).build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(MyCartActivity.this).defaultDisplayImageOptions(defaultOptions).build();
         ImageLoader.getInstance().init(config);
         /*image settin by universal image loader */
 
@@ -153,7 +152,7 @@ public class MyCart extends AppCompatActivity {
 
         mLayoutManager = new LinearLayoutManager(this);
         mycartlist_recylerView.setLayoutManager(mLayoutManager);
-        mycartlist_recylerView.addItemDecoration(new MyCart.EqualSpaceItemDecoration(15));
+        mycartlist_recylerView.addItemDecoration(new MyCartActivity.EqualSpaceItemDecoration(15));
 
 
 
@@ -164,7 +163,7 @@ public class MyCart extends AppCompatActivity {
         } else {
 
             SnackbarManager.show(
-                    Snackbar.with(MyCart.this)
+                    Snackbar.with(MyCartActivity.this)
                             .position(Snackbar.SnackbarPosition.TOP)
                             .margin(15, 15)
                             .backgroundDrawable(R.drawable.snackbar_custom_layout)
@@ -212,6 +211,47 @@ public class MyCart extends AppCompatActivity {
 
     }
 
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("MyCartActivity Activity lifecycle", "onStart invoked");
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("MyCartActivity Activity lifecycle", "onResume invoked");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("MyCartActivity Activity lifecycle", "onPause invoked");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("MyCartActivity Activity lifecycle", "onStop invoked");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("MyCartActivity Activity lifecycle", "onRestart invoked");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("MyCartActivity Activity lifecycle", "onDestroy invoked");
+    }
+    
 
     /*progressbar data (Start)*/
     private void updateValues() {
@@ -393,7 +433,7 @@ public class MyCart extends AppCompatActivity {
                 TV_total_items_price.setText(Html.fromHtml("\u20ac"+ " " +Str_My_Cart_total_price));
 
 
-                categoryAdapter = new MyCart.CategoryAdapter(MyCart.this, mystring);
+                categoryAdapter = new MyCartActivity.CategoryAdapter(MyCartActivity.this, mystring);
                 mycartlist_recylerView.setAdapter(categoryAdapter);
 
 
@@ -410,7 +450,7 @@ public class MyCart extends AppCompatActivity {
     }
 
 
-    private class CategoryAdapter extends RecyclerView.Adapter<MyCart.CategoryAdapter.MyViewHolder> {
+    private class CategoryAdapter extends RecyclerView.Adapter<MyCartActivity.CategoryAdapter.MyViewHolder> {
 
         private Context mContext;
         private List<BeanMyCartList> arrayList;
@@ -450,7 +490,7 @@ public class MyCart extends AppCompatActivity {
         }
 
         @Override
-        public MyCart.CategoryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public MyCartActivity.CategoryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.activity_my_cart_list_items, parent, false);
 
@@ -476,11 +516,11 @@ public class MyCart extends AppCompatActivity {
             });
 
 
-            return new MyCart.CategoryAdapter.MyViewHolder(itemView);
+            return new MyCartActivity.CategoryAdapter.MyViewHolder(itemView);
         }
 
         @Override
-        public void onBindViewHolder(final MyCart.CategoryAdapter.MyViewHolder holder, final int position) {
+        public void onBindViewHolder(final MyCartActivity.CategoryAdapter.MyViewHolder holder, final int position) {
 
             holder.MyCartItem_Tittle.setText(Html.fromHtml(arrayList.get(position).getMyCartSingleProductName()));
             holder.MyCartItem_quantity.setText(Html.fromHtml(arrayList.get(position).getMyCartSingleProductQuantity()));
@@ -556,7 +596,7 @@ public class MyCart extends AppCompatActivity {
                     } else {
 
                         SnackbarManager.show(
-                                Snackbar.with(MyCart.this)
+                                Snackbar.with(MyCartActivity.this)
                                         .position(Snackbar.SnackbarPosition.TOP)
                                         .margin(15, 15)
                                         .backgroundDrawable(R.drawable.snackbar_custom_layout)
@@ -715,7 +755,7 @@ public class MyCart extends AppCompatActivity {
                     } else {
 
                         SnackbarManager.show(
-                                Snackbar.with(MyCart.this)
+                                Snackbar.with(MyCartActivity.this)
                                         .position(Snackbar.SnackbarPosition.TOP)
                                         .margin(15, 15)
                                         .backgroundDrawable(R.drawable.snackbar_custom_layout)
@@ -727,7 +767,7 @@ public class MyCart extends AppCompatActivity {
                 } else {
                     Log.e("onPostExecute Error ", "ooppss");
                     SnackbarManager.show(
-                            Snackbar.with(MyCart.this)
+                            Snackbar.with(MyCartActivity.this)
                                     .position(Snackbar.SnackbarPosition.TOP)
                                     .margin(15, 15)
                                     .backgroundDrawable(R.drawable.snackbar_custom_layout)

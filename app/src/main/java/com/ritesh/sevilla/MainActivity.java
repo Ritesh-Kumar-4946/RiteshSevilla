@@ -20,9 +20,6 @@ import android.text.Html;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +45,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ritesh.sevilla.Beans.BeanMainCategory;
 import com.ritesh.sevilla.Constant.Appconstant;
 import com.ritesh.sevilla.Constant.HttpUrlPath;
 import com.ritesh.sevilla.Constant.Utils;
@@ -219,8 +217,8 @@ public class MainActivity extends AppCompatActivity {
         Appconstant.sh = getSharedPreferences(Appconstant.MyPREFERENCES, Context.MODE_PRIVATE);
         User_ID = Appconstant.sh.getString("id", null);
         Log.e("User_ID from SharedPref :", "" + User_ID);
-        Str_Get_CartCount_Shared = Appconstant.sh.getString("cart_count", null);
-        Log.e("Cart Count From Shared Preference:", "" + Str_Get_CartCount_Shared);
+/*        Str_Get_CartCount_Shared = Appconstant.sh.getString("cart_count", null);
+        Log.e("Cart Count From Shared Preference:", "" + Str_Get_CartCount_Shared);*/
 
         if (Utils.isConnected(getApplicationContext())) {
             GetUserDetailJsontask task = new GetUserDetailJsontask();
@@ -412,7 +410,7 @@ public class MainActivity extends AppCompatActivity {
                     rl_cart_badgeview_main.setVisibility(View.VISIBLE);
 
 
-                    Intent MyCartPage = new Intent(getApplicationContext(), MyCart.class);
+                    Intent MyCartPage = new Intent(getApplicationContext(), MyCartActivity.class);
                     MainActivity.this.startActivity(MyCartPage);
 
                     return true;
@@ -1163,7 +1161,7 @@ public class MainActivity extends AppCompatActivity {
 
 //            case R.id.menu_cart:
 //                Toast.makeText(MainActivity.this, "Cart is Selected", Toast.LENGTH_SHORT).show();
-                /*Intent SubCatPage = new Intent(getApplicationContext(), MyCart.class);
+                /*Intent SubCatPage = new Intent(getApplicationContext(), MyCartActivity.class);
                 MainActivity.this.startActivity(SubCatPage);*/
 
 

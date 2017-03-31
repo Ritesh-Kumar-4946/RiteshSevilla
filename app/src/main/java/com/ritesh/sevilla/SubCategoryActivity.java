@@ -31,6 +31,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ritesh.sevilla.Beans.BeanSubCategory;
 import com.ritesh.sevilla.Constant.Appconstant;
 import com.ritesh.sevilla.Constant.Utils;
 
@@ -240,7 +241,7 @@ public class SubCategoryActivity extends AppCompatActivity {
                     RL_badgeview_cart_item_sub_category.setVisibility(View.VISIBLE);
 
 
-                    Intent MyCartPage = new Intent(getApplicationContext(), MyCart.class);
+                    Intent MyCartPage = new Intent(getApplicationContext(), MyCartActivity.class);
                     SubCategoryActivity.this.startActivity(MyCartPage);
 
                     return true;

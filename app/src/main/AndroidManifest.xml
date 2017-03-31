@@ -109,7 +109,7 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".MyCart"
+            android:name=".MyCartActivity"
             android:label="@string/app_name"
             android:largeHeap="true"
             android:screenOrientation="portrait"
@@ -117,6 +117,13 @@
 
         <activity
             android:name=".NewsEventActivity"
+            android:label="@string/app_name"
+            android:largeHeap="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".NewsEventSingleActivity"
             android:label="@string/app_name"
             android:largeHeap="true"
             android:screenOrientation="portrait"

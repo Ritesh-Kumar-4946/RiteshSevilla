@@ -6,4 +6,7 @@
     <dimen name="text_size">18sp</dimen>
 
 
+    <dimen name="appbar_collepsing_height">250dp</dimen>
+
+
 </resources>

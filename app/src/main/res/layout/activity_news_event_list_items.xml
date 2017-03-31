@@ -22,9 +22,11 @@
 
             <RelativeLayout
                 android:id="@+id/rl_news_event_items_image"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_centerVertical="true">
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp">
 
                 <ImageView
                     android:id="@+id/iv_news_event_items"
@@ -79,7 +81,6 @@
                         android:layout_marginStart="5dp"
                         android:ellipsize="end"
                         android:ems="3"
-                        android:gravity="center_vertical"
                         android:lines="2"
                         android:text="@string/tv_news_event_tittle"
                         android:textColor="@color/tv_sub_category_product_list_items"
@@ -90,7 +91,6 @@
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
                         android:layout_marginEnd="5dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"

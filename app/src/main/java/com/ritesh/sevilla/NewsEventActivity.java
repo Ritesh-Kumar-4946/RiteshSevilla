@@ -11,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -27,6 +28,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ritesh.sevilla.Beans.BeanNewsEvent;
 import com.ritesh.sevilla.Constant.Appconstant;
 import com.ritesh.sevilla.Constant.Utils;
 
@@ -49,7 +51,7 @@ import fr.castorflex.android.circularprogressbar.CircularProgressDrawable;
 /**
  * Created by ritesh on 30/3/17.
  */
-
+@SuppressWarnings("deprecation")
 public class NewsEventActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar_news_event)
@@ -57,6 +59,7 @@ public class NewsEventActivity extends AppCompatActivity {
 
     String
             User_ID = "",
+            EventID_send = "",
             Str_Get_CartCount_Shared = "",
             Str_Get_Cart_Detail_Status = "",
             Str_Get_Cart_result = "",
@@ -74,8 +77,6 @@ public class NewsEventActivity extends AppCompatActivity {
             NewsEventList_Result = "",
             Sub_Catagories_result = "",
             Sub_Category_Id = "",
-            Main_Category_Id_Recived = "",
-    //            Sub_Category_Name = "",
     Sub_Category_Name_decoded = "",
             Obj_decoded = "",
             Sub_Category_Img_Src = "",
@@ -126,8 +127,22 @@ public class NewsEventActivity extends AppCompatActivity {
         Appconstant.sh = getSharedPreferences(Appconstant.MyPREFERENCES, Context.MODE_PRIVATE);
         User_ID = Appconstant.sh.getString("id", null);
         Log.e("User_ID from SharedPref :", "" + User_ID);
-        Str_Get_CartCount_Shared = Appconstant.sh.getString("cart_count", null);
-        Log.e("Cart Count From Shared Preference:", "" + Str_Get_CartCount_Shared);
+
+
+        if (Utils.isConnected(getApplicationContext())) {
+            NewsEventListCartDetailJsontask task = new NewsEventListCartDetailJsontask();
+            task.execute();
+        } else {
+
+            SnackbarManager.show(
+                    Snackbar.with(NewsEventActivity.this)
+                            .position(Snackbar.SnackbarPosition.TOP)
+                            .margin(15, 15)
+                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                            .text("Please Your Internet Connectivity..!!"));
+
+        }
+
 
 
         DisplayImageOptions defaultOptionss = new DisplayImageOptions.Builder()
@@ -300,6 +315,16 @@ public class NewsEventActivity extends AppCompatActivity {
                         Log.e("onPostExecute News_Event_id size is not Zero ", "wow");
                         Log.e(" ********** News_Event_id ********** ", "" + News_Event_id);
 
+                        /**************** Start Animation **************  **/
+                        YoYo.with(Techniques.Wobble)
+                                .duration(700)
+                                .playOn(RL_cart_icon_news_event);
+                        YoYo.with(Techniques.Wobble)
+                                .duration(700)
+                                .playOn(RL_badgeview_cart_item_news_event);
+                        /**************** End Animation ****************/
+
+
                         NewsEventAdapter newsEventAdapter = new NewsEventAdapter(NewsEventActivity.this, myNewsEventstring);
                         RV_news_event.setAdapter(newsEventAdapter);
 
@@ -331,6 +356,85 @@ public class NewsEventActivity extends AppCompatActivity {
         }
 
     }
+
+
+
+    private class NewsEventListCartDetailJsontask extends AsyncTask<String, Void, String> {
+
+        boolean iserror = false;
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            //  loginprogressbar.setVisibility(View.VISIBLE);
+            Log.e("******* NOW NewsEventListCartDetailJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW NewsEventListCartDetailJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("User_ID onPreExecute :", "" + User_ID);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            Log.e("******* NOW MainCartDeatilJsontask IS doInBackground RUNNING *******", "YES");
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id="+User_ID);
+
+            /*http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id=286*/
+            Log.e("URL Cart Detail News Event SIngle :", "" + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id="+User_ID);
+
+            try {
+                HttpResponse response = client.execute(post);
+                String CartDetailobject = EntityUtils.toString(response.getEntity());
+                Log.e("*******Cart Detail object******** :", "" + CartDetailobject);
+
+                //JSONArray js = new JSONArray(object);
+                JSONObject jobect = new JSONObject(CartDetailobject);
+                Str_Get_Cart_Detail_Status = jobect.getString("status");
+                if (Str_Get_Cart_Detail_Status.equalsIgnoreCase("OK")) {
+                    Str_Get_Cart_Deatil_User_ID = jobect.getString("user_id");
+                    Str_Get_Cart_Product_count = jobect.getString("no_of_prodcut");
+                    Str_Get_Cart_result = jobect.getString("single_product_result");
+
+                }
+
+            } catch (Exception e) {
+                Log.v("22", "22" + e.getMessage());
+                e.printStackTrace();
+                iserror = true;
+            }
+
+            return Str_Get_Cart_Detail_Status;
+        }
+
+        @Override
+        protected void onPostExecute(String result1) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result1);
+
+            if (!iserror) {
+                if (Str_Get_Cart_Detail_Status.equalsIgnoreCase("OK")) {
+
+                    Log.e("Str_Get_Cart_Deatil_User_ID :", "" + Str_Get_Cart_Deatil_User_ID);
+                    Log.e("Str_Get_Cart_Product_count :", "" + Str_Get_Cart_Product_count);
+                    Log.e("Str_Get_Cart_result :", "" + Str_Get_Cart_result);
+
+                    TV_badge_counter_news_event.setText(Str_Get_Cart_Product_count);
+
+                } else {
+                    Log.e("onPostExecute Error ", "ooppss");
+                    SnackbarManager.show(
+                            Snackbar.with(NewsEventActivity.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("No Data Found"));
+                }
+            }
+        }
+
+    }
+
+
 
 
     private class NewsEventAdapter extends RecyclerView.Adapter<NewsEventActivity.NewsEventAdapter.MyViewHolder> {
@@ -417,12 +521,14 @@ public class NewsEventActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     int position = holder.getAdapterPosition();
 
-//                    holder.Catimage_transparent_overlay.setVisibility(View.GONE);
                     Log.e(" Item Position :", "" + newseventarrayList.get(holder.getLayoutPosition()));
 
                     Log.e(" Adapter Position :", "" + position);
 
                     Log.e("Item id", "" + newseventarrayList.get(position).getEventNewsId());
+                    EventID_send = newseventarrayList.get(position).getEventNewsId();
+                    Log.e("EventID_send :", "" + EventID_send);
+
                     Sub_Category_Name_for_product_list = String.valueOf(Html.fromHtml(newseventarrayList.get(position).getEventNewsTittle()));
 
                     Log.e("Item Name", "" + String.valueOf(Html.fromHtml(newseventarrayList.get(position).getEventNewsTittle())));
@@ -431,16 +537,10 @@ public class NewsEventActivity extends AppCompatActivity {
 
                     Log.e(" List Size :", "" + newseventarrayList.size());
 
-                    Log.e("MainCategory_ID Send for SubCategoryItemList:", "" + Main_Category_Id_Recived);
 
-
-                    Intent SubCatPage = new Intent(getApplicationContext(), SubCategoryProductListActivity.class);
-                    SubCatPage.putExtra("SubCatID", newseventarrayList.get(position).getEventNewsId());
-                    SubCatPage.putExtra("MainCategoryID", Main_Category_Id_Recived);
-                    SubCatPage.putExtra("SubCatName", Sub_Category_Name_for_product_list);
-//                    SubCatPage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    NewsEventActivity.this.startActivity(SubCatPage);
-//                    finish();
+                    Intent GoNewsEventSinglePage = new Intent(getApplicationContext(), NewsEventSingleActivity.class);
+                    GoNewsEventSinglePage.putExtra("NewsEventID", EventID_send);
+                    NewsEventActivity.this.startActivity(GoNewsEventSinglePage);
 
 
                 }

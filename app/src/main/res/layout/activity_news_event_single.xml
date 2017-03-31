@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_news_event_single"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainscreen_toolbar"
+        android:elevation="7dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/toolbar_text_news_event_single"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ellipsize="end"
+                android:ems="3"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/tv_toolbar_news_event"
+                android:textColor="@color/text_color_white"
+                android:textSize="15sp" />
+
+            <!--cart imageview (Start)-->
+            <RelativeLayout
+                android:id="@+id/rl_cart_icon_news_event_single"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="2dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_cart" />
+
+            </RelativeLayout>
+            <!--cart imageview (End)-->
+
+            <!--cartitem badge counter (Start)-->
+            <RelativeLayout
+                android:id="@+id/rl_badgeview_cart_item_news_event_single"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/badge_bg"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tv_badge_counter_news_event_single"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/tv_add_cart_total_items"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+            <!--cartitem badge counter (End)-->
+
+
+            <!--cart imageview (Start)-->
+            <RelativeLayout
+                android:id="@+id/rl_cart_icon_news_event_single_click"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="2dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:padding="5dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_cart" />
+
+            </RelativeLayout>
+            <!--cart imageview (End)-->
+
+            <!--cartitem badge counter (Start)-->
+            <RelativeLayout
+                android:id="@+id/rl_badgeview_cart_item_news_event_single_click"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/badge_bg"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_badge_counter_news_event_single_click"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/tv_add_cart_total_items"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+            <!--cartitem badge counter (End)-->
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:id="@+id/sv_news_event_single"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_news_event_single">
+
+        <RelativeLayout
+            android:id="@+id/rl_news_event_single_top_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_news_event_single_image"
+                android:layout_width="match_parent"
+                android:layout_height="250dp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_news_event_single_image_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_news_event_single_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_news_event_single"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_noo_image" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_news_event_single_image_progress"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:padding="3dp"
+                            android:visibility="gone">
+
+                            <fr.castorflex.android.circularprogressbar.CircularProgressBar
+                                android:id="@+id/cpb_news_event_single_image_progressbar_circular"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:indeterminate="true"
+                                android:indeterminateOnly="false"
+                                app:cpb_colors="@array/gplus_colors" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_news_event_single_trasparet_overlay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true">
+
+                        <ImageView
+                            android:id="@+id/iv_news_event_single_tranparent_overlay"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:background="@color/main_grid_overlay_semitransparent"
+                            android:scaleType="fitCenter" />
+
+                        <TextView
+                            android:id="@+id/tv_news_event_single_tittle"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="100dp"
+                            android:ellipsize="end"
+                            android:ems="3"
+                            android:lines="4"
+                            android:text="@string/tv_news_event_tittle"
+                            android:textColor="@color/text_color_white"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_news_event_single_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_news_event_single_tittle"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginStart="20dp"
+                            android:ellipsize="end"
+                            android:ems="3"
+                            android:lines="1"
+                            android:text="@string/tv_news_event_date"
+                            android:textColor="@color/text_light_black_color"
+                            android:textSize="15sp" />
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_news_event_single_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/cv_news_event_single_image"
+                android:layout_margin="20dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_news_event_single_description_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:id="@+id/tv_news_event_single_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="20dp"
+                        android:text="@string/tv_news_event_description"
+                        android:textColor="@color/text_black_color"
+                        android:textSize="20sp" />
+
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_news_event_single_progress_main"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:padding="3dp"
+        android:visibility="gone">
+
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+            android:id="@+id/cpb_news_event_single_progressbar_circular_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminate="true"
+            android:indeterminateOnly="false"
+            app:cpb_colors="@array/gplus_colors" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

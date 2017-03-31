@@ -1,4 +1,4 @@
-package com.ritesh.sevilla;
+package com.ritesh.sevilla.Beans;
 
 /**
  * Created by ritesh on 30/3/17.

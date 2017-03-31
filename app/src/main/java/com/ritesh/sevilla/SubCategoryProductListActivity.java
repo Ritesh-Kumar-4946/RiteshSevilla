@@ -14,9 +14,6 @@ import android.text.Html;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +21,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -35,6 +31,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ritesh.sevilla.Beans.BeanSubCategoryProduct;
 import com.ritesh.sevilla.Constant.Appconstant;
 import com.ritesh.sevilla.Constant.Utils;
 
@@ -248,7 +245,7 @@ public class SubCategoryProductListActivity extends AppCompatActivity {
                     RL_badgeview_cart_item_sub_category_product_list.setVisibility(View.VISIBLE);
 
 
-                    Intent MyCartPage = new Intent(getApplicationContext(), MyCart.class);
+                    Intent MyCartPage = new Intent(getApplicationContext(), MyCartActivity.class);
                     SubCategoryProductListActivity.this.startActivity(MyCartPage);
 
                     return true;
