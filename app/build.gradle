@@ -184,4 +184,11 @@ dependencies {
     /*https://github.com/dlukashev/android-phone-number-with-flags*/
     /*this is needed for country code in signup screen (End)*/
 
+
+    /*this  is needed for dot loader for address field update (Spinner - Country, State, City )   (Start)*/
+    /*https://github.com/bhargavms/DotLoader?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=4032*/
+    compile 'com.github.bhargavms:DotLoader:1.0.3'
+    /*https://github.com/bhargavms/DotLoader?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=4032*/
+    /*this  is needed for dot loader for address field update (Spinner - Country, State, City )   (End)*/
+
 }

@@ -111,6 +111,10 @@
     <string name="user_first_name">User First Name</string>
     <string name="user_last_name">User Last Name</string>
     <string name="user_street_address">User Street Address</string>
+    <string name="user_zip_code">Zip</string>
+    <string name="dot_country_loading">Country Loading</string>
+    <string name="dot_state_loading">State Loading</string>
+    <string name="dot_city_loading">City Loading</string>
 
 
     <string name="tv_collepsing">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue

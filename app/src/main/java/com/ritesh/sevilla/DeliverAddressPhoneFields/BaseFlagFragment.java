@@ -481,7 +481,7 @@ public abstract class BaseFlagFragment extends Fragment {
 
         mSpinner.setAdapter(mAdapter);
 
-        mPhoneEdit = (EditText) rootView.findViewById(R.id.phone);
+        mPhoneEdit = (EditText) rootView.findViewById(R.id.et_address_phone);
         mPhoneEdit.addTextChangedListener(new CustomPhoneNumberFormattingTextWatcher(mOnPhoneChangedListener));
         InputFilter filter = new InputFilter() {
             public CharSequence filter(CharSequence source, int start, int end,

@@ -45,7 +45,7 @@
             android:id="@+id/rl_delivery_main_scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:padding="10dp">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cv_et_address_user_first_name"
@@ -273,7 +273,7 @@
                             android:textColorHint="@color/text_color_hint">
 
                             <EditText
-                                android:id="@+id/phone"
+                                android:id="@+id/et_address_phone"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerHorizontal="true"
@@ -353,6 +353,36 @@
                     app:ms_dropdown_max_height="150dp"
                     app:ms_hide_arrow="false" />
 
+
+                <!--<RelativeLayout
+                    android:id="@+id/rl_country_dot_loader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_dot_country_loading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:paddingEnd="2dp"
+                        android:text="@string/dot_country_loading"
+                        android:textColor="@color/mainscreen_toolbar"
+                        android:textSize="20sp" />
+
+                    <com.bhargavms.dotloader.DotLoader
+                        android:id="@+id/text_dot_loader_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/tv_dot_country_loading"
+                        app:color_array="@array/dot_colors"
+                        app:dot_radius="4dp"
+                        app:number_of_dots="3" />
+
+                </RelativeLayout>-->
+
             </android.support.v7.widget.CardView>
 
 
@@ -399,6 +429,35 @@
                     app:ms_dropdown_height="wrap_content"
                     app:ms_dropdown_max_height="150dp"
                     app:ms_hide_arrow="false" />
+
+                <!--<RelativeLayout
+                    android:id="@+id/rl_state_dot_loader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_dot_state_loading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:paddingEnd="2dp"
+                        android:text="@string/dot_state_loading"
+                        android:textColor="@color/mainscreen_toolbar"
+                        android:textSize="20sp" />
+
+                    <com.bhargavms.dotloader.DotLoader
+                        android:id="@+id/text_dot_loader_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/tv_dot_state_loading"
+                        app:color_array="@array/dot_colors"
+                        app:dot_radius="4dp"
+                        app:number_of_dots="3" />
+
+                </RelativeLayout>-->
 
             </android.support.v7.widget.CardView>
 
@@ -447,6 +506,36 @@
                     app:ms_dropdown_height="wrap_content"
                     app:ms_dropdown_max_height="150dp"
                     app:ms_hide_arrow="false" />
+
+
+                <!--<RelativeLayout
+                    android:id="@+id/rl_city_dot_loader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_dot_city_loading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:paddingEnd="2dp"
+                        android:text="@string/dot_city_loading"
+                        android:textColor="@color/mainscreen_toolbar"
+                        android:textSize="20sp" />
+
+                    <com.bhargavms.dotloader.DotLoader
+                        android:id="@+id/text_dot_loader_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/tv_dot_city_loading"
+                        app:color_array="@array/dot_colors"
+                        app:dot_radius="4dp"
+                        app:number_of_dots="3" />
+
+                </RelativeLayout>-->
 
             </android.support.v7.widget.CardView>
 
@@ -500,7 +589,7 @@
                         android:layout_centerVertical="true"
                         android:ellipsize="start"
                         android:gravity="clip_horizontal"
-                        android:hint="@string/user_first_name"
+                        android:hint="@string/user_zip_code"
                         android:inputType="text"
                         android:maxLines="1"
                         android:textColor="@color/text_black_color"
@@ -575,7 +664,7 @@
                 android:layout_centerInParent="true"
                 android:text="@string/btn_address_continue_payment"
                 android:textColor="@color/text_color_white"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
         </RelativeLayout>
 

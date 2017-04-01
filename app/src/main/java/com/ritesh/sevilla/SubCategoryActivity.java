@@ -299,7 +299,7 @@ public class SubCategoryActivity extends AppCompatActivity {
         super.onResume();
         Log.e("SubCategoryActivity lifecycle", "onResume invoked");
 //        TV_badge_counter_sub_category.setText(Str_Get_CartCount_Shared);
-        /*if (Utils.isConnected(getApplicationContext())) {
+        if (Utils.isConnected(getApplicationContext())) {
             Log.e("onResume SubCategoryCartDetailJsontask Call :", "OK");
             SubCategoryCartDetailJsontask task = new SubCategoryCartDetailJsontask();
             task.execute();
@@ -312,7 +312,7 @@ public class SubCategoryActivity extends AppCompatActivity {
                             .backgroundDrawable(R.drawable.snackbar_custom_layout)
                             .text("Please Your Internet Connectivity..!!"));
 
-        }*/
+        }
     }
 
     @Override

@@ -48,4 +48,15 @@
     <color name="gplus_color_5">#b23424</color>
     <!--google type progress bar color (End)-->
 
+
+    <!--dot loader array-->
+    <array name="dot_colors">
+        <item>#3e802f</item>
+        <item>#f4b400</item>
+        <item>#427fed</item>
+        <item>#FF4081</item>
+        <item>#b23424</item>
+    </array>
+    <!--dot loader array-->
+
 </resources>

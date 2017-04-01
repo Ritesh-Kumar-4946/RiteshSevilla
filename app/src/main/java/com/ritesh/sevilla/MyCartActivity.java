@@ -64,15 +64,14 @@ import fr.castorflex.android.circularprogressbar.CircularProgressDrawable;
 @SuppressWarnings("deprecation")
 public class MyCartActivity extends AppCompatActivity {
 
+    @BindView(R.id.toolbar_my_cart)
+    Toolbar TB_my_cart;
 
     @BindView(R.id.rl_sub_category_button_cart)
     RelativeLayout Rl_checkout;
 
     @BindView(R.id.rl_sub_category_button_cart_zoon)
     RelativeLayout Rl_checkout_zoom;
-
-    @BindView(R.id.toolbar_my_cart)
-    Toolbar toolbar_MyCart;
 
     @BindView(R.id.tv_total_number)
     TextView TV_total_number;
@@ -137,7 +136,6 @@ public class MyCartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_cart);
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar_MyCart);
         Appconstant.sh = getSharedPreferences(Appconstant.MyPREFERENCES, Context.MODE_PRIVATE);
         User_ID = Appconstant.sh.getString("id", null);
         Log.e("User_ID from SharedPref :", "" + User_ID);
@@ -160,6 +158,23 @@ public class MyCartActivity extends AppCompatActivity {
         ((CircularProgressDrawable) mCircularProgressBarGridview_mycartlist.getIndeterminateDrawable()).start();
         updateValues();
         /*circular progress bar (End)*/
+
+
+
+
+        setSupportActionBar(TB_my_cart);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+//        toolbar_sub_category.setNavigationIcon(R.drawable.ic_back_arrow); // your drawable
+
+        TB_my_cart.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed(); // Implemented by activity
+            }
+        });
+
 
 
         // getPayment();
