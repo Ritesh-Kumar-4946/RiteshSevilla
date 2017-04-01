@@ -14,6 +14,7 @@
     <string name="user_name">User Name</string>
     <string name="user_account_type">Account Type</string>
     <string name="btn_signup">Sign Up</string>
+    <string name="btn_address_continue_payment">Continue to payment</string>
     <string name="btn_update">Update</string>
     <string name="spinner_hint">Buyer</string>
     <string name="text_seller_type">Seller Type</string>
@@ -107,6 +108,9 @@
     <string name="tv_my_cart_total_items_price">$ 00</string>
     <string name="tv_patment_check_item_name">Item Name</string>
     <string name="tv_subcategory_single_product_discription">Product Description</string>
+    <string name="user_first_name">User First Name</string>
+    <string name="user_last_name">User Last Name</string>
+    <string name="user_street_address">User Street Address</string>
 
 
     <string name="tv_collepsing">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
@@ -122,6 +126,12 @@
     <string name="roboto_medium">sans-serif-medium</string>
 
     <string name="number_picker_formatter">%02d</string>
+
+
+    <!--address activity flag string-->
+    <string name="label_send">Send</string>
+    <string name="label_error_incorrect_phone">Incorrect phone</string>
+    <!--address activity flag string-->
 
 
 </resources>

@@ -177,4 +177,11 @@ dependencies {
 
     compile 'com.paypal.sdk:paypal-android-sdk:2.15.3'
 
+
+    /*this is needed for country code in signup screen (Start)*/
+    /*https://github.com/dlukashev/android-phone-number-with-flags*/
+    compile 'com.googlecode.libphonenumber:libphonenumber:6.2'
+    /*https://github.com/dlukashev/android-phone-number-with-flags*/
+    /*this is needed for country code in signup screen (End)*/
+
 }
