@@ -208,6 +208,8 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
 
                     Log.e("Action ", "Up");
+                    CV_et_sign_btn_edit_profile.setVisibility(View.VISIBLE);
+                    CV_et_sign_btn_edit_profile_click.setVisibility(View.GONE);
 
                     Str_Set_user_name = EDT_et_edit_profile_username.getText().toString().trim();
                     Str_Set_phone_number = EDT_et_edit_profile_phone_number.getText().toString().trim();
@@ -236,8 +238,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
 //                    Toast.makeText(EditProfileActivity.this, "Comming Soon", Toast.LENGTH_SHORT).show();
-                    CV_et_sign_btn_edit_profile_click.setVisibility(View.GONE);
-                    CV_et_sign_btn_edit_profile.setVisibility(View.VISIBLE);
+//                    CV_et_sign_btn_edit_profile_click.setVisibility(View.GONE);
+//                    CV_et_sign_btn_edit_profile.setVisibility(View.VISIBLE);
                     return true;
                 }
 

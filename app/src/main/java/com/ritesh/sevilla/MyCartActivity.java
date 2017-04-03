@@ -55,6 +55,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import fr.castorflex.android.circularprogressbar.CircularProgressDrawable;
 
@@ -129,7 +130,6 @@ public class MyCartActivity extends AppCompatActivity {
             .clientId(PayPalConfig.PAYPAL_CLIENT_ID);
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,8 +160,6 @@ public class MyCartActivity extends AppCompatActivity {
         /*circular progress bar (End)*/
 
 
-
-
         setSupportActionBar(TB_my_cart);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -174,7 +172,6 @@ public class MyCartActivity extends AppCompatActivity {
                 onBackPressed(); // Implemented by activity
             }
         });
-
 
 
         // getPayment();
@@ -193,8 +190,6 @@ public class MyCartActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mycartlist_recylerView.setLayoutManager(mLayoutManager);
         mycartlist_recylerView.addItemDecoration(new MyCartActivity.EqualSpaceItemDecoration(15));
-
-
 
 
         if (Utils.isConnected(getApplicationContext())) {
@@ -254,8 +249,6 @@ public class MyCartActivity extends AppCompatActivity {
     }
 
 
-
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -293,7 +286,7 @@ public class MyCartActivity extends AppCompatActivity {
         super.onDestroy();
         Log.e("MyCartActivity Activity lifecycle", "onDestroy invoked");
     }
-    
+
 
     /*progressbar data (Start)*/
     private void updateValues() {
@@ -470,9 +463,8 @@ public class MyCartActivity extends AppCompatActivity {
                 Log.e(" **********onPostExecute MyCartSingleProduct_DeliveryDate List**********", "" + MyCartSingleProduct_DeliveryDate);
 
 
-
                 TV_total_number.setText(Html.fromHtml(Str_My_Cart_product_count));
-                TV_total_items_price.setText(Html.fromHtml("\u20ac"+ " " +Str_My_Cart_total_price));
+                TV_total_items_price.setText(Html.fromHtml("\u20ac" + " " + Str_My_Cart_total_price));
 
 
                 categoryAdapter = new MyCartActivity.CategoryAdapter(MyCartActivity.this, mystring);
@@ -617,42 +609,66 @@ public class MyCartActivity extends AppCompatActivity {
             holder.CV_DeleteItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position = holder.getAdapterPosition();
-                    Log.e("CV_DeleteItem Item Position :", "" + arrayList.get(holder.getLayoutPosition()));
-                    Log.e("CV_DeleteItem Adapter Position :", "" + position);
 
-                    Str_My_Cart_List_single_product_id = arrayList.get(position).getMyCartSingleProductid();
-                    Log.e("CV_DeleteItem Item ID Str_My_Cart_List_single_product_id :", "" + Str_My_Cart_List_single_product_id);
-                    Str_My_Cart_List_single_product_title = arrayList.get(position).getMyCartSingleProductName();
-                    Log.e("CV_DeleteItem Item TITTLE Str_My_Cart_List_single_product_title :", "" + Str_My_Cart_List_single_product_title);
+                    new SweetAlertDialog(MyCartActivity.this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Are you sure?")
+                            .setContentText("Won't be able to recover this Action!")
+                            .setCancelText("No,cancel..!")
+                            .setConfirmText("Yes,Remove!")
+                            .showCancelButton(true)
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+
+                                    Log.e("Cancell Click :", "OK");
+                                    // reuse previous dialog instance, keep widget user state, reset them if you need
+                                    sDialog.setTitleText("Cancelled!")
+                                            .setContentText("Your Item is safe :)")
+                                            .setConfirmText("OK")
+                                            .showCancelButton(false)
+                                            .setCancelClickListener(null)
+                                            .setConfirmClickListener(null)
+                                            .changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                                }
+                            })
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    Log.e("Deleted Click :", "OK");
+                                    int position = holder.getAdapterPosition();
+                                    Log.e("CV_DeleteItem Item Position :", "" + arrayList.get(holder.getLayoutPosition()));
+                                    Log.e("CV_DeleteItem Adapter Position :", "" + position);
+
+                                    Str_My_Cart_List_single_product_id = arrayList.get(position).getMyCartSingleProductid();
+                                    Log.e("CV_DeleteItem Item ID Str_My_Cart_List_single_product_id :", "" + Str_My_Cart_List_single_product_id);
+                                    Str_My_Cart_List_single_product_title = arrayList.get(position).getMyCartSingleProductName();
+                                    Log.e("CV_DeleteItem Item TITTLE Str_My_Cart_List_single_product_title :", "" + Str_My_Cart_List_single_product_title);
 
 
+                                    categoryAdapter.deleteItem(position);  //https://github.com/thedeveloperworldisyours/FullRecycleView (FOR REMOVING ITEM ON LIST)
 
-                    categoryAdapter.deleteItem(position);  //https://github.com/thedeveloperworldisyours/FullRecycleView (FOR REMOVING ITEM ON LIST)
+//                                    Toast.makeText(getApplicationContext(), "Comming Soon", Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(getApplicationContext(), "Comming Soon", Toast.LENGTH_SHORT).show();
+                                    if (Utils.isConnected(getApplicationContext())) {
+                                        MyCartListItemDeleteJsontask task = new MyCartListItemDeleteJsontask();
+                                        task.execute();
+                                    } else {
 
-                    if (Utils.isConnected(getApplicationContext())) {
-                        MyCartListItemDeleteJsontask task = new MyCartListItemDeleteJsontask();
-                        task.execute();
-                    } else {
+                                        SnackbarManager.show(
+                                                Snackbar.with(MyCartActivity.this)
+                                                        .position(Snackbar.SnackbarPosition.TOP)
+                                                        .margin(15, 15)
+                                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                                        .text("Please Your Internet Connectivity..!!"));
 
-                        SnackbarManager.show(
-                                Snackbar.with(MyCartActivity.this)
-                                        .position(Snackbar.SnackbarPosition.TOP)
-                                        .margin(15, 15)
-                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                        .text("Please Your Internet Connectivity..!!"));
-
-                    }
-
-
-
+                                    }
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
 
                 }
             });
-
-
 
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -717,7 +733,6 @@ public class MyCartActivity extends AppCompatActivity {
         }
 
 
-
     }
 
 
@@ -732,6 +747,7 @@ public class MyCartActivity extends AppCompatActivity {
             Log.e("******* NOW MyCartListItemDeleteJsontask WEB SERVICE IS RUNNING *******", "YES");
             Log.e("******* NOW MyCartListItemDeleteJsontask WEB SERVICE IS RUNNING *******", "YES");
             Log.e("User_ID onPreExecute :", "" + User_ID);
+
             pv_gridview_mycartlist_progressview.setVisibility(View.VISIBLE);
             Log.e("Str_My_Cart_List_single_product_id onPreExecute :", "" + Str_My_Cart_List_single_product_id);
 
@@ -741,12 +757,10 @@ public class MyCartActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             Log.e("******* NOW MyCartListItemDeleteJsontask IS doInBackground RUNNING *******", "YES");
             HttpClient client = new DefaultHttpClient();
-            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/delete_cart.php?product_id="+Str_My_Cart_List_single_product_id+"&user_id="+User_ID);
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/delete_cart.php?product_id=" + Str_My_Cart_List_single_product_id + "&user_id=" + User_ID);
 
 
-
-
-            Log.e("URL Cart Detail MyCartListItemDeleteJsontask :", "" + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/delete_cart.php?product_id="+Str_My_Cart_List_single_product_id+"&user_id="+User_ID);
+            Log.e("URL Cart Detail MyCartListItemDeleteJsontask :", "" + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/delete_cart.php?product_id=" + Str_My_Cart_List_single_product_id + "&user_id=" + User_ID);
 
             try {
                 HttpResponse response = client.execute(post);
@@ -778,15 +792,16 @@ public class MyCartActivity extends AppCompatActivity {
             if (!iserror) {
                 if (Str_Get_DeleteCart_Status.equalsIgnoreCase("OK")) {
 
+
+
+                    new SweetAlertDialog(MyCartActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                            .setTitleText("Item Removed")
+                            .setContentText("Your Cart is updated!")
+                            .show();
+
                     Log.e("Str_Get_DeleteCart_Status :", "" + Str_Get_DeleteCart_Status);
                     Log.e("Str_Get_DeleteCart_Message :", "" + Str_Get_DeleteCart_Message);
 
-
-                    /*mycartlist_recylerView.setAdapter(null);
-                    mycartlist_recylerView.setLayoutManager(null);
-                    mycartlist_recylerView.setAdapter(categoryAdapter);
-                    mycartlist_recylerView.setLayoutManager(mLayoutManager);
-                    categoryAdapter.notifyDataSetChanged();*/
 
                     if (Utils.isConnected(getApplicationContext())) {
                         MyCartListJsontask task = new MyCartListJsontask();
@@ -837,7 +852,6 @@ public class MyCartActivity extends AppCompatActivity {
         startActivityForResult(intent, PAYPAL_REQUEST_CODE);
 
     }
-
 
 
     @Override
@@ -919,8 +933,6 @@ public class MyCartActivity extends AppCompatActivity {
             }
         }
     }
-
-
 
 
 }

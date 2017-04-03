@@ -568,7 +568,7 @@
                         android:id="@+id/iv_et_address_user_zip_code"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ic_user"
+                        android:background="@drawable/ic_zip_code"
                         android:contentDescription="@string/login_email_user" />
 
                 </RelativeLayout>
