@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -129,6 +130,15 @@ public class MyCartActivity extends AppCompatActivity {
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(PayPalConfig.PAYPAL_CLIENT_ID);
 
+
+    /*Another double click to exit on back pressed 01- 02 (Start)*/
+    boolean doubleBackToExitPressedOnce = false;
+    /*Another double click to exit on back pressed 01- 02 (End)*/
+
+    /*double click to exit on back pressed 01- 02 (Start)*/
+    /*private boolean doubleBackToExitPressedOnce;
+    private Handler mHandler = new Handler();*/
+    /*double click to exit on back pressed 01- 02 (End)*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -281,11 +291,11 @@ public class MyCartActivity extends AppCompatActivity {
         Log.e("MyCartActivity Activity lifecycle", "onRestart invoked");
     }
 
-    @Override
+    /*@Override
     protected void onDestroy() {
         super.onDestroy();
         Log.e("MyCartActivity Activity lifecycle", "onDestroy invoked");
-    }
+    }*/
 
 
     /*progressbar data (Start)*/
@@ -793,7 +803,6 @@ public class MyCartActivity extends AppCompatActivity {
                 if (Str_Get_DeleteCart_Status.equalsIgnoreCase("OK")) {
 
 
-
                     new SweetAlertDialog(MyCartActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                             .setTitleText("Item Removed")
                             .setContentText("Your Cart is updated!")
@@ -934,5 +943,61 @@ public class MyCartActivity extends AppCompatActivity {
         }
     }
 
+
+    /*Another double click to exit on back pressed 02- 02 (Start)*/
+    /*@Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }*/
+    /*Another double click to exit on back pressed 02- 02 (End)*/
+
+
+
+
+
+    /*double click to exit on back pressed 02- 02 (Start)*/
+    /*private final Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            doubleBackToExitPressedOnce = false;
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mHandler != null) {
+            mHandler.removeCallbacks(mRunnable);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        mHandler.postDelayed(mRunnable, 2000);
+    }*/
+    /*double click to exit on back pressed 02- 02 (End)*/
 
 }

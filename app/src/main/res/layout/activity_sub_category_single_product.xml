@@ -295,7 +295,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_below="@id/cv_sub_category_single_item_image"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="1dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="0dp"
@@ -378,7 +378,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cv_sub_category_item_tittle_price"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="1dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="0dp"
@@ -617,8 +617,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_single_product_progress"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_centerInParent="true"
         android:padding="3dp"
         android:visibility="gone">
