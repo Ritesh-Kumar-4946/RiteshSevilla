@@ -74,6 +74,7 @@
     </RelativeLayout>
 
 
+
     <android.support.v7.widget.CardView
         android:id="@+id/cv_my_cart_checkout"
         android:layout_width="match_parent"
