@@ -67,7 +67,14 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".DeliveryActivity"
+            android:name=".EditDeliveryActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".GetDeliveryAddress"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"

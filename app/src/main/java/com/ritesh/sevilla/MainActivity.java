@@ -455,9 +455,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                Toast.makeText(getApplicationContext(), "Inventory Clicked", Toast.LENGTH_SHORT).show();
-                Intent GoDeliveryScreen = new Intent(getApplicationContext(), DeliveryActivity.class);
-                startActivity(GoDeliveryScreen);
+//                Toast.makeText(getApplicationContext(), "Inventory Clicked", Toast.LENGTH_SHORT).show();
+                /*Intent GoDeliveryScreen = new Intent(getApplicationContext(), EditDeliveryActivity.class);
+                startActivity(GoDeliveryScreen);*/
             }
         });
 

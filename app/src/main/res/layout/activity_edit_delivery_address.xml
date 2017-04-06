@@ -627,7 +627,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/btn_address_continue_payment"
+                android:text="@string/tv_my_address_confirm"
                 android:textColor="@color/text_color_white"
                 android:textSize="18sp" />
 
@@ -662,7 +662,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/btn_address_continue_payment"
+                android:text="@string/tv_my_address_confirm"
                 android:textColor="@color/text_color_white"
                 android:textSize="15sp" />
 

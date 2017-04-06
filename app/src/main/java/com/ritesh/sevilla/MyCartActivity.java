@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -98,6 +97,23 @@ public class MyCartActivity extends AppCompatActivity {
             Str_My_Cart_List_DeliveryCharge = "",
             Str_My_Cart_List_DeliveryDate = "",
             status = "";
+
+
+
+
+    String
+            Get_user_address_ID = "",
+            Get_user_address_status = "",
+            Get_user_address_result = "",
+            Get_user_address_F_name = "",
+            Get_user_address_L_name = "",
+            Get_user_address_address = "",
+            Get_user_address_phone_number = "",
+            Get_user_address_country = "",
+            Get_user_address_state = "",
+            Get_user_address_city = "",
+            Get_user_address_zipcode = "",
+            Get_user_address_message = "";
 
 
     List<MainActivity> mycartlistrowItems;
@@ -246,7 +262,21 @@ public class MyCartActivity extends AppCompatActivity {
                     Log.e("Action ", "Up");
                     Rl_checkout_zoom.setVisibility(View.GONE);
                     Rl_checkout.setVisibility(View.VISIBLE);
-                    getPayment();
+//                    getPayment();     // paypal integration for one to one payment
+
+                    if (Utils.isConnected(getApplication())) {
+                        UserGetAddressJsontask task = new UserGetAddressJsontask();
+                        task.execute();
+                    } else {
+
+                        SnackbarManager.show(
+                                Snackbar.with(MyCartActivity.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .text("Please Your Internet Connectivity..!!"));
+
+                    }
                     return true;
                 }
 
@@ -942,6 +972,118 @@ public class MyCartActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
+
+    private class UserGetAddressJsontask extends AsyncTask<String, Void, String> {
+
+        boolean iserror = false;
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            //  loginprogressbar.setVisibility(View.VISIBLE);
+            Log.e("******* NOW UserGetAddressJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW UserGetAddressJsontask WEB SERVICE IS RUNNING *******", "YES");
+            pv_gridview_mycartlist_progressview.setVisibility(View.VISIBLE);
+            Log.e("User_ID From Shared Preference :", "" + User_ID);
+            Log.e("Sign in URL :",
+                    "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_address.php?user_id=" + User_ID);
+
+        }
+
+        protected String doInBackground(String... params) {
+            Log.e("******* NOW UserGetAddressJsontask TASK IS in doInBackground *******", "YES");
+            Log.e("******* NOW UserGetAddressJsontask TASK IS in doInBackground *******", "YES");
+
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_address.php?user_id=" + User_ID);
+
+            try {
+
+                HttpResponse response = client.execute(post);
+                String objectAddress = EntityUtils.toString(response.getEntity());
+                Log.e("*******objectAddress******** :", "" + objectAddress);
+
+                //JSONArray js = new JSONArray(object);
+                JSONObject jobectAddress = new JSONObject(objectAddress);
+                Get_user_address_status = jobectAddress.getString("status");
+                if (Get_user_address_status.equalsIgnoreCase("Ok")) {
+                    Get_user_address_result = jobectAddress.getString("result");
+                    Get_user_address_message = jobectAddress.getString("message");
+                    Get_user_address_ID = jobectAddress.getString("user_id");
+                    Get_user_address_F_name = jobectAddress.getString("first_name");
+                    Get_user_address_L_name = jobectAddress.getString("last_name");
+                    Get_user_address_address = jobectAddress.getString("address");
+                    Get_user_address_phone_number = jobectAddress.getString("phone_number");
+                    Get_user_address_country = jobectAddress.getString("country");
+                    Get_user_address_state = jobectAddress.getString("state");
+                    Get_user_address_city = jobectAddress.getString("city");
+                    Get_user_address_zipcode = jobectAddress.getString("zipcode");
+
+                }
+
+            } catch (Exception e) {
+                Log.v("22", "22" + e.getMessage());
+                e.printStackTrace();
+                iserror = true;
+            }
+            return Get_user_address_status;
+        }
+
+        @Override
+        protected void onPostExecute(String result1) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result1);
+            pv_gridview_mycartlist_progressview.setVisibility(View.GONE);
+
+            if (!iserror) {
+                if (Get_user_address_status.equalsIgnoreCase("OK")) {
+
+                    Log.e("No Error :", "Get_user_address_result Success    OK");
+
+                    Log.e("Get_user_address_result :", "" + Get_user_address_result);
+                    Log.e("Get_user_address_message :", "" + Get_user_address_message);
+                    Log.e("Get_user_address_ID :", "" + Get_user_address_ID);
+                    Log.e("Get_user_address_F_name :", "" + Get_user_address_F_name);
+                    Log.e("Get_user_address_L_name :", "" + Get_user_address_L_name);
+                    Log.e("Get_user_address_address :", "" + Get_user_address_address);
+                    Log.e("Get_user_address_phone_number :", "" + Get_user_address_phone_number);
+                    Log.e("Get_user_address_country :", "" + Get_user_address_country);
+                    Log.e("Get_user_address_state :", "" + Get_user_address_state);
+                    Log.e("Get_user_address_city :", "" + Get_user_address_city);
+                    Log.e("Get_user_address_zipcode :", "" + Get_user_address_zipcode);
+
+                    Intent GoDeliveryScreen = new Intent(getApplicationContext(), GetDeliveryAddress.class);
+                    startActivity(GoDeliveryScreen);
+
+                } else if (Get_user_address_status.equalsIgnoreCase("Not Ok")) {
+
+                    Log.e("********* UserGetAddressJsontask *********", "unsuccessfull ERROR");
+                    Log.e("********* UserGetAddressJsontask *********", "unsuccessfull ERROR");
+                    Log.e("********* UserGetAddressJsontask *********", "unsuccessfull ERROR");
+
+                    Intent GoEditDeliveryScreen = new Intent(getApplicationContext(), EditDeliveryActivity.class);
+                    startActivity(GoEditDeliveryScreen);
+
+                }
+            } else {
+                Log.e("********* UserGetAddressJsontask *********", " ERROR");
+
+                SnackbarManager.show(
+                        Snackbar.with(MyCartActivity.this)
+                                .position(Snackbar.SnackbarPosition.TOP)
+                                .margin(15, 15)
+                                .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                .text("Oops!! Please check server connection ."));
+
+            }
+        }
+
+    }
+
+
 
 
     /*Another double click to exit on back pressed 02- 02 (Start)*/

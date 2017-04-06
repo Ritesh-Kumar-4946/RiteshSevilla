@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ritesh.sevilla.DeliverAddressPhoneFields;
+package com.ritesh.sevilla.EditDeliverAddressPhoneFields;
 
 import android.content.Context;
 
