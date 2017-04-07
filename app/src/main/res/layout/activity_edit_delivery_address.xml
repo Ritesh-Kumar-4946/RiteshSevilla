@@ -350,7 +350,7 @@
                     android:layout_marginStart="50dp"
                     android:textSize="15sp"
                     app:ms_dropdown_height="wrap_content"
-                    app:ms_dropdown_max_height="150dp"
+                    app:ms_dropdown_max_height="200dp"
                     app:ms_hide_arrow="false" />
 
 
@@ -427,7 +427,7 @@
                     android:layout_marginStart="50dp"
                     android:textSize="15sp"
                     app:ms_dropdown_height="wrap_content"
-                    app:ms_dropdown_max_height="150dp"
+                    app:ms_dropdown_max_height="200dp"
                     app:ms_hide_arrow="false" />
 
                 <!--<RelativeLayout
@@ -504,7 +504,7 @@
                     android:layout_marginStart="50dp"
                     android:textSize="15sp"
                     app:ms_dropdown_height="wrap_content"
-                    app:ms_dropdown_max_height="150dp"
+                    app:ms_dropdown_max_height="200dp"
                     app:ms_hide_arrow="false" />
 
 
@@ -590,7 +590,8 @@
                         android:ellipsize="start"
                         android:gravity="clip_horizontal"
                         android:hint="@string/user_zip_code"
-                        android:inputType="text"
+                        android:inputType="number"
+                        android:digits="0123456789"
                         android:maxLines="1"
                         android:textColor="@color/text_black_color"
                         android:textColorHint="@color/text_color_hint"

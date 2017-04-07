@@ -488,7 +488,7 @@
         android:layout_marginBottom="70dp"
         app:fab_backgroundAnimDuration="@integer/cpb_default_max_sweep_angle"
         app:fab_backgroundColor="@color/mainscreen_toolbar"
-        app:fab_elevation="3dp"
+        app:fab_elevation="5dp"
         app:fab_iconSize="30dp"
         app:fab_iconSrc="@drawable/ic_edit_address" />
 

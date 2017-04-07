@@ -51,6 +51,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -132,6 +134,7 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
             Str_set_user_l_name = "",
             Str_set_user_street_address = "",
             Str_set_user_phone = "",
+            Str_set_user_phone_replace = "",
             Str_get_user_country = "",
             Str_set_user_country = "",
             Str_get_user_state = "",
@@ -187,16 +190,18 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
             Get_user_city_default = "",
             Get_user_city_SelectedValue = "",
 
-    Set_user_address_ID = "",
-            Set_user_address_F_name = "",
-            Set_user_address_L_name = "",
-            Set_user_address_address = "",
-            Set_user_address_phone_number = "",
-            Set_user_address_country = "",
-            Set_user_address_state = "",
-            Set_user_address_city = "",
-            Set_user_address_zipcode = "",
-            Set_user_address_message = "";
+    Update_user_address_ID = "",
+            Update_user_address_Result = "",
+            Update_user_address_Status = "",
+            Update_user_address_F_name = "",
+            Update_user_address_L_name = "",
+            Update_user_address_address = "",
+            Update_user_address_phone_number = "",
+            Update_user_address_country = "",
+            Update_user_address_state = "",
+            Update_user_address_city = "",
+            Update_user_address_zipcode = "",
+            Update_user_address_message = "";
 
     ArrayList<String> USER_ADDRESS_COUNTRY_LIST = new ArrayList<String>();
     ArrayList<String> USER_ADDRESS_STATE_LIST = new ArrayList<String>();
@@ -435,6 +440,7 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                 Str_set_user_l_name = ET_address_user_last_name.getText().toString().trim();
                 Str_set_user_street_address = ET_address_user_address.getText().toString().trim();
                 Str_set_user_phone = ET_address_phone.getText().toString().trim();
+                Str_set_user_phone_replace = Str_set_user_phone.replace(" ", "");
                 Str_set_user_zip_code = ET_address_user_zip_code.getText().toString().trim();
 
 
@@ -443,6 +449,7 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                         + "Str_set_user_l_name :" + "" + Str_set_user_l_name + "\n"
                         + "Str_set_user_street_address :" + "" + Str_set_user_street_address + "\n"
                         + "Str_set_user_phone :" + "" + Str_set_user_phone + "\n"
+                        + "Str_set_user_phone_replace :" + "" + Str_set_user_phone_replace + "\n"
                         + "Str_set_user_zip_code :" + "" + Str_set_user_zip_code + "\n"
                         + "Str_set_user_country :" + "" + Str_set_user_country + "\n"
                         + "Str_set_user_state :" + "" + Str_set_user_state + "\n"
@@ -478,7 +485,7 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                     /*Intent MyCartPage = new Intent(GetDeliveryAddress.this, MyCartActivity.class);
                     startActivity(MyCartPage);*/
 
-                    if (Str_set_user_f_name.equals("")) {
+                    if (Str_set_user_f_name.isEmpty()) {
                         ISerror = true;
                         v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
 //                    v.playSoundEffect(SoundEffectConstants.CLICK);
@@ -498,7 +505,7 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                                         .backgroundDrawable(R.drawable.snackbar_custom_layout)
                                         .text("Please enter your First Name"));
 
-                    } else if (Str_set_user_l_name.equals("")) {
+                    } else if (Str_set_user_l_name.isEmpty()) {
                         ISerror = true;
                         v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
 //                    v.playSoundEffect(SoundEffectConstants.CLICK);
@@ -518,7 +525,7 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                                         .backgroundDrawable(R.drawable.snackbar_custom_layout)
                                         .text("Please enter your Last Name"));
 
-                    } else if (Str_set_user_street_address.equals("")) {
+                    } else if (Str_set_user_street_address.isEmpty()) {
                         ISerror = true;
                         v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
 //                    v.playSoundEffect(SoundEffectConstants.CLICK);
@@ -538,7 +545,7 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                                         .backgroundDrawable(R.drawable.snackbar_custom_layout)
                                         .text("Please enter your Street Address"));
 
-                    } else if (Str_set_user_phone.equals("")) {
+                    } else if (Str_set_user_phone_replace.isEmpty()) {
                         ISerror = true;
                         v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
 //                    v.playSoundEffect(SoundEffectConstants.CLICK);
@@ -558,7 +565,7 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                                         .backgroundDrawable(R.drawable.snackbar_custom_layout)
                                         .text("Please enter your Phone Number"));
 
-                    } else if (Str_set_user_country.equals("")) {
+                    } else if (Str_set_user_country.isEmpty()) {
                         ISerror = true;
                         v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
 //                    v.playSoundEffect(SoundEffectConstants.CLICK);
@@ -578,7 +585,7 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                                         .backgroundDrawable(R.drawable.snackbar_custom_layout)
                                         .text("Please select your Country"));
 
-                    } else if (Str_set_user_state.equals("")) {
+                    } else if (Str_set_user_state.isEmpty()) {
                         ISerror = true;
                         v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
 //                    v.playSoundEffect(SoundEffectConstants.CLICK);
@@ -598,11 +605,12 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                                         .backgroundDrawable(R.drawable.snackbar_custom_layout)
                                         .text("Please select your State"));
 
-                    } else if (Str_set_user_city.equals("")) {
+                    } else if (Str_set_user_city.isEmpty()) {
                         ISerror = true;
                         v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
 //                    v.playSoundEffect(SoundEffectConstants.CLICK);
-                        /**************** Start Animation **************  **/
+
+                        /**************** Start Animation ***************/
                         YoYo.with(Techniques.Tada)
                                 .duration(700)
                                 .playOn(SP_user_city);
@@ -618,14 +626,14 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                                         .backgroundDrawable(R.drawable.snackbar_custom_layout)
                                         .text("Please select your City"));
 
-                    } else if (Str_set_user_zip_code.equals("")) {
+                    } else if (Str_set_user_zip_code.isEmpty()) {
                         ISerror = true;
                         v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
 //                    v.playSoundEffect(SoundEffectConstants.CLICK);
                         /**************** Start Animation **************  **/
                         YoYo.with(Techniques.Tada)
                                 .duration(700)
-                                .playOn(SP_user_city);
+                                .playOn(ET_address_user_zip_code);
                         /**************** End Animation ****************/
 
                     /*Toast.makeText(getApplicationContext(),
@@ -636,20 +644,34 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                                         .position(Snackbar.SnackbarPosition.TOP)
                                         .margin(15, 15)
                                         .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                        .text("Please select your City"));
+                                        .text("Please enter your area code"));
 
                     } else if (!ISerror) {
 
-                        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+//                        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                     /*Toast.makeText(getApplicationContext(),
                             "Good", Toast.LENGTH_SHORT).show();*/
 
+                        if (Utils.isConnected(getActivity())) {
+                            UserUpdateAddressJsontask task = new UserUpdateAddressJsontask();
+                            task.execute();
+                        } else {
+
+                            SnackbarManager.show(
+                                    Snackbar.with(getActivity())
+                                            .position(Snackbar.SnackbarPosition.TOP)
+                                            .margin(15, 15)
+                                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                            .text("Please Your Internet Connectivity..!!"));
+
+                        }
+                        /*
                         SnackbarManager.show(
                                 Snackbar.with(getActivity())
                                         .position(Snackbar.SnackbarPosition.TOP)
                                         .margin(15, 15)
                                         .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                        .text("Good All Value Correct"));
+                                        .text("Good All Value Correct"));*/
 
 //                    v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 
@@ -835,6 +857,8 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
             Log.e("******* UserStateListJsontask IS RUNNING *******", "YES");
             Log.e("******* UserStateListJsontask IS RUNNING *******", "YES");
             RL_address_progress.setVisibility(View.VISIBLE);
+            USER_ADDRESS_STATE_LIST.clear();
+
 //            RL_state_dot_loader.setVisibility(View.VISIBLE);
         }
 
@@ -913,6 +937,19 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                             android.R.layout.simple_spinner_dropdown_item, resultState);
                     SP_user_state.setItems(resultState);
                     Get_user_state_default = resultState.get(0);
+
+                    for(int i=0;i<resultState.size();i++)
+                    {
+                        String countryName=resultState.get(i);
+                        if(countryName.equals(resultState))//for default selection
+                        {
+                            SP_user_state.setSelectedIndex(i);
+
+                        }
+                    }
+
+
+
                     Log.e("Get_user_state_default ", "" + Get_user_state_default);
 
                     Log.e(" State list result :", "" + resultState.size());
@@ -936,6 +973,7 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
             Log.e("******* UserCityListJsontask IS RUNNING *******", "YES");
             Log.e("******* UserCityListJsontask IS RUNNING *******", "YES");
             RL_address_progress.setVisibility(View.VISIBLE);
+            USER_ADDRESS_CITY_LIST.clear();
 //            RL_city_dot_loader.setVisibility(View.VISIBLE);
         }
 
@@ -996,27 +1034,39 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
         }
 
         @Override
-        protected void onPostExecute(ArrayList<String> resultState) {
+        protected void onPostExecute(ArrayList<String> resultCity) {
             // TODO Auto-generated method stub
-            super.onPostExecute(resultState);
+            super.onPostExecute(resultCity);
             RL_address_progress.setVisibility(View.GONE);
 //            RL_city_dot_loader.setVisibility(View.GONE);
 //            RL_address_spineer_user_city.setVisibility(View.VISIBLE);
             if (!iserror) {
 
-                if (resultState == null) {
+                if (resultCity == null) {
                     Log.e("resultState :", "Null");
-                } else if (resultState.isEmpty()) {
+                } else if (resultCity.isEmpty()) {
 
                     Log.e("resultState :", "empty");
                 } else {
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                            android.R.layout.simple_spinner_dropdown_item, resultState);
-                    SP_user_city.setItems(resultState);
-                    Get_user_city_default = resultState.get(0);
+                            android.R.layout.simple_spinner_dropdown_item, resultCity);
+                    SP_user_city.setItems(resultCity);
+                    Get_user_city_default = resultCity.get(0);
+
+                    for(int i=0;i<resultCity.size();i++)
+                    {
+                        String countryName=resultCity.get(i);
+                        if(countryName.equals(resultCity))//for default selection
+                        {
+                            SP_user_city.setSelectedIndex(i);
+
+                        }
+                    }
+
+
                     Log.e("Get_user_city_default ", "" + Get_user_city_default);
 
-                    Log.e(" city list result :", "" + resultState.size());
+                    Log.e(" city list result :", "" + resultCity.size());
                 }
 
             }
@@ -1038,7 +1088,7 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
             Log.e("******* NOW UserGetAddressJsontask WEB SERVICE IS RUNNING *******", "YES");
             RL_address_progress.setVisibility(View.VISIBLE);
             Log.e("User_ID From Shared Preference :", "" + User_ID);
-            Log.e("Sign in URL :",
+            Log.e("UserGetAddress in URL :",
                     "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_address.php?user_id=" + User_ID);
 
         }
@@ -1128,6 +1178,159 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                 }
             } else {
                 Log.e("********* UserGetAddressJsontask *********", " ERROR");
+
+                SnackbarManager.show(
+                        Snackbar.with(getActivity())
+                                .position(Snackbar.SnackbarPosition.TOP)
+                                .margin(15, 15)
+                                .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                .text("Oops!! Please check server connection ."));
+
+            }
+
+
+            if (Utils.isConnected(getActivity())) {
+                UserCountryListJsontask task = new UserCountryListJsontask();
+                task.execute();
+            } else {
+
+                SnackbarManager.show(
+                        Snackbar.with(getActivity())
+                                .position(Snackbar.SnackbarPosition.TOP)
+                                .margin(15, 15)
+                                .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                .text("Please Your Internet Connectivity..!!"));
+
+            }
+
+
+        }
+
+    }
+
+
+    private class UserUpdateAddressJsontask extends AsyncTask<String, Void, String> {
+
+        boolean iserror = false;
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            //  loginprogressbar.setVisibility(View.VISIBLE);
+            Log.e("******* NOW UserUpdateAddressJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW UserUpdateAddressJsontask WEB SERVICE IS RUNNING *******", "YES");
+            RL_address_progress.setVisibility(View.VISIBLE);
+            Log.e("User_ID From Shared Preference :", "" + User_ID);
+
+            try {
+                Str_set_user_street_address = URLEncoder.encode(Str_set_user_street_address, "UTF-8");
+                Str_set_user_country = URLEncoder.encode(Str_set_user_country, "UTF-8");
+                Str_set_user_state = URLEncoder.encode(Str_set_user_state, "UTF-8");
+                Str_set_user_city = URLEncoder.encode(Str_set_user_city, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                Log.e("Encode error", "" + e.getMessage());
+                e.printStackTrace();
+            }
+
+            Log.e("UserUpdateAddress in URL :",
+                    "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/add_address.php?" +
+                            "user_id=" + User_ID + "&first_name=" + Str_set_user_f_name + "&last_name=" + Str_set_user_l_name
+                            + "&address=" + Str_set_user_street_address + "&phone_number=" + Str_set_user_phone_replace
+                            + "&country=" + Str_set_user_country + "&state=" + Str_set_user_state + "&city=" + Str_set_user_city
+                            + "&zipcode=" + Str_set_user_zip_code);
+
+        }
+
+        protected String doInBackground(String... params) {
+            Log.e("******* NOW UserUpdateAddressJsontask TASK IS in doInBackground *******", "YES");
+            Log.e("******* NOW UserUpdateAddressJsontask TASK IS in doInBackground *******", "YES");
+
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/add_address.php?" +
+                    "user_id=" + User_ID + "&first_name=" + Str_set_user_f_name + "&last_name=" + Str_set_user_l_name
+                    + "&address=" + Str_set_user_street_address + "&phone_number=" + Str_set_user_phone_replace
+                    + "&country=" + Str_set_user_country + "&state=" + Str_set_user_state + "&city=" + Str_set_user_city
+                    + "&zipcode=" + Str_set_user_zip_code);
+
+            try {
+
+                HttpResponse response = client.execute(post);
+                String objectUpdateAddress = EntityUtils.toString(response.getEntity());
+                Log.e("*******objectUpdateAddress******** :", "" + objectUpdateAddress);
+
+                //JSONArray js = new JSONArray(object);
+                JSONObject jobectUpdateAddress = new JSONObject(objectUpdateAddress);
+                Update_user_address_Result = jobectUpdateAddress.getString("result");
+                if (Update_user_address_Result.equalsIgnoreCase("successfull")) {
+                    Update_user_address_Status = jobectUpdateAddress.getString("status");
+                    Update_user_address_message = jobectUpdateAddress.getString("message");
+                    Update_user_address_ID = jobectUpdateAddress.getString("user_id");
+                    Update_user_address_F_name = jobectUpdateAddress.getString("first_name");
+                    Update_user_address_L_name = jobectUpdateAddress.getString("last_name");
+                    Update_user_address_address = jobectUpdateAddress.getString("address");
+                    Update_user_address_phone_number = jobectUpdateAddress.getString("phone_number");
+                    Update_user_address_country = jobectUpdateAddress.getString("country");
+                    Update_user_address_state = jobectUpdateAddress.getString("state");
+                    Update_user_address_city = jobectUpdateAddress.getString("city");
+                    Update_user_address_zipcode = jobectUpdateAddress.getString("zipcode");
+
+
+                }
+
+            } catch (Exception e) {
+                Log.v("22", "22" + e.getMessage());
+                e.printStackTrace();
+                iserror = true;
+            }
+            return Update_user_address_Result;
+        }
+
+        @Override
+        protected void onPostExecute(String result1) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result1);
+            RL_address_progress.setVisibility(View.GONE);
+
+            if (!iserror) {
+                if (Update_user_address_Result.equalsIgnoreCase("successfull")) {
+
+                    Log.e("No Error :", "Update_user_address_Result successfull  OK");
+
+                    Log.e("Update_user_address_Result :", "" + Update_user_address_Result);
+                    Log.e("Update_user_address_Status :", "" + Update_user_address_Status);
+                    Log.e("Update_user_address_message :", "" + Update_user_address_message);
+                    Log.e("Update_user_address_ID :", "" + Update_user_address_ID);
+                    Log.e("Update_user_address_F_name :", "" + Update_user_address_F_name);
+                    Log.e("Update_user_address_L_name :", "" + Update_user_address_L_name);
+                    Log.e("Update_user_address_address :", "" + Update_user_address_address);
+                    Log.e("Update_user_address_phone_number :", "" + Update_user_address_phone_number);
+                    Log.e("Update_user_address_country :", "" + Update_user_address_country);
+                    Log.e("Update_user_address_state :", "" + Update_user_address_state);
+                    Log.e("Update_user_address_city :", "" + Update_user_address_city);
+                    Log.e("Update_user_address_zipcode :", "" + Update_user_address_zipcode);
+
+                    ET_address_user_first_name.setText(Html.fromHtml(Get_user_address_F_name));
+                    ET_address_user_last_name.setText(Html.fromHtml(Get_user_address_L_name));
+                    ET_address_user_address.setText(Html.fromHtml(Get_user_address_address));
+                    ET_address_phone.setText(Html.fromHtml(Get_user_address_phone_number));
+                    ET_address_user_zip_code.setText(Html.fromHtml(Get_user_address_zipcode));
+
+                } else if (Get_user_address_result.equalsIgnoreCase("unsuccessfull")) {
+
+                    Log.e("********* UserUpdateAddressJsontask *********", "unsuccessfull ERROR");
+                    Log.e("********* UserUpdateAddressJsontask *********", "unsuccessfull ERROR");
+                    Log.e("********* UserUpdateAddressJsontask *********", "unsuccessfull ERROR");
+
+                    SnackbarManager.show(
+                            Snackbar.with(getActivity())
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("Get Address Unsuccessfull"));
+
+                }
+            } else {
+                Log.e("********* UserUpdateAddressJsontask *********", " ERROR");
 
                 SnackbarManager.show(
                         Snackbar.with(getActivity())

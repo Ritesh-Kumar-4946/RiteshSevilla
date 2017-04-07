@@ -184,12 +184,12 @@ public class LoginActivity extends AppCompatActivity {
                     /*Toast.makeText(getApplicationContext(),
                             "Good", Toast.LENGTH_SHORT).show();*/
 
-                    SnackbarManager.show(
+                    /*SnackbarManager.show(
                             Snackbar.with(LoginActivity.this)
                                     .position(Snackbar.SnackbarPosition.TOP)
                                     .margin(15, 15)
                                     .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                    .text("Good All Value Correct"));
+                                    .text("Good All Value Correct"));*/
 
 //                    v.playSoundEffect(android.view.SoundEffectConstants.CLICK);
 

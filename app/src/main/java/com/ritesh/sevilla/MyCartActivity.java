@@ -244,7 +244,7 @@ public class MyCartActivity extends AppCompatActivity {
                     Rl_checkout_zoom.setVisibility(View.VISIBLE);
                     Rl_checkout.setVisibility(View.GONE);
                     v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                    Toast.makeText(getApplicationContext(), "Add to cart Clicked", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "Add to cart Clicked", Toast.LENGTH_SHORT).show();
 
                     return true;
                 }
