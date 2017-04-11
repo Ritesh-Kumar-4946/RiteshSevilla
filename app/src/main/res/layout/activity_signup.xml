@@ -384,7 +384,6 @@
                         android:hint="@string/spinner_hint"
                         android:textSize="15sp"
                         app:ms_arrow_tint="@color/text_color_black"
-                        app:ms_background_color="@android:color/transparent"
                         app:ms_dropdown_height="wrap_content"
                         app:ms_dropdown_max_height="300dp"
                         app:ms_hide_arrow="false"

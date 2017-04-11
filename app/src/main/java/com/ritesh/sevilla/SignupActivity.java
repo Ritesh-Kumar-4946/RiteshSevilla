@@ -71,9 +71,12 @@ public class SignupActivity extends AppCompatActivity {
     String str_username = "", str_emailid = "", str_password = "", str_confirm_password = "",
             str_phone_number = "", result = "", error = "";
 
+    String User_type = "", GetSet_user_Type = "";
+
     String STR_User_ID = "", STR_Phone_Number = "", STR_User_Name = "", STR_User_Email = "",
             STR_Password = "", STR_error_Message = "";
 
+    private static final String[] USER_TYPE = {"Register as :", "Buyer", "Seller"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +91,38 @@ public class SignupActivity extends AppCompatActivity {
         updateValues();
         /*circular progress bar (End)*/
 
+        spinner.setItems(USER_TYPE);
+        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+//                android.support.design.widget.Snackbar.make(view, "Register as " + item, android.support.design.widget.Snackbar.LENGTH_LONG).show();
+//                User_type = item;
+                int posi = position;
+                Log.e("posi ID:", "" + posi);
+                Log.e("User_type :", "" + User_type);
+                Log.e("User_type Detail :", "Position :" + "" + position
+                        + "\t" + "ID :" + "" + id
+                        + "\t" + "Name :" + "" + item);
+//                GetSet_user_Type_ID = String.valueOf(posi);
+                GetSet_user_Type = item;
+                Log.e("GetSet_user_Type :", "" + GetSet_user_Type);
+            }
+        });
+        spinner.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                android.support.design.widget.Snackbar.make(spinner, "Please selected User Type",
+                        android.support.design.widget.Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
 
         Btn_CV_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 str_username = ET_signup_username.getText().toString().trim();
                 str_emailid = ET_signup_email.getText().toString().trim();
@@ -103,9 +134,9 @@ public class SignupActivity extends AppCompatActivity {
                         + "str_username :" + "" + str_username + "\n"
                         + "str_emailid :" + "" + str_emailid + "\n"
                         + "str_phone_number :" + "" + str_phone_number + "\n"
+                        + "GetSet_user_Type :" + "" + GetSet_user_Type + "\n"
                         + "str_password :" + "" + str_password + "\n"
                         + "str_confirm_password :" + "" + str_confirm_password);
-
 
                 if (str_username.equals("")) {
                     iserror = true;
@@ -255,12 +286,21 @@ public class SignupActivity extends AppCompatActivity {
                                     .margin(15, 15)
                                     .backgroundDrawable(R.drawable.snackbar_custom_layout)
                                     .textColor(R.color.text_color_black)
-                                    .text("oopsss....\\n Password not Match Please try again"));
+                                    .text("oopsss....\n Password not Match Please try again"));
 
-                } else if (!iserror) {
+                } else if (GetSet_user_Type.equals("")) {
+                    iserror = true;
                     v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                    /*Toast.makeText(getApplicationContext(),
-                            "Good", Toast.LENGTH_SHORT).show();*/
+                    /**************** Start Animation ****************/
+                /*https://github.com/daimajia/AndroidViewAnimations/blob/master/README.md*/
+
+                    YoYo.with(Techniques.Tada)
+                            .duration(700)
+                            .playOn(spinner);
+                    /**************** End Animation ****************/
+
+                    /*Toast.makeText(getApplicationContext(), "Please enter your Name",
+                            Toast.LENGTH_SHORT).show();*/
 
                     SnackbarManager.show(
                             Snackbar.with(SignupActivity.this)
@@ -268,7 +308,22 @@ public class SignupActivity extends AppCompatActivity {
                                     .margin(15, 15)
                                     .backgroundDrawable(R.drawable.snackbar_custom_layout)
                                     .textColor(R.color.text_color_black)
-                                    .text("Good All Value Correct"));
+                                    .text("Please Select User Type First..!!"));
+
+
+                } else if (!iserror) {
+
+                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                    /*Toast.makeText(getApplicationContext(),
+                            "Good", Toast.LENGTH_SHORT).show();*/
+
+                    /*SnackbarManager.show(
+                            Snackbar.with(SignupActivity.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .textColor(R.color.text_color_black)
+                                    .text("Good All Value Correct"));*/
 
                     if (Utils.isConnected(getApplicationContext())) {
                         SignUpJsontask task = new SignUpJsontask();
@@ -349,11 +404,13 @@ public class SignupActivity extends AppCompatActivity {
                     + "str_username :" + "" + str_username + "\n"
                     + "str_emailid :" + "" + str_emailid + "\n"
                     + "str_phone_number :" + "" + str_phone_number + "\n"
+                    + "GetSet_user_Type_ID :" + "" + GetSet_user_Type + "\n"
                     + "str_password :" + "" + str_password + "\n"
                     + "str_confirm_password :" + "" + str_confirm_password);
 
             Log.e("SignUp URL :", "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/user_signup.php?user_name="
-                    +str_username+"&user_email="+str_emailid+"&user_pass="+str_password+"&phone_number="+str_phone_number);
+                    + str_username + "&user_email=" + str_emailid + "&user_pass=" + str_password +
+                    "&phone_number=" + str_phone_number + "&seller_type=" + GetSet_user_Type);
 
         }
 
@@ -361,7 +418,9 @@ public class SignupActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             HttpClient client = new DefaultHttpClient();
 
-            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/user_signup.php?user_name="+str_username+"&user_email="+str_emailid+"&user_pass="+str_password+"&phone_number="+str_phone_number);
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/user_signup.php?user_name="
+                    + str_username + "&user_email=" + str_emailid + "&user_pass=" + str_password
+                    + "&phone_number=" + str_phone_number + "&seller_type=" + GetSet_user_Type);
 
             try {
 

@@ -116,7 +116,7 @@ public class MyCartActivity extends AppCompatActivity {
             Get_user_address_message = "";
 
 
-    List<MainActivity> mycartlistrowItems;
+    List<MyCartActivity> mycartlistrowItems;
     private ArrayList<String> MyCartSingleProduct_id;
     private ArrayList<String> MyCartSingleProduct_Name;
     private ArrayList<String> MyCartSingleProduct_Image;
@@ -202,7 +202,7 @@ public class MyCartActivity extends AppCompatActivity {
 
         // getPayment();
 
-        mycartlistrowItems = new ArrayList<MainActivity>();
+        mycartlistrowItems = new ArrayList<MyCartActivity>();
         MyCartSingleProduct_id = new ArrayList<>();
         MyCartSingleProduct_Name = new ArrayList<>();
         MyCartSingleProduct_Image = new ArrayList<>();

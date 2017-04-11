@@ -14,6 +14,13 @@
     <string name="user_name">User Name</string>
     <string name="user_account_type">Account Type</string>
     <string name="btn_signup">Sign Up</string>
+    <string name="tv_order_no_text">Order No. :</string>
+    <string name="tv_order_date_text">Order Date :</string>
+    <string name="tv_order_date">Order Date</string>
+    <string name="tv_order_no">Order Number</string>
+    <string name="tv_order_total_price">00</string>
+    <string name="tv_order_status">Status</string>
+    <string name="tv_order_btn_detail">Detail</string>
     <string name="btn_address_continue_payment">Continue to payment</string>
     <string name="btn_update">Update</string>
     <string name="spinner_hint">Buyer</string>
@@ -81,9 +88,12 @@
 
 
     <string name="tv_toolbar_subcategory">SubCategory</string>
+    <string name="tv_toolbar_inventory_order">Inventory History</string>
     <string name="tv_toolbar_news_event">News/Events</string>
     <string name="tv_toolbar_subcategory_name">SubCategory Name</string>
     <string name="tv_toolbar_my_cart">My Cart</string>
+    <string name="tv_toolbar_order_detail_text">Order Number :</string>
+    <string name="tv_toolbar_order_detail_number">Order Number</string>
     <string name="tv_toolbar_address">My Address</string>
     <string name="tv_toolbar_subcategory_product">SubCategory Product</string>
     <string name="tv_subcategory_product_list_tittle">Product Name</string>

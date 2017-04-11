@@ -1223,6 +1223,7 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
             Log.e("User_ID From Shared Preference :", "" + User_ID);
 
             try {
+                Str_set_user_phone_replace = URLEncoder.encode(Str_set_user_phone_replace, "UTF-8");
                 Str_set_user_street_address = URLEncoder.encode(Str_set_user_street_address, "UTF-8");
                 Str_set_user_country = URLEncoder.encode(Str_set_user_country, "UTF-8");
                 Str_set_user_state = URLEncoder.encode(Str_set_user_state, "UTF-8");

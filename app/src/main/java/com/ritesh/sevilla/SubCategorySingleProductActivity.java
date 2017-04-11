@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
@@ -60,8 +61,8 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
     @BindView(R.id.tv_ity)
     TextView tv_qunt;
 
-    /*@BindView(R.id.toolbar_single_product_item)
-    Toolbar toolbar_sub_category_single_Product;*/
+    @BindView(R.id.toolbar_single_product_item)
+    Toolbar TB_single_product_item;
 
     @BindView(R.id.cv_sub_category_product_add_cart)
     CardView CV_add_cart;
@@ -129,6 +130,9 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
     @BindView(R.id.tv_badge_counter_sub_category_single_product_click)
     TextView TV_badge_counter_sub_category_single_product_click;
 
+    @BindView(R.id.tv_sub_category_single_item_tv)
+    TextView TV_sub_category_single_item_tv;
+
 
     String
             User_ID = "",
@@ -177,6 +181,7 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
         Str_Get_CartCount_Shared = Appconstant.sh.getString("cart_count", null);
         Log.e("User_ID from SharedPref :", "" + User_ID);
         Log.e("Cart Count From Shared Preference:", "" + Str_Get_CartCount_Shared);
+        TV_sub_category_single_item_tv.setText(Html.fromHtml(SubCategoryName_Recived));
 
 
         if (Utils.isConnected(getApplicationContext())) {
@@ -184,7 +189,6 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
             SubCategorySingleProductCartDetailJsontask task = new SubCategorySingleProductCartDetailJsontask();
             task.execute();
         } else {
-
             SnackbarManager.show(
                     Snackbar.with(SubCategorySingleProductActivity.this)
                             .position(Snackbar.SnackbarPosition.TOP)
@@ -196,11 +200,16 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
 
 
 //        TV_single_product_Toolbar_text.setText(SubCategoryName_Recived);
-
-
-        /*setSupportActionBar(toolbar_sub_category_single_Product);
+        setSupportActionBar(TB_single_product_item);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);*/
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        TB_single_product_item.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed(); // Implemented by activity
+            }
+        });
 
 //        toolbar_sub_category.setNavigationIcon(R.drawable.ic_back_arrow); // your drawable
 
@@ -830,41 +839,6 @@ public class SubCategorySingleProductActivity extends AppCompatActivity {
         }
 
     }
-
-
-    // Initiating Menu XML file (menu.xml)
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_search).setVisible(false);
-        return true;
-    }
-
-    /**
-     * Event Handling for Individual menu item selected
-     * Identify single menu item by it's id
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.menu_cart:
-                Toast.makeText(SubCategorySingleProductActivity.this, "Cart is Selected", Toast.LENGTH_SHORT).show();
-                return true;
-
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
 
     /*progressbar data (Start)*/
     private void updateValues() {

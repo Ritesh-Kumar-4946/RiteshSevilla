@@ -431,7 +431,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                Toast.makeText(getApplicationContext(), "Home Clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Home Clicked", Toast.LENGTH_SHORT).show();
+                Intent GoMainScreen = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(GoMainScreen);
             }
         });
 
@@ -448,6 +450,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 Toast.makeText(getApplicationContext(), "Place Seller Clicked", Toast.LENGTH_SHORT).show();
+                /*Intent GoMainScreen = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(GoMainScreen);*/
             }
         });
 
@@ -456,8 +460,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
 //                Toast.makeText(getApplicationContext(), "Inventory Clicked", Toast.LENGTH_SHORT).show();
-                /*Intent GoDeliveryScreen = new Intent(getApplicationContext(), EditDeliveryActivity.class);
-                startActivity(GoDeliveryScreen);*/
+                Intent GoInventoryScreen = new Intent(getApplicationContext(), InventoryOderListActivity.class);
+                startActivity(GoInventoryScreen);
             }
         });
 

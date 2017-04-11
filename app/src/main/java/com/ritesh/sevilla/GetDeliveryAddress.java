@@ -82,6 +82,15 @@ public class GetDeliveryAddress extends AppCompatActivity {
 
     String
             User_ID = "",
+            Get_Place_Order_ID = "",
+            Get_Place_Order_user_id = "",
+            Get_Place_Order_order_date = "",
+            Get_Place_Order_delivery_date = "",
+            Get_Place_Order_total_item_price = "",
+            Get_Place_Order_order_status = "",
+            Get_Place_Order_result = "",
+            Get_Place_Order_message = "",
+            Get_Place_Order_status = "",
             Get_user_address_ID = "",
             Get_user_address_status = "",
             Get_user_address_result = "",
@@ -150,7 +159,6 @@ public class GetDeliveryAddress extends AppCompatActivity {
         });
 
 
-
         CV_my_address_confirm.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -183,12 +191,26 @@ public class GetDeliveryAddress extends AppCompatActivity {
                     /*Intent MyCartPage = new Intent(GetDeliveryAddress.this, MyCartActivity.class);
                     startActivity(MyCartPage);*/
 
-                    SnackbarManager.show(
+                    if (Utils.isConnected(getApplication())) {
+                        PlaceOrderJsontask task = new PlaceOrderJsontask();
+                        task.execute();
+                    } else {
+
+                        SnackbarManager.show(
+                                Snackbar.with(GetDeliveryAddress.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .text("Please Your Internet Connectivity..!!"));
+
+                    }
+
+                    /*SnackbarManager.show(
                             Snackbar.with(GetDeliveryAddress.this)
                                     .position(Snackbar.SnackbarPosition.TOP)
                                     .margin(15, 15)
                                     .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                    .text("Confirm Clicked"));
+                                    .text("Confirm Clicked"));*/
 
                     return true;
                 }
@@ -305,7 +327,6 @@ public class GetDeliveryAddress extends AppCompatActivity {
                     Log.e("Get_user_address_zipcode :", "" + Get_user_address_zipcode);
 
 
-
                     TV_my_address_user_f_name.setText(Html.fromHtml(Get_user_address_F_name));
                     TV_my_address_user_l_name.setText(Html.fromHtml(Get_user_address_L_name));
                     TV_my_address_user_phone.setText(Html.fromHtml(Get_user_address_phone_number));
@@ -343,5 +364,233 @@ public class GetDeliveryAddress extends AppCompatActivity {
         }
 
     }
+
+
+    private class PlaceOrderJsontask extends AsyncTask<String, Void, String> {
+
+        boolean iserror = false;
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            //  loginprogressbar.setVisibility(View.VISIBLE);
+            Log.e("******* NOW PlaceOrderJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW PlaceOrderJsontask WEB SERVICE IS RUNNING *******", "YES");
+            RL_my_address_progress.setVisibility(View.VISIBLE);
+            Log.e("User_ID From Shared Preference :", "" + User_ID);
+            Log.e("Sign in URL :",
+                    "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/cash_on_delivery.php?user_id=" + User_ID);
+
+        }
+
+        protected String doInBackground(String... params) {
+            Log.e("******* NOW PlaceOrderJsontask TASK IS in doInBackground *******", "YES");
+            Log.e("******* NOW PlaceOrderJsontask TASK IS in doInBackground *******", "YES");
+
+            HttpClient clientPlaceOrder = new DefaultHttpClient();
+            HttpPost postPlaceOrder = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/cash_on_delivery.php?user_id=" + User_ID);
+
+            try {
+
+                HttpResponse response = clientPlaceOrder.execute(postPlaceOrder);
+                String objectPlaceOrder = EntityUtils.toString(response.getEntity());
+                Log.e("*******objectPlaceOrder******** :", "" + objectPlaceOrder);
+
+                //JSONArray js = new JSONArray(object);
+                JSONObject jobectPlaceOrder = new JSONObject(objectPlaceOrder);
+                Get_Place_Order_status = jobectPlaceOrder.getString("status");
+                if (Get_Place_Order_status.equalsIgnoreCase("1")) {
+                    Get_Place_Order_ID = jobectPlaceOrder.getString("order_id");
+                    Get_Place_Order_user_id = jobectPlaceOrder.getString("user_id");
+                    Get_Place_Order_order_date = jobectPlaceOrder.getString("order_date");
+                    Get_Place_Order_delivery_date = jobectPlaceOrder.getString("delivery_date");
+                    Get_Place_Order_total_item_price = jobectPlaceOrder.getString("total_item_price");
+                    Get_Place_Order_order_status = jobectPlaceOrder.getString("order_status");
+                    Get_Place_Order_result = jobectPlaceOrder.getString("result");
+                    Get_Place_Order_message = jobectPlaceOrder.getString("message");
+
+                }
+
+            } catch (Exception e) {
+                Log.v("22", "22" + e.getMessage());
+                e.printStackTrace();
+                iserror = true;
+            }
+            return Get_Place_Order_status;
+        }
+
+        @Override
+        protected void onPostExecute(String result1) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result1);
+            RL_my_address_progress.setVisibility(View.GONE);
+
+            if (!iserror) {
+                if (Get_Place_Order_status.equalsIgnoreCase("1")) {
+
+                    Log.e("No Error :", "Get_Place_Order_status Success    1");
+
+                    Log.e("Get_Place_Order_ID :", "" + Get_Place_Order_ID);
+                    Log.e("Get_Place_Order_user_id :", "" + Get_Place_Order_user_id);
+                    Log.e("Get_Place_Order_order_date :", "" + Get_Place_Order_order_date);
+                    Log.e("Get_Place_Order_delivery_date :", "" + Get_Place_Order_delivery_date);
+                    Log.e("Get_Place_Order_total_item_price :", "" + Get_Place_Order_total_item_price);
+                    Log.e("Get_Place_Order_order_status :", "" + Get_Place_Order_order_status);
+                    Log.e("Get_Place_Order_result :", "" + Get_Place_Order_result);
+                    Log.e("Get_Place_Order_message :", "" + Get_Place_Order_message);
+
+                    SnackbarManager.show(
+                            Snackbar.with(GetDeliveryAddress.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("Order Placed.. Successfully"));
+
+
+                    Intent GoMainScreen = new Intent(getApplicationContext(), SubCategoryActivity.class);
+                    GoMainScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(GoMainScreen);
+                    finish();
+
+
+                } else if (Get_Place_Order_status.equalsIgnoreCase("0")) {
+
+                    Log.e("********* PlaceOrderJsontask *********", "unsuccessfull ERROR");
+                    Log.e("********* PlaceOrderJsontask *********", "unsuccessfull ERROR");
+                    Log.e("********* PlaceOrderJsontask *********", "unsuccessfull ERROR");
+
+                    SnackbarManager.show(
+                            Snackbar.with(GetDeliveryAddress.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("Order is not Placed.. Try again"));
+
+                }
+            } else {
+                Log.e("********* PlaceOrderJsontask *********", " ERROR");
+
+                SnackbarManager.show(
+                        Snackbar.with(GetDeliveryAddress.this)
+                                .position(Snackbar.SnackbarPosition.TOP)
+                                .margin(15, 15)
+                                .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                .text("Oops!! Please check server connection ."));
+
+            }
+        }
+
+    }
+
+
+    /*private class ClearCartJsontask extends AsyncTask<String, Void, String> {
+
+        boolean iserror = false;
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            //  loginprogressbar.setVisibility(View.VISIBLE);
+            Log.e("******* NOW PlaceOrderJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW PlaceOrderJsontask WEB SERVICE IS RUNNING *******", "YES");
+            RL_my_address_progress.setVisibility(View.VISIBLE);
+            Log.e("User_ID From Shared Preference :", "" + User_ID);
+            Log.e("Sign in URL :",
+                    "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/cash_on_delivery.php?user_id=" + User_ID);
+
+        }
+
+        protected String doInBackground(String... params) {
+            Log.e("******* NOW PlaceOrderJsontask TASK IS in doInBackground *******", "YES");
+            Log.e("******* NOW PlaceOrderJsontask TASK IS in doInBackground *******", "YES");
+
+            HttpClient clientPlaceOrder = new DefaultHttpClient();
+            HttpPost postPlaceOrder = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/cash_on_delivery.php?user_id=" + User_ID);
+
+            try {
+
+                HttpResponse response = clientPlaceOrder.execute(postPlaceOrder);
+                String objectPlaceOrder = EntityUtils.toString(response.getEntity());
+                Log.e("*******objectPlaceOrder******** :", "" + objectPlaceOrder);
+
+                //JSONArray js = new JSONArray(object);
+                JSONObject jobectPlaceOrder = new JSONObject(objectPlaceOrder);
+                Get_Place_Order_status = jobectPlaceOrder.getString("status");
+                if (Get_Place_Order_status.equalsIgnoreCase("1")) {
+                    Get_Place_Order_ID = jobectPlaceOrder.getString("order_id");
+                    Get_Place_Order_user_id = jobectPlaceOrder.getString("user_id");
+                    Get_Place_Order_order_date = jobectPlaceOrder.getString("order_date");
+                    Get_Place_Order_delivery_date = jobectPlaceOrder.getString("delivery_date");
+                    Get_Place_Order_total_item_price = jobectPlaceOrder.getString("total_item_price");
+                    Get_Place_Order_order_status = jobectPlaceOrder.getString("order_status");
+                    Get_Place_Order_result = jobectPlaceOrder.getString("result");
+                    Get_Place_Order_message = jobectPlaceOrder.getString("message");
+
+                }
+
+            } catch (Exception e) {
+                Log.v("22", "22" + e.getMessage());
+                e.printStackTrace();
+                iserror = true;
+            }
+            return Get_Place_Order_status;
+        }
+
+        @Override
+        protected void onPostExecute(String result1) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result1);
+            RL_my_address_progress.setVisibility(View.GONE);
+
+            if (!iserror) {
+                if (Get_Place_Order_status.equalsIgnoreCase("1")) {
+
+                    Log.e("No Error :", "Get_Place_Order_status Success    1");
+
+                    Log.e("Get_Place_Order_ID :", "" + Get_Place_Order_ID);
+                    Log.e("Get_Place_Order_user_id :", "" + Get_Place_Order_user_id);
+                    Log.e("Get_Place_Order_order_date :", "" + Get_Place_Order_order_date);
+                    Log.e("Get_Place_Order_delivery_date :", "" + Get_Place_Order_delivery_date);
+                    Log.e("Get_Place_Order_total_item_price :", "" + Get_Place_Order_total_item_price);
+                    Log.e("Get_Place_Order_order_status :", "" + Get_Place_Order_order_status);
+                    Log.e("Get_Place_Order_result :", "" + Get_Place_Order_result);
+                    Log.e("Get_Place_Order_message :", "" + Get_Place_Order_message);
+
+                    SnackbarManager.show(
+                            Snackbar.with(GetDeliveryAddress.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("Order Placed.. Successfully" + "\n" + "Your Order id is :" + Get_Place_Order_ID));
+
+
+                } else if (Get_Place_Order_status.equalsIgnoreCase("0")) {
+
+                    Log.e("********* PlaceOrderJsontask *********", "unsuccessfull ERROR");
+                    Log.e("********* PlaceOrderJsontask *********", "unsuccessfull ERROR");
+                    Log.e("********* PlaceOrderJsontask *********", "unsuccessfull ERROR");
+
+                    SnackbarManager.show(
+                            Snackbar.with(GetDeliveryAddress.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("Order is not Placed.. Try again"));
+
+                }
+            } else {
+                Log.e("********* PlaceOrderJsontask *********", " ERROR");
+
+                SnackbarManager.show(
+                        Snackbar.with(GetDeliveryAddress.this)
+                                .position(Snackbar.SnackbarPosition.TOP)
+                                .margin(15, 15)
+                                .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                .text("Oops!! Please check server connection ."));
+
+            }
+        }
+
+    }*/
 
 }

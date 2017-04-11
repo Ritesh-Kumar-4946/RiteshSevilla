@@ -114,8 +114,6 @@ public class SubCategoryActivity extends AppCompatActivity {
     TextView TV_badge_counter_sub_category_click;
 
 
-
-
     @BindView(R.id.rl_gridview_sub_category_progress)
     RelativeLayout pv_gridview_sub_cat_progressview;
 
@@ -765,7 +763,7 @@ public class SubCategoryActivity extends AppCompatActivity {
 
 
     /*this is used to set the equal space between grid items (Start)*/
-                                        /*    02     */
+                                   /*    02     */
     public class EqualSpaceItemDecoration extends RecyclerView.ItemDecoration {
 
         private final int mSpaceHeight;
@@ -788,7 +786,7 @@ public class SubCategoryActivity extends AppCompatActivity {
 
 
     /*this is used for only set vertical space on recycler gridview items (Start)*/
-                                        /*    03     */
+                                  /*    03     */
     public class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration {
 
         private final int verticalSpaceHeight;

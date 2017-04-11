@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rl_address_text"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="80dp"
         android:layout_marginTop="20dp">
 
 
@@ -92,28 +92,33 @@
 
                         <TextView
                             android:id="@+id/tv_my_address_user_f_name_text"
-                            android:layout_width="100dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="5dp"
                             android:text="@string/tv_my_address_user_f_name_text"
                             android:textColor="@color/main_color_dark"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_my_address_user_f_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginEnd="10dp"
                             android:layout_toEndOf="@id/tv_my_address_user_f_name_text"
                             android:ellipsize="end"
                             android:ems="3"
                             android:lines="1"
-                            android:text="@string/tv_my_address_user_f_name"
+                            android:hint="@string/tv_my_address_user_f_name"
                             android:textAlignment="viewStart"
-                            android:textColor="@color/text_color_black"
-                            android:textSize="15sp" />
+                            android:textColor="@color/text_color_hint"
+                            android:textSize="12sp" />
 
                     </RelativeLayout>
 
@@ -126,28 +131,33 @@
 
                         <TextView
                             android:id="@+id/tv_my_address_user_l_name_text"
-                            android:layout_width="100dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="5dp"
                             android:text="@string/tv_my_address_user_l_name_text"
                             android:textColor="@color/main_color_dark"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_my_address_user_l_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginEnd="10dp"
                             android:layout_toEndOf="@id/tv_my_address_user_l_name_text"
                             android:ellipsize="end"
                             android:ems="3"
                             android:lines="1"
-                            android:text="@string/tv_my_address_user_l_name"
+                            android:hint="@string/tv_my_address_user_l_name"
                             android:textAlignment="viewStart"
-                            android:textColor="@color/text_color_black"
-                            android:textSize="15sp" />
+                            android:textColor="@color/text_color_hint"
+                            android:textSize="12sp" />
 
                     </RelativeLayout>
 
@@ -160,28 +170,33 @@
 
                         <TextView
                             android:id="@+id/tv_my_address_user_phone_text"
-                            android:layout_width="100dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="5dp"
                             android:text="@string/tv_my_address_user_phone_text"
                             android:textColor="@color/main_color_dark"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_my_address_user_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginEnd="10dp"
                             android:layout_toEndOf="@id/tv_my_address_user_phone_text"
                             android:ellipsize="end"
                             android:ems="3"
                             android:lines="1"
-                            android:text="@string/tv_my_address_user_phone_no"
+                            android:hint="@string/tv_my_address_user_phone_no"
                             android:textAlignment="viewStart"
-                            android:textColor="@color/text_color_black"
-                            android:textSize="15sp" />
+                            android:textColor="@color/text_color_hint"
+                            android:textSize="12sp" />
 
                     </RelativeLayout>
 
@@ -189,33 +204,34 @@
                     <RelativeLayout
                         android:id="@+id/rl_my_address_user_address_text"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_below="@id/rl_my_address_user_phone_text">
 
                         <TextView
                             android:id="@+id/tv_my_address_user_address_text"
-                            android:layout_width="100dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="5dp"
                             android:text="@string/tv_my_address_user_address_text"
                             android:textColor="@color/main_color_dark"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_my_address_user_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:hint="@string/tv_my_address_user_address"
                             android:layout_toEndOf="@id/tv_my_address_user_address_text"
-                            android:ellipsize="end"
-                            android:ems="3"
-                            android:lines="1"
-                            android:text="@string/tv_my_address_user_address"
-                            android:textAlignment="viewStart"
-                            android:textColor="@color/text_color_black"
-                            android:textSize="15sp" />
+                            android:textColor="@color/text_color_hint"
+                            android:textSize="12sp" />
 
                     </RelativeLayout>
 
@@ -228,28 +244,33 @@
 
                         <TextView
                             android:id="@+id/tv_my_address_user_country_text"
-                            android:layout_width="100dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="5dp"
                             android:text="@string/tv_my_address_user_country_text"
                             android:textColor="@color/main_color_dark"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_my_address_user_country"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginEnd="10dp"
                             android:layout_toEndOf="@id/tv_my_address_user_country_text"
                             android:ellipsize="end"
                             android:ems="3"
                             android:lines="1"
-                            android:text="@string/tv_my_address_user_country"
+                            android:hint="@string/tv_my_address_user_country"
                             android:textAlignment="viewStart"
-                            android:textColor="@color/text_color_black"
-                            android:textSize="15sp" />
+                            android:textColor="@color/text_color_hint"
+                            android:textSize="12sp" />
 
                     </RelativeLayout>
 
@@ -262,28 +283,33 @@
 
                         <TextView
                             android:id="@+id/tv_my_address_user_state_text"
-                            android:layout_width="100dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="5dp"
                             android:text="@string/tv_my_address_user_state_text"
                             android:textColor="@color/main_color_dark"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_my_address_user_state"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginEnd="10dp"
                             android:layout_toEndOf="@id/tv_my_address_user_state_text"
                             android:ellipsize="end"
                             android:ems="3"
                             android:lines="1"
-                            android:text="@string/tv_my_address_user_state"
+                            android:hint="@string/tv_my_address_user_state"
                             android:textAlignment="viewStart"
-                            android:textColor="@color/text_color_black"
-                            android:textSize="15sp" />
+                            android:textColor="@color/text_color_hint"
+                            android:textSize="12sp" />
 
                     </RelativeLayout>
 
@@ -296,28 +322,33 @@
 
                         <TextView
                             android:id="@+id/tv_my_address_user_city_text"
-                            android:layout_width="100dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="5dp"
                             android:text="@string/tv_my_address_user_city_text"
                             android:textColor="@color/main_color_dark"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_my_address_user_city"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginEnd="10dp"
                             android:layout_toEndOf="@id/tv_my_address_user_city_text"
                             android:ellipsize="end"
                             android:ems="3"
                             android:lines="1"
-                            android:text="@string/tv_my_address_user_city"
+                            android:hint="@string/tv_my_address_user_city"
                             android:textAlignment="viewStart"
-                            android:textColor="@color/text_color_black"
-                            android:textSize="15sp" />
+                            android:textColor="@color/text_color_hint"
+                            android:textSize="12sp" />
 
                     </RelativeLayout>
 
@@ -330,28 +361,33 @@
 
                         <TextView
                             android:id="@+id/tv_my_address_user_zip_text"
-                            android:layout_width="100dp"
+                            android:layout_width="70dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="5dp"
                             android:text="@string/tv_my_address_user_zip_text"
                             android:textColor="@color/main_color_dark"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/tv_my_address_user_zip"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginEnd="10dp"
                             android:layout_toEndOf="@id/tv_my_address_user_zip_text"
                             android:ellipsize="end"
                             android:ems="3"
                             android:lines="1"
-                            android:text="@string/tv_my_address_user_zip"
+                            android:hint="@string/tv_my_address_user_zip"
                             android:textAlignment="viewStart"
-                            android:textColor="@color/text_color_black"
-                            android:textSize="15sp" />
+                            android:textColor="@color/text_color_hint"
+                            android:textSize="12sp" />
 
                     </RelativeLayout>
 

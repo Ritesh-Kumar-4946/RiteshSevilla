@@ -33,13 +33,13 @@ public class SplashActivity extends AppCompatActivity {
         /*Toast.makeText(getApplicationContext(),
                 "Please click above image", Toast.LENGTH_SHORT).show();*/
 
-        IV_logo.setOnClickListener(new View.OnClickListener() {
+        /*IV_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentLogin = new Intent(getApplicationContext(), LoginSelectActivity.class);
                 startActivity(intentLogin);
             }
-        });
+        });*/
 
 
         // here initializing the shared preference
