@@ -59,4 +59,11 @@
     </array>
     <!--dot loader array-->
 
+
+    <color name="min_chars_color">#f44336</color>
+    <color name="first_state_color">#FFC107</color>
+    <color name="second_state_color">#2196F3</color>
+    <color name="third_state_color">#4CAF50</color>
+
+
 </resources>

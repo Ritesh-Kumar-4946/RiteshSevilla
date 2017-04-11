@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_publicate_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainscreen_toolbar"
+        android:elevation="7dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/tv_publicate_new"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="@string/tv_toolbar_publicate_new"
+                android:textColor="@color/text_color_white"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_publicate_new_top_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_publicate_new"
+        android:layout_marginTop="5dp">
+
+        <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+        <com.ritesh.sevilla.CustomTextView
+            android:id="@+id/tv_publicate_new_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/tv_publicate_new_text"
+            android:textColor="@color/text_black_color"
+            android:textSize="30sp"
+            app:font="montez_regular.ttf" />
+        <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:id="@+id/sv_publicate_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_publicate_new_top_text">
+
+        <RelativeLayout
+            android:id="@+id/rl_publicate_new_scrool_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_publicate_new_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_publicate_new_category_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp">
+
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+                    <TextView
+                        android:id="@+id/tv_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/tv_category_text"
+                        android:textColor="@color/text_color_hint"
+                        android:textSize="18sp" />
+
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_publicate_new_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_category"
+                        android:textSize="15sp"
+                        app:ms_dropdown_height="wrap_content"
+                        app:ms_dropdown_max_height="200dp"
+                        app:ms_hide_arrow="false" />
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_publicate_new_subcategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_publicate_new_category"
+                android:layout_marginTop="15dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_publicate_new_subcategory_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp">
+
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+                    <TextView
+                        android:id="@+id/tv_subcategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/tv_sbucategory_text"
+                        android:textColor="@color/text_color_hint"
+                        android:textSize="18sp" />
+
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_publicate_new_subcategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_subcategory"
+                        android:textSize="15sp"
+                        app:ms_dropdown_height="wrap_content"
+                        app:ms_dropdown_max_height="200dp"
+                        app:ms_hide_arrow="false" />
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_publicate_new_product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_publicate_new_subcategory"
+                android:layout_marginTop="15dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_publicate_new_product_name_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp">
+
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+                    <TextView
+                        android:id="@+id/tv_product_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/tv_product_name_text"
+                        android:textColor="@color/text_color_hint"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/edt_product_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_product_name"
+                        android:digits="@string/edt_product_name_allowed_text"
+                        android:hint="@string/edt_product_name_hint"
+                        android:inputType="text"
+                        android:maxLength="25"
+                        android:textColor="@color/text_black_color"
+                        android:textSize="18sp" />
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_publicate_new_product_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_publicate_new_product_name"
+                android:layout_marginTop="15dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_publicate_new_product_image_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:id="@+id/tv_product_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/tv_product_image_text"
+                        android:textColor="@color/text_color_hint"
+                        android:textSize="18sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_product_image">
+
+                        <TextView
+                            android:id="@+id/tv_product_image_path"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="180dp"
+                            android:ellipsize="end"
+                            android:ems="3"
+                            android:gravity="start"
+                            android:lines="4"
+                            android:text="@string/tv_product_image_path"
+                            android:textColor="@color/text_color_hint"
+                            android:textSize="18sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_product_image"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="50dp"
+                            android:src="@drawable/ic_noo_image" />
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_select_product_image_btn"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/ic_picker_imagee" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_publicate_new_product_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_publicate_new_product_image"
+                android:layout_marginTop="15dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_publicate_new_product_price_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp">
+
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+                    <TextView
+                        android:id="@+id/tv_product_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/tv_product_price_text"
+                        android:textColor="@color/text_color_hint"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/edt_product_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_product_price"
+                        android:hint="@string/edt_product_price_hint"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:textColor="@color/text_black_color"
+                        android:textSize="18sp" />
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_publicate_new_product_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_publicate_new_product_price"
+                android:layout_marginTop="15dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_publicate_new_product_description_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp">
+
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+                    <TextView
+                        android:id="@+id/tv_product_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/tv_product_description_text"
+                        android:textColor="@color/text_color_hint"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/edt_product_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_below="@id/tv_product_description"
+                        android:background="@drawable/et_background"
+                        android:gravity="top|center_vertical"
+                        android:hint="@string/edt_product_price_hint"
+                        android:inputType="textMultiLine"
+                        android:padding="10dp"
+                        android:textColor="@color/text_black_color"
+                        android:textSize="18sp" />
+
+                    <com.ritesh.sevilla.CharCountTextView
+                        android:id="@+id/tvTextCounter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/edt_product_description"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="5dp" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_btn_publicate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/cv_publicate_new_product_description"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:padding="5dp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_btn_publicate_now"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rl_my_cart_checkout_text_bg">
+
+                    <TextView
+                        android:id="@+id/tv_btn_publicate_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/tv_btn_publicate_text"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_btn_publicate_now_click"
+                    android:layout_width="130dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rl_my_cart_checkout_text_bg"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_btn_publicate_text_click"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/tv_btn_publicate_text"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <minube.com.library.TextLengthBar
+                android:id="@+id/text_length_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_btn_publicate"
+                android:layout_marginBottom="100dp"
+                app:barBackgroundColor="@android:color/holo_red_dark"
+                app:barIcon="@drawable/ic_min_chars"
+                app:barMessage="@string/default_message_content"
+                app:barMessageTextColor="@android:color/white"
+                app:barMessageTextSize="14dp"
+                app:barMinChars="50"
+                app:textFontPath="fonts/Raleway-Medium.ttf" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_publicate_new_progress"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:padding="3dp"
+        android:visibility="gone">
+
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+            android:id="@+id/cpb_publicate_new"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminate="true"
+            android:indeterminateOnly="false"
+            app:cpb_colors="@array/gplus_colors" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

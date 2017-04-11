@@ -253,7 +253,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                Toast.makeText(EditProfileActivity.this, "Image Picker", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(EditProfileActivity.this, "Image Picker", Toast.LENGTH_SHORT).show();
 
                 ProfileImagePicker();
             }

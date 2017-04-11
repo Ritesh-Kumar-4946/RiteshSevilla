@@ -99,8 +99,6 @@ public class MyCartActivity extends AppCompatActivity {
             status = "";
 
 
-
-
     String
             Get_user_address_ID = "",
             Get_user_address_status = "",
@@ -974,8 +972,6 @@ public class MyCartActivity extends AppCompatActivity {
     }
 
 
-
-
     private class UserGetAddressJsontask extends AsyncTask<String, Void, String> {
 
         boolean iserror = false;
@@ -1055,6 +1051,7 @@ public class MyCartActivity extends AppCompatActivity {
                     Log.e("Get_user_address_city :", "" + Get_user_address_city);
                     Log.e("Get_user_address_zipcode :", "" + Get_user_address_zipcode);
 
+                    Rl_checkout.setVisibility(View.VISIBLE);
                     Intent GoDeliveryScreen = new Intent(getApplicationContext(), GetDeliveryAddress.class);
                     startActivity(GoDeliveryScreen);
 

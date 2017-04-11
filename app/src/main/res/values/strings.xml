@@ -14,6 +14,17 @@
     <string name="user_name">User Name</string>
     <string name="user_account_type">Account Type</string>
     <string name="btn_signup">Sign Up</string>
+    <string name="tv_publicate_new_text">Publish your product</string>
+    <string name="tv_category_text">Category</string>
+    <string name="tv_product_name_text">Product Name</string>
+    <string name="tv_product_price_text">Product Price</string>
+    <string name="tv_product_description_text">Product Description</string>
+    <string name="tv_product_image_path">image path</string>
+    <string name="tv_product_image_text">Product Image</string>
+    <string name="edt_product_name_hint">Only letters and numbers allowed</string>
+    <string name="edt_product_price_hint">Product Price</string>
+    <string name="edt_product_name_allowed_text">0123456789abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="tv_sbucategory_text">Subcategory</string>
     <string name="tv_order_no_text">Order No. :</string>
     <string name="tv_order_date_text">Order Date :</string>
     <string name="tv_order_date">Order Date</string>
@@ -44,7 +55,7 @@
     <string name ="dialog_camera_textview">Camera</string>
     <string name ="dialog_gallery_textview">Gallery</string>
     <string name ="dialog_cancel_textview">Cancel</string>
-
+    <string name="default_message_content">Write at least %d characters</string>
 
     <!--drawer text (Start)-->
     <string name="navigation_drawer_open">Open</string>
@@ -95,6 +106,7 @@
     <string name="tv_toolbar_order_detail_text">Order Number :</string>
     <string name="tv_toolbar_order_detail_number">Order Number</string>
     <string name="tv_toolbar_address">My Address</string>
+    <string name="tv_toolbar_publicate_new">Publicate New</string>
     <string name="tv_toolbar_subcategory_product">SubCategory Product</string>
     <string name="tv_subcategory_product_list_tittle">Product Name</string>
     <string name="tv_news_event_tittle">News/Event Name</string>
@@ -109,6 +121,7 @@
     <string name="tv_my_cart_remove_item">REMOVE</string>
     <string name="tv_my_cart_checkout">TOTAL</string>
     <string name="tv_my_cart_checkout_text">Checkout</string>
+    <string name="tv_btn_publicate_text">Publicate Now</string>
     <string name="tv_my_cart_checkout_bracket_open">(</string>
     <string name="tv_my_cart_checkout_bracket_closed">)</string>
     <string name="tv_subcategory_single_product_add_cart">ADD TO CART</string>

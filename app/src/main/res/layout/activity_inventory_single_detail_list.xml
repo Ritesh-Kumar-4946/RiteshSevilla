@@ -38,7 +38,7 @@
 
 
                 <RelativeLayout
-                    android:id="@+id/rl_single_order_grid_item_image_progress"
+                    android:id="@+id/rl_single_order_list_item_image_progress"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_centerInParent="true"
@@ -95,7 +95,7 @@
 
 
                     <TextView
-                        android:id="@+id/tv_sub_category_product_discription"
+                        android:id="@+id/tv_single_order_product_discription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -111,7 +111,7 @@
 
 
                     <android.support.v7.widget.CardView
-                        android:id="@+id/cv_item_quantity"
+                        android:id="@+id/cv_single_order_item_quantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -120,8 +120,8 @@
                         android:layout_marginRight="5dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/tv_sub_category_product_discription"
-                        android:layout_toRightOf="@id/tv_sub_category_product_discription"
+                        android:layout_toEndOf="@id/tv_single_order_product_discription"
+                        android:layout_toRightOf="@id/tv_single_order_product_discription"
                         android:background="?android:attr/selectableItemBackground"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="0dp"
@@ -133,7 +133,7 @@
                             android:layout_height="30dp">
 
                             <TextView
-                                android:id="@+id/tv_item_quantity_number"
+                                android:id="@+id/tv_single_order_item_quantity_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
@@ -179,7 +179,7 @@
             android:layout_marginTop="10dp">
 
             <TextView
-                android:id="@+id/tv_single_order_single_item"
+                android:id="@+id/tv_single_order_single_item_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -292,7 +292,7 @@
     </android.support.v7.widget.CardView>
 
 
-    <android.support.v7.widget.CardView
+    <!--<android.support.v7.widget.CardView
         android:id="@+id/cv_single_order_remove_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -338,7 +338,7 @@
         </RelativeLayout>
 
 
-    </android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>-->
 
 
 </RelativeLayout>

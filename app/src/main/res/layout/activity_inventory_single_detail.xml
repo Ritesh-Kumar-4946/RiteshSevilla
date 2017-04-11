@@ -75,7 +75,7 @@
         android:visibility="gone">
 
         <fr.castorflex.android.circularprogressbar.CircularProgressBar
-            android:id="@+id/listview_single_order_progressbar_circular"
+            android:id="@+id/cpb_single_order"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:indeterminate="true"

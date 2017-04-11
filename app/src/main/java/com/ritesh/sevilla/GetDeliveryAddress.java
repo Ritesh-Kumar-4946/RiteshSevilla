@@ -82,6 +82,8 @@ public class GetDeliveryAddress extends AppCompatActivity {
 
     String
             User_ID = "",
+            Get_ClearCart_Status = "",
+            Get_ClearCart_Result = "",
             Get_Place_Order_ID = "",
             Get_Place_Order_user_id = "",
             Get_Place_Order_order_date = "",
@@ -109,7 +111,6 @@ public class GetDeliveryAddress extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_delivery_address);
         ButterKnife.bind(this);
-
 
         Appconstant.sh = getSharedPreferences(Appconstant.MyPREFERENCES, Context.MODE_PRIVATE);
         User_ID = Appconstant.sh.getString("id", null);
@@ -447,11 +448,20 @@ public class GetDeliveryAddress extends AppCompatActivity {
                                     .text("Order Placed.. Successfully"));
 
 
-                    Intent GoMainScreen = new Intent(getApplicationContext(), SubCategoryActivity.class);
-                    GoMainScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(GoMainScreen);
-                    finish();
 
+                    if (Utils.isConnected(getApplication())) {
+                        ClearCartJsontask task = new ClearCartJsontask();
+                        task.execute();
+                    } else {
+
+                        SnackbarManager.show(
+                                Snackbar.with(GetDeliveryAddress.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .text("Please Your Internet Connectivity..!!"));
+
+                    }
 
                 } else if (Get_Place_Order_status.equalsIgnoreCase("0")) {
 
@@ -483,7 +493,7 @@ public class GetDeliveryAddress extends AppCompatActivity {
     }
 
 
-    /*private class ClearCartJsontask extends AsyncTask<String, Void, String> {
+    private class ClearCartJsontask extends AsyncTask<String, Void, String> {
 
         boolean iserror = false;
 
@@ -491,40 +501,33 @@ public class GetDeliveryAddress extends AppCompatActivity {
         protected void onPreExecute() {
             // TODO Auto-generated method stub
             //  loginprogressbar.setVisibility(View.VISIBLE);
-            Log.e("******* NOW PlaceOrderJsontask WEB SERVICE IS RUNNING *******", "YES");
-            Log.e("******* NOW PlaceOrderJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW ClearCartJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW ClearCartJsontask WEB SERVICE IS RUNNING *******", "YES");
             RL_my_address_progress.setVisibility(View.VISIBLE);
             Log.e("User_ID From Shared Preference :", "" + User_ID);
-            Log.e("Sign in URL :",
-                    "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/cash_on_delivery.php?user_id=" + User_ID);
+            Log.e("Clear Cart URL :",
+                    "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/clear_cart.php?user_id="+User_ID);
 
         }
 
         protected String doInBackground(String... params) {
-            Log.e("******* NOW PlaceOrderJsontask TASK IS in doInBackground *******", "YES");
-            Log.e("******* NOW PlaceOrderJsontask TASK IS in doInBackground *******", "YES");
+            Log.e("******* NOW ClearCartJsontask TASK IS in doInBackground *******", "YES");
+            Log.e("******* NOW ClearCartJsontask TASK IS in doInBackground *******", "YES");
 
-            HttpClient clientPlaceOrder = new DefaultHttpClient();
-            HttpPost postPlaceOrder = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/cash_on_delivery.php?user_id=" + User_ID);
+            HttpClient clientClearCart = new DefaultHttpClient();
+            HttpPost postClearCart  = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/clear_cart.php?user_id=" + User_ID);
 
             try {
 
-                HttpResponse response = clientPlaceOrder.execute(postPlaceOrder);
-                String objectPlaceOrder = EntityUtils.toString(response.getEntity());
-                Log.e("*******objectPlaceOrder******** :", "" + objectPlaceOrder);
+                HttpResponse responseClearCart = clientClearCart.execute(postClearCart);
+                String objectClearCart  = EntityUtils.toString(responseClearCart .getEntity());
+                Log.e("*******objectClearCart******** :", "" + objectClearCart);
 
                 //JSONArray js = new JSONArray(object);
-                JSONObject jobectPlaceOrder = new JSONObject(objectPlaceOrder);
-                Get_Place_Order_status = jobectPlaceOrder.getString("status");
-                if (Get_Place_Order_status.equalsIgnoreCase("1")) {
-                    Get_Place_Order_ID = jobectPlaceOrder.getString("order_id");
-                    Get_Place_Order_user_id = jobectPlaceOrder.getString("user_id");
-                    Get_Place_Order_order_date = jobectPlaceOrder.getString("order_date");
-                    Get_Place_Order_delivery_date = jobectPlaceOrder.getString("delivery_date");
-                    Get_Place_Order_total_item_price = jobectPlaceOrder.getString("total_item_price");
-                    Get_Place_Order_order_status = jobectPlaceOrder.getString("order_status");
-                    Get_Place_Order_result = jobectPlaceOrder.getString("result");
-                    Get_Place_Order_message = jobectPlaceOrder.getString("message");
+                JSONObject jobectClearCart = new JSONObject(objectClearCart);
+                Get_ClearCart_Status = jobectClearCart.getString("status");
+                if (Get_ClearCart_Status.equalsIgnoreCase("OK")) {
+                    Get_ClearCart_Result = jobectClearCart.getString("result");
 
                 }
 
@@ -533,7 +536,7 @@ public class GetDeliveryAddress extends AppCompatActivity {
                 e.printStackTrace();
                 iserror = true;
             }
-            return Get_Place_Order_status;
+            return Get_ClearCart_Status;
         }
 
         @Override
@@ -543,43 +546,27 @@ public class GetDeliveryAddress extends AppCompatActivity {
             RL_my_address_progress.setVisibility(View.GONE);
 
             if (!iserror) {
-                if (Get_Place_Order_status.equalsIgnoreCase("1")) {
+                if (Get_ClearCart_Status.equalsIgnoreCase("OK")) {
 
-                    Log.e("No Error :", "Get_Place_Order_status Success    1");
+                    Log.e("No Error :", "Get_ClearCart_Status Success    OK");
 
-                    Log.e("Get_Place_Order_ID :", "" + Get_Place_Order_ID);
-                    Log.e("Get_Place_Order_user_id :", "" + Get_Place_Order_user_id);
-                    Log.e("Get_Place_Order_order_date :", "" + Get_Place_Order_order_date);
-                    Log.e("Get_Place_Order_delivery_date :", "" + Get_Place_Order_delivery_date);
-                    Log.e("Get_Place_Order_total_item_price :", "" + Get_Place_Order_total_item_price);
-                    Log.e("Get_Place_Order_order_status :", "" + Get_Place_Order_order_status);
-                    Log.e("Get_Place_Order_result :", "" + Get_Place_Order_result);
-                    Log.e("Get_Place_Order_message :", "" + Get_Place_Order_message);
+                    Log.e("Get_ClearCart_Result :", "" + Get_ClearCart_Result);
 
-                    SnackbarManager.show(
-                            Snackbar.with(GetDeliveryAddress.this)
-                                    .position(Snackbar.SnackbarPosition.TOP)
-                                    .margin(15, 15)
-                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                    .text("Order Placed.. Successfully" + "\n" + "Your Order id is :" + Get_Place_Order_ID));
+                    Intent GoMainScreen = new Intent(getApplicationContext(), MainActivity.class);
+                    GoMainScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(GoMainScreen);
+                    finish();
 
 
-                } else if (Get_Place_Order_status.equalsIgnoreCase("0")) {
+                } else if (Get_Place_Order_status.equalsIgnoreCase("Fail")) {
 
-                    Log.e("********* PlaceOrderJsontask *********", "unsuccessfull ERROR");
-                    Log.e("********* PlaceOrderJsontask *********", "unsuccessfull ERROR");
-                    Log.e("********* PlaceOrderJsontask *********", "unsuccessfull ERROR");
-
-                    SnackbarManager.show(
-                            Snackbar.with(GetDeliveryAddress.this)
-                                    .position(Snackbar.SnackbarPosition.TOP)
-                                    .margin(15, 15)
-                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                    .text("Order is not Placed.. Try again"));
+                    Log.e("********* Get_ClearCart_Result *********", "unsuccessfull ERROR");
+                    Log.e("********* Get_ClearCart_Result *********", "unsuccessfull ERROR");
+                    Log.e("********* Get_ClearCart_Result *********", "unsuccessfull ERROR");
 
                 }
             } else {
-                Log.e("********* PlaceOrderJsontask *********", " ERROR");
+                Log.e("********* ClearCartJsontask *********", " ERROR");
 
                 SnackbarManager.show(
                         Snackbar.with(GetDeliveryAddress.this)
@@ -591,6 +578,8 @@ public class GetDeliveryAddress extends AppCompatActivity {
             }
         }
 
-    }*/
+    }
+
+
 
 }

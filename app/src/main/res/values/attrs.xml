@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomTextView">
+        <attr name="font" format="string" />
+    </declare-styleable>
+
+
+    <declare-styleable name="CharCountTextView">
+        <attr name="maxCharacters" format="integer"/>
+        <attr name="exceededTextColor" format="color"/>
+    </declare-styleable>
+
+</resources>
