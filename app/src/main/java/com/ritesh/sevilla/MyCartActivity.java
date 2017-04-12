@@ -1051,7 +1051,6 @@ public class MyCartActivity extends AppCompatActivity {
                     Log.e("Get_user_address_city :", "" + Get_user_address_city);
                     Log.e("Get_user_address_zipcode :", "" + Get_user_address_zipcode);
 
-                    Rl_checkout.setVisibility(View.VISIBLE);
                     Intent GoDeliveryScreen = new Intent(getApplicationContext(), GetDeliveryAddress.class);
                     startActivity(GoDeliveryScreen);
 

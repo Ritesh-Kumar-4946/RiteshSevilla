@@ -102,6 +102,13 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
+            android:name=".ContactSupportActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
             android:name=".WebViewProfileImage"
             android:label="@string/app_name"
             android:largeHeap="true"

@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_contact_support"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainscreen_toolbar"
+        android:elevation="7dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/tv_contact_support"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="@string/tv_toolbar_contact_support"
+                android:textColor="@color/text_color_white"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:id="@+id/sv_contact_support"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_contact_support"
+        android:layout_marginTop="15dp">
+
+
+        <RelativeLayout
+            android:id="@+id/rl_contact_support_scroll_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_contact_support_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_contact_support_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp">
+
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+                    <TextView
+                        android:id="@+id/tv_contact_support_name_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/tv_contact_support_name_text"
+                        android:textColor="@color/text_color_hint"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/edt_contact_support_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_contact_support_name_text"
+                        android:digits="@string/edt_product_name_allowed_text"
+                        android:hint="@string/edt_contact_support_name_hint_text"
+                        android:inputType="text"
+                        android:maxLength="25"
+                        android:textColor="@color/text_black_color"
+                        android:textSize="18sp" />
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_contact_support_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_contact_support_name"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_contact_support_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp">
+
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+                    <TextView
+                        android:id="@+id/tv_contact_support_email_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/tv_contact_support_email_text"
+                        android:textColor="@color/text_color_hint"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/edt_contact_support_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_contact_support_email_text"
+                        android:hint="@string/edt_contact_support_email_hint_text"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="25"
+                        android:textColor="@color/text_black_color"
+                        android:textSize="18sp" />
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_contact_support_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_contact_support_email"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_contact_support_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp">
+
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+                    <TextView
+                        android:id="@+id/tv_contact_support_phone_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/tv_contact_support_phone_text"
+                        android:textColor="@color/text_color_hint"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/edt_contact_support_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_contact_support_phone_text"
+                        android:hint="@string/edt_contact_support_phone_hint_text"
+                        android:inputType="phone"
+                        android:digits="@string/edt_contact_support_allowed_number"
+                        android:maxLength="25"
+                        android:textColor="@color/text_black_color"
+                        android:textSize="18sp" />
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_contact_support_query"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_contact_support_phone"
+                android:layout_margin="15dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="3dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_contact_support_query"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp">
+
+                    <!--https://examples.javacodegeeks.com/android/android-custom-font-textview/-->
+                    <TextView
+                        android:id="@+id/tv_contact_support_query_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/tv_contact_support_query_text"
+                        android:textColor="@color/text_color_hint"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/edt_contact_support_query"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_below="@id/tv_contact_support_query_text"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/et_background"
+                        android:gravity="top|center_vertical"
+                        android:hint="@string/edt_contact_support_query_hint"
+                        android:inputType="textMultiLine"
+                        android:padding="10dp"
+                        android:textColor="@color/text_black_color"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_btn_contact_support"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/cv_contact_support_query"
+                android:layout_marginBottom="100dp"
+                android:layout_marginTop="20dp"
+                android:padding="5dp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_btn_contact_support_now"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rl_my_cart_checkout_text_bg">
+
+                    <TextView
+                        android:id="@+id/tv_btn_contact_support_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/tv_btn_contact_support_text"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_btn_contact_support_now_click"
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rl_my_cart_checkout_text_bg"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_btn_contact_support_text_click"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/tv_btn_contact_support_text"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_contact_support_progress"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:padding="3dp"
+        android:visibility="gone">
+
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+            android:id="@+id/cpb_contact_support"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminate="true"
+            android:indeterminateOnly="false"
+            app:cpb_colors="@array/gplus_colors" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

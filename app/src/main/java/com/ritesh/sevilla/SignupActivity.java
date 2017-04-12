@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -66,7 +67,7 @@ public class SignupActivity extends AppCompatActivity {
 
     CircularProgressBar mCircularProgressBar;
 
-    boolean iserror = false;
+
 
     String str_username = "", str_emailid = "", str_password = "", str_confirm_password = "",
             str_phone_number = "", result = "", error = "";
@@ -74,7 +75,7 @@ public class SignupActivity extends AppCompatActivity {
     String User_type = "", GetSet_user_Type = "";
 
     String STR_User_ID = "", STR_Phone_Number = "", STR_User_Name = "", STR_User_Email = "",
-            STR_Password = "", STR_error_Message = "";
+            STR_Password = "", STR_error_Message = "", STR_seller_type = "";
 
     private static final String[] USER_TYPE = {"Register as :", "Buyer", "Seller"};
 
@@ -119,11 +120,10 @@ public class SignupActivity extends AppCompatActivity {
         });
 
 
-        Btn_CV_signup.setOnClickListener(new View.OnClickListener() {
+        Btn_CV_signup.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-
-
+            public boolean onTouch(View v, MotionEvent event) {
+                boolean iserror = false;
                 str_username = ET_signup_username.getText().toString().trim();
                 str_emailid = ET_signup_email.getText().toString().trim();
                 str_password = ET_signup_password.getText().toString().trim();
@@ -134,201 +134,44 @@ public class SignupActivity extends AppCompatActivity {
                         + "str_username :" + "" + str_username + "\n"
                         + "str_emailid :" + "" + str_emailid + "\n"
                         + "str_phone_number :" + "" + str_phone_number + "\n"
-                        + "GetSet_user_Type :" + "" + GetSet_user_Type + "\n"
                         + "str_password :" + "" + str_password + "\n"
-                        + "str_confirm_password :" + "" + str_confirm_password);
+                        + "str_confirm_password :" + "" + str_confirm_password + "\n"
+                        + "GetSet_user_Type :" + "" + GetSet_user_Type);
 
-                if (str_username.equals("")) {
-                    iserror = true;
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    Log.e("Action ", "Down");
                     v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                    /**************** Start Animation ****************/
+
+//                    Toast.makeText(getApplicationContext(), "Add to cart Clicked", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_MOVE) {
+
+                    Log.e("Action ", "Move");
+
+                    return true;
+
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                    Log.e("Action ", "Up");
+
+                    if (str_username.equals("")) {
+                        iserror = true;
+                        Log.e(" Error :", "Ok");
+                        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                        /**************** Start Animation ****************/
                 /*https://github.com/daimajia/AndroidViewAnimations/blob/master/README.md*/
 
-                    YoYo.with(Techniques.Tada)
-                            .duration(700)
-                            .playOn(ET_signup_username);
-                    /**************** End Animation ****************/
+                        YoYo.with(Techniques.Tada)
+                                .duration(700)
+                                .playOn(ET_signup_username);
+                        /**************** End Animation ****************/
 
                     /*Toast.makeText(getApplicationContext(), "Please enter your Name",
                             Toast.LENGTH_SHORT).show();*/
-
-                    SnackbarManager.show(
-                            Snackbar.with(SignupActivity.this)
-                                    .position(Snackbar.SnackbarPosition.TOP)
-                                    .margin(15, 15)
-                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                    .textColor(R.color.text_color_black)
-                                    .text("Please enter your Name"));
-
-
-                } else if (str_emailid.equals("")) {
-                    iserror = true;
-                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                    /**************** Start Animation ****************/
-                    YoYo.with(Techniques.Tada)
-                            .duration(700)
-                            .playOn(ET_signup_email);
-                    /**************** End Animation ****************/
-
-                    /*Toast.makeText(getApplicationContext(),
-                            "Please enter your Email Id", Toast.LENGTH_SHORT).show();*/
-
-                    SnackbarManager.show(
-                            Snackbar.with(SignupActivity.this)
-                                    .position(Snackbar.SnackbarPosition.TOP)
-                                    .margin(15, 15)
-                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                    .textColor(R.color.text_color_black)
-                                    .text("Please enter your Email Id"));
-
-                } else if (!isValidEmail(str_emailid)) {
-                    iserror = true;
-                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                    //	emailedit.requestFocus();
-                    /**************** Start Animation ****************/
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .playOn(ET_signup_email);
-                    /**************** End Animation ****************/
-                    /*Toast.makeText(getApplicationContext(),
-                            "Please enter valid email address.", Toast.LENGTH_SHORT).show();*/
-
-                    SnackbarManager.show(
-                            Snackbar.with(SignupActivity.this)
-                                    .position(Snackbar.SnackbarPosition.TOP)
-                                    .margin(15, 15)
-                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                    .textColor(R.color.text_color_black)
-                                    .text("Please enter valid email address."));
-
-
-                } else if (str_phone_number.equals("")) {
-                    iserror = true;
-                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                    /**************** Start Animation ****************/
-                    YoYo.with(Techniques.Tada)
-                            .duration(700)
-                            .playOn(ET_signup_phone_number);
-                    /**************** End Animation ****************/
-
-                    /*Toast.makeText(getApplicationContext(),
-                            "Please enter your Email Id", Toast.LENGTH_SHORT).show();*/
-
-                    SnackbarManager.show(
-                            Snackbar.with(SignupActivity.this)
-                                    .position(Snackbar.SnackbarPosition.TOP)
-                                    .margin(15, 15)
-                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                    .textColor(R.color.text_color_black)
-                                    .text("Please enter your Phone Number"));
-
-                } else if (str_password.equals("")) {
-                    iserror = true;
-                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                    /**************** Start Animation ****************/
-                    YoYo.with(Techniques.Tada)
-                            .duration(700)
-                            .playOn(ET_signup_password);
-                    /**************** End Animation ****************/
-
-                    /*Toast.makeText(getApplicationContext(),
-                            "Please enter your Password", Toast.LENGTH_SHORT).show();*/
-
-                    SnackbarManager.show(
-                            Snackbar.with(SignupActivity.this)
-                                    .position(Snackbar.SnackbarPosition.TOP)
-                                    .margin(15, 15)
-                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                    .textColor(R.color.text_color_black)
-                                    .text("Please enter your Password"));
-
-                } else if (str_password.length() < 5) {
-                    iserror = true;
-                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                    /**************** Start Animation ****************/
-                    YoYo.with(Techniques.Shake)
-                            .duration(700)
-                            .playOn(ET_signup_password);
-                    /**************** End Animation ****************/
-
-                    /*Toast.makeText(getApplicationContext(), "Please enter more than 5 character in password.",
-                            Toast.LENGTH_SHORT).show();*/
-
-                    SnackbarManager.show(
-                            Snackbar.with(SignupActivity.this)
-                                    .position(Snackbar.SnackbarPosition.TOP)
-                                    .margin(15, 15)
-                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                    .textColor(R.color.text_color_black)
-                                    .text("Please enter more than 5 character \n in password."));
-
-
-                } else if (!str_confirm_password.equals(str_password)) {
-                    iserror = true;
-                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                    /**************** Start Animation ****************/
-                    YoYo.with(Techniques.Swing)
-                            .duration(700)
-                            .playOn(ET_signup_password);
-
-                    YoYo.with(Techniques.Swing)
-                            .duration(700)
-                            .playOn(ET_signup_re_password);
-                    /**************** End Animation ****************/
-
-                    /*Toast.makeText(getApplicationContext(),
-                            "oopsss....\n Password not Match Please try again", Toast.LENGTH_SHORT).show();*/
-
-
-                    SnackbarManager.show(
-                            Snackbar.with(SignupActivity.this)
-                                    .position(Snackbar.SnackbarPosition.TOP)
-                                    .margin(15, 15)
-                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                    .textColor(R.color.text_color_black)
-                                    .text("oopsss....\n Password not Match Please try again"));
-
-                } else if (GetSet_user_Type.equals("")) {
-                    iserror = true;
-                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                    /**************** Start Animation ****************/
-                /*https://github.com/daimajia/AndroidViewAnimations/blob/master/README.md*/
-
-                    YoYo.with(Techniques.Tada)
-                            .duration(700)
-                            .playOn(spinner);
-                    /**************** End Animation ****************/
-
-                    /*Toast.makeText(getApplicationContext(), "Please enter your Name",
-                            Toast.LENGTH_SHORT).show();*/
-
-                    SnackbarManager.show(
-                            Snackbar.with(SignupActivity.this)
-                                    .position(Snackbar.SnackbarPosition.TOP)
-                                    .margin(15, 15)
-                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                    .textColor(R.color.text_color_black)
-                                    .text("Please Select User Type First..!!"));
-
-
-                } else if (!iserror) {
-
-                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                    /*Toast.makeText(getApplicationContext(),
-                            "Good", Toast.LENGTH_SHORT).show();*/
-
-                    /*SnackbarManager.show(
-                            Snackbar.with(SignupActivity.this)
-                                    .position(Snackbar.SnackbarPosition.TOP)
-                                    .margin(15, 15)
-                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
-                                    .textColor(R.color.text_color_black)
-                                    .text("Good All Value Correct"));*/
-
-                    if (Utils.isConnected(getApplicationContext())) {
-                        SignUpJsontask task = new SignUpJsontask();
-                        task.execute();
-                    } else {
 
                         SnackbarManager.show(
                                 Snackbar.with(SignupActivity.this)
@@ -336,15 +179,222 @@ public class SignupActivity extends AppCompatActivity {
                                         .margin(15, 15)
                                         .backgroundDrawable(R.drawable.snackbar_custom_layout)
                                         .textColor(R.color.text_color_black)
-                                        .text("Please Your Internet Connectivity..!!"));
+                                        .text("Please enter your Name"));
+
+
+                    } else if (str_emailid.equals("")) {
+                        iserror = true;
+                        Log.e(" Error :", "Ok");
+                        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                        /**************** Start Animation ****************/
+                        YoYo.with(Techniques.Tada)
+                                .duration(700)
+                                .playOn(ET_signup_email);
+                        /**************** End Animation ****************/
+
+                    /*Toast.makeText(getApplicationContext(),
+                            "Please enter your Email Id", Toast.LENGTH_SHORT).show();*/
+
+                        SnackbarManager.show(
+                                Snackbar.with(SignupActivity.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .textColor(R.color.text_color_black)
+                                        .text("Please enter your Email Id"));
+
+                    } else if (!isValidEmail(str_emailid)) {
+                        iserror = true;
+                        Log.e(" Error :", "Ok");
+                        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                        //	emailedit.requestFocus();
+                        /**************** Start Animation ****************/
+                        YoYo.with(Techniques.Shake)
+                                .duration(700)
+                                .playOn(ET_signup_email);
+                        /**************** End Animation ****************/
+                    /*Toast.makeText(getApplicationContext(),
+                            "Please enter valid email address.", Toast.LENGTH_SHORT).show();*/
+
+                        SnackbarManager.show(
+                                Snackbar.with(SignupActivity.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .textColor(R.color.text_color_black)
+                                        .text("Please enter valid email address."));
+
+
+                    } else if (str_phone_number.equals("")) {
+                        iserror = true;
+                        Log.e(" Error :", "Ok");
+                        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                        /**************** Start Animation ****************/
+                        YoYo.with(Techniques.Tada)
+                                .duration(700)
+                                .playOn(ET_signup_phone_number);
+                        /**************** End Animation ****************/
+
+                    /*Toast.makeText(getApplicationContext(),
+                            "Please enter your Email Id", Toast.LENGTH_SHORT).show();*/
+
+                        SnackbarManager.show(
+                                Snackbar.with(SignupActivity.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .textColor(R.color.text_color_black)
+                                        .text("Please enter your Phone Number"));
+
+                    } else if (str_password.equals("")) {
+                        iserror = true;
+                        Log.e(" Error :", "Ok");
+                        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                        /**************** Start Animation ****************/
+                        YoYo.with(Techniques.Tada)
+                                .duration(700)
+                                .playOn(ET_signup_password);
+                        /**************** End Animation ****************/
+
+                    /*Toast.makeText(getApplicationContext(),
+                            "Please enter your Password", Toast.LENGTH_SHORT).show();*/
+
+                        SnackbarManager.show(
+                                Snackbar.with(SignupActivity.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .textColor(R.color.text_color_black)
+                                        .text("Please enter your Password"));
+
+                    } else if (str_password.length() < 5) {
+                        iserror = true;
+                        Log.e(" Error :", "Ok");
+                        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                        /**************** Start Animation ****************/
+                        YoYo.with(Techniques.Shake)
+                                .duration(700)
+                                .playOn(ET_signup_password);
+                        /**************** End Animation ****************/
+
+                    /*Toast.makeText(getApplicationContext(), "Please enter more than 5 character in password.",
+                            Toast.LENGTH_SHORT).show();*/
+
+                        SnackbarManager.show(
+                                Snackbar.with(SignupActivity.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .textColor(R.color.text_color_black)
+                                        .text("Please enter more than 5 character \n in password."));
+
+
+                    } else if (!str_confirm_password.equals(str_password)) {
+                        iserror = true;
+                        Log.e(" Error :", "Ok");
+                        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                        /**************** Start Animation ****************/
+                        YoYo.with(Techniques.Swing)
+                                .duration(700)
+                                .playOn(ET_signup_password);
+
+                        YoYo.with(Techniques.Swing)
+                                .duration(700)
+                                .playOn(ET_signup_re_password);
+                        /**************** End Animation ****************/
+
+                    /*Toast.makeText(getApplicationContext(),
+                            "oopsss....\n Password not Match Please try again", Toast.LENGTH_SHORT).show();*/
+
+
+                        SnackbarManager.show(
+                                Snackbar.with(SignupActivity.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .textColor(R.color.text_color_black)
+                                        .text("oopsss....\n Password not Match Please try again"));
+
+                    } else if (GetSet_user_Type.equals("")) {
+                        iserror = true;
+                        Log.e(" Error :", "Ok");
+                        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                        /**************** Start Animation ****************/
+                /*https://github.com/daimajia/AndroidViewAnimations/blob/master/README.md*/
+
+                        YoYo.with(Techniques.Tada)
+                                .duration(700)
+                                .playOn(spinner);
+                        /**************** End Animation ****************/
+
+                    /*Toast.makeText(getApplicationContext(), "Please enter your Name",
+                            Toast.LENGTH_SHORT).show();*/
+
+                        SnackbarManager.show(
+                                Snackbar.with(SignupActivity.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .textColor(R.color.text_color_black)
+                                        .text("Please Select User Type First..!!"));
+
+
+                    } else if (GetSet_user_Type.equals("Register as :")) {
+                        iserror = true;
+                        Log.e(" Error :", "Ok");
+                        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                        /**************** Start Animation ****************/
+                /*https://github.com/daimajia/AndroidViewAnimations/blob/master/README.md*/
+
+                        YoYo.with(Techniques.Tada)
+                                .duration(700)
+                                .playOn(spinner);
+                        /**************** End Animation ****************/
+
+                    /*Toast.makeText(getApplicationContext(), "Please enter your Name",
+                            Toast.LENGTH_SHORT).show();*/
+
+                        SnackbarManager.show(
+                                Snackbar.with(SignupActivity.this)
+                                        .position(Snackbar.SnackbarPosition.TOP)
+                                        .margin(15, 15)
+                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                        .textColor(R.color.text_color_black)
+                                        .text("Please Select User Type First..!!"));
+
+
+                    }
+                     if (!iserror) {
+
+                        Log.e("No Error :", "Ok");
+                        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+
+                        if (Utils.isConnected(getApplicationContext())) {
+                            SignUpJsontask task = new SignUpJsontask();
+                            task.execute();
+                        } else {
+
+                            SnackbarManager.show(
+                                    Snackbar.with(SignupActivity.this)
+                                            .position(Snackbar.SnackbarPosition.TOP)
+                                            .margin(15, 15)
+                                            .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                            .textColor(R.color.text_color_black)
+                                            .text("Please Your Internet Connectivity..!!"));
+
+                        }
 
                     }
 
+
+                    return true;
                 }
 
 
+                return false;
             }
         });
+
 
     }
 
@@ -387,7 +437,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
     private class SignUpJsontask extends AsyncTask<String, Void, String> {
-
+        boolean iserror = false;
         @Override
         protected void onPreExecute() {
             // TODO Auto-generated method stub
@@ -437,6 +487,7 @@ public class SignupActivity extends AppCompatActivity {
                     STR_User_Name = jobect.getString("user_name");
                     STR_User_Email = jobect.getString("user_email");
                     STR_Phone_Number = jobect.getString("phone_number");
+                    STR_seller_type = jobect.getString("seller_type");
                 } else {
                     if (result.equalsIgnoreCase("fail")) {
                         STR_error_Message = jobect.getString("message");
@@ -464,7 +515,7 @@ public class SignupActivity extends AppCompatActivity {
                     Log.e("STR_user_name :", "" + STR_User_Name);
                     Log.e("STR_user_email :", "" + STR_User_Email);
                     Log.e("STR_Phone_Number :", "" + STR_Phone_Number);
-                    Log.e("STR_Password :", "" + STR_Password);
+                    Log.e("STR_seller_type :", "" + STR_seller_type);
 
                     Intent GoLoginScreen = new Intent(SignupActivity.this, LoginActivity.class);
                     startActivity(GoLoginScreen);

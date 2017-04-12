@@ -168,8 +168,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/rl_my_cart_checkout_text_bg"
-                android:visibility="gone">
+                android:background="@drawable/rl_my_cart_checkout_text_bg">
 
                 <TextView
                     android:id="@+id/tv_checkout_text"

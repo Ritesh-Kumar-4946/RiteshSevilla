@@ -89,8 +89,8 @@ public class PublicateNewActivity extends AppCompatActivity {
     @BindView(R.id.tvTextCounter)
     CharCountTextView CCTVtvTextCounter;
 
-    @BindView(R.id.text_length_bar)
-    TextLengthBar textLengthBar;
+    /*@BindView(R.id.text_length_bar)
+    TextLengthBar textLengthBar;*/
 
     Dialog QuickTipDialog;
 
@@ -137,8 +137,8 @@ public class PublicateNewActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        textLengthBar.setStates(buildStates());
-        textLengthBar.attachToEditText(EDT_product_description);
+        /*textLengthBar.setStates(buildStates());
+        textLengthBar.attachToEditText(EDT_product_description);*/
 
         TB_publicate_new.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -316,7 +316,7 @@ public class PublicateNewActivity extends AppCompatActivity {
     }
 
 
-    private List<TextLengthBarState> buildStates() {
+    /*private List<TextLengthBarState> buildStates() {
 
         List<TextLengthBarState> states = new ArrayList<>();
 
@@ -336,7 +336,7 @@ public class PublicateNewActivity extends AppCompatActivity {
                 .build());
 
         return states;
-    }
+    }*/
 
 
 

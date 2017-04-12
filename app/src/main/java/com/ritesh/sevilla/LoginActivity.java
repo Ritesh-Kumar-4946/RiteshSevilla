@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
     boolean iserror = false;
     String Str_login_email = "", Str_login_password = "", result = "", error = "";
-    String STR_User_Server_Id = "", STR_Email_ID = "", STR_User_Name = "", STR_Phone_Number = "";
+    String STR_User_Server_Id = "", STR_Email_ID = "", STR_User_Name = "", STR_Phone_Number = "", STR_User_Type = "";
 
 
     @Override
@@ -303,6 +303,7 @@ public class LoginActivity extends AppCompatActivity {
                     STR_Email_ID = jobect.getString("user_email");
                     STR_User_Name = jobect.getString("user_name");
                     STR_Phone_Number = jobect.getString("phone_number");
+                    STR_User_Type = jobect.getString("seller_type");
 
                 }
 
@@ -327,13 +328,21 @@ public class LoginActivity extends AppCompatActivity {
                     Appconstant.editor.putString("email", STR_Email_ID);
                     Appconstant.editor.putString("username", STR_User_Name);
                     Appconstant.editor.putString("mobile", STR_Phone_Number);
+                    Appconstant.editor.putString("usertype", STR_User_Type);
                     Appconstant.editor.putString("loginTest", "true");
                     Appconstant.editor.commit();
+
+                    Log.e("Login ID :", "" + STR_User_Server_Id);
+                    Log.e("Login STR_Email_ID :", "" + STR_Email_ID);
+                    Log.e("Login STR_User_Name :", "" + STR_User_Name);
+                    Log.e("Login STR_Phone_Number :", "" + STR_Phone_Number);
+                    Log.e("Login STR_User_Type :", "" + STR_User_Type);
 
 
                     Toast.makeText(LoginActivity.this, "Login Successfully ", Toast.LENGTH_SHORT).show();
                     Intent in = new Intent(LoginActivity.this, MainActivity.class);
                     in.putExtra("EXIT", "0");
+                    in.putExtra("USERTYPE", STR_User_Type);
                     in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     LoginActivity.this.startActivity(in);
                     finish();

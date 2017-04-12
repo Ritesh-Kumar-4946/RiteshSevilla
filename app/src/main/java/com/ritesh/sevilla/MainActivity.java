@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
             result = "",
             Str_Get_Cart_Detail_Status = "",
             Str_Get_Cart_result = "",
+            Str_Get_User_Type = "",
             Str_Get_Status = "";
 
     List<MainActivity> rowItems;
@@ -222,6 +223,14 @@ public class MainActivity extends AppCompatActivity {
         Log.e("User_ID from SharedPref :", "" + User_ID);
 /*        Str_Get_CartCount_Shared = Appconstant.sh.getString("cart_count", null);
         Log.e("Cart Count From Shared Preference:", "" + Str_Get_CartCount_Shared);*/
+
+        Str_Get_User_Type = getIntent().getStringExtra("USERTYPE");
+        Log.e("Login User Type :", "" + Str_Get_User_Type);
+        if (Str_Get_User_Type.equals("Buyer")) {
+            rl_Dr_Publicate_New.setVisibility(View.VISIBLE);
+        } else {
+            rl_Dr_Publicate_New.setVisibility(View.GONE);
+        }
 
         if (Utils.isConnected(getApplicationContext())) {
             GetUserDetailJsontask task = new GetUserDetailJsontask();
@@ -425,8 +434,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
         rl_Dr_Home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -469,7 +476,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                Toast.makeText(getApplicationContext(), "Publicate New Clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Publicate New Clicked", Toast.LENGTH_SHORT).show();
+                Intent GoPublicateScreen = new Intent(getApplicationContext(), PublicateNewActivity.class);
+                startActivity(GoPublicateScreen);
             }
         });
 
@@ -495,7 +504,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                Toast.makeText(getApplicationContext(), "Contact Support Clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Contact Support Clicked", Toast.LENGTH_SHORT).show();
+
+                Intent GoContactSupportScreen = new Intent(getApplicationContext(), ContactSupportActivity.class);
+                startActivity(GoContactSupportScreen);
             }
         });
 
@@ -515,7 +527,6 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent GoNewsEventScreen = new Intent(getApplicationContext(), NewsEventActivity.class);
                 startActivity(GoNewsEventScreen);
-
 
 
             }
@@ -923,7 +934,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-
         }
 
     }
@@ -946,10 +956,10 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             Log.e("******* NOW MainCartDeatilJsontask IS doInBackground RUNNING *******", "YES");
             HttpClient client = new DefaultHttpClient();
-            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id="+User_ID);
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id=" + User_ID);
 
             /*http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id=286*/
-            Log.e("URL Cart Detail Main :", "" + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id="+User_ID);
+            Log.e("URL Cart Detail Main :", "" + "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/get_cart_product.php?user_id=" + User_ID);
 
             try {
                 HttpResponse response = client.execute(post);
@@ -1003,8 +1013,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
 
 
     private class CategoryAdapter extends RecyclerView.Adapter<MainActivity.CategoryAdapter.MyViewHolder> {

@@ -79,9 +79,6 @@
             <!--cartitem badge counter (End)-->
 
 
-
-
-
             <!--cart imageview (Start)-->
             <RelativeLayout
                 android:id="@+id/rl_cart_icon_main_click"
@@ -450,7 +447,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_below="@id/rl_dr_inventory"
-                            android:background="@drawable/drawable_list_item_click_effect">
+                            android:background="@drawable/drawable_list_item_click_effect"
+                            android:visibility="gone">
 
                             <RelativeLayout
                                 android:id="@+id/rl_iv_publicate_new"
@@ -723,8 +721,6 @@
 
 
     </android.support.v4.widget.DrawerLayout>
-
-
 
 
 </RelativeLayout>
