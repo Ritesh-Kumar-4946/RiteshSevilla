@@ -220,13 +220,10 @@ public class MainActivity extends AppCompatActivity {
 
         Appconstant.sh = getSharedPreferences(Appconstant.MyPREFERENCES, Context.MODE_PRIVATE);
         User_ID = Appconstant.sh.getString("id", null);
+        Str_Get_User_Type = Appconstant.sh.getString("usertype", null);
         Log.e("User_ID from SharedPref :", "" + User_ID);
-/*        Str_Get_CartCount_Shared = Appconstant.sh.getString("cart_count", null);
-        Log.e("Cart Count From Shared Preference:", "" + Str_Get_CartCount_Shared);*/
-
-        Str_Get_User_Type = getIntent().getStringExtra("USERTYPE");
-        Log.e("Login User Type :", "" + Str_Get_User_Type);
-        if (Str_Get_User_Type.equals("Buyer")) {
+        Log.e("MainActivity Login User Type :", "" + Str_Get_User_Type);
+        if (Str_Get_User_Type != null && Str_Get_User_Type.equalsIgnoreCase("Seller")) {
             rl_Dr_Publicate_New.setVisibility(View.VISIBLE);
         } else {
             rl_Dr_Publicate_New.setVisibility(View.GONE);
