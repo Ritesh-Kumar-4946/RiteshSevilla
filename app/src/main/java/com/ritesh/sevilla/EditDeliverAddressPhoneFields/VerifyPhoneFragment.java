@@ -267,7 +267,7 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
 
         /*%%%%%%%%%%%%%%      Spinner Country (Start)        %%%%%%%%%%%%%%*/
 
-         /*spinner click method and not clicked methos (Start)*/
+         /*spinner click method and not clicked method for country (Start)*/
         SP_user_country.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
 
             @Override

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CharectorCountLib/CharectorCountLib.iml" filepath="$PROJECT_DIR$/CharectorCountLib/CharectorCountLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/CircularProgress-google/CircularProgress-google.iml" filepath="$PROJECT_DIR$/CircularProgress-google/CircularProgress-google.iml" />
       <module fileurl="file://$PROJECT_DIR$/RiteshSevilla.iml" filepath="$PROJECT_DIR$/RiteshSevilla.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
