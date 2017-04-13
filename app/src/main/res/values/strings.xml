@@ -72,10 +72,13 @@
     <string name="toolbar_image">Logo Image</string>
     <string name="drawer_image_home">Home Image</string>
     <string name="dr_tv_home">Home</string>
+    <string name="dr_tv_home_seller">My Product</string>
     <string name="dr_tv_delivery">Delivery Address</string>
     <string name="toolbar_tv_payment_check">Payment</string>
     <string name="dr_tv_place_seller">Place Seller</string>
+    <string name="dr_tv_order_sales_mode">Orders/Sales Mode</string>
     <string name="dr_tv_inventry">Inventory</string>
+    <string name="dr_tv_shipment_seller">My Shipment</string>
     <string name="dr_tv_publicate_new">Publicate New</string>
     <string name="dr_tv_edit_profile">Edit Profile</string>
     <string name="dr_tv_message">Messages</string>

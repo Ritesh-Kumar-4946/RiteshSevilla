@@ -67,6 +67,13 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
+            android:name=".MainSellerActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
             android:name=".EditDeliveryActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"

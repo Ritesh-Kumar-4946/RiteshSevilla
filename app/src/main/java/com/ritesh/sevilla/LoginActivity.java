@@ -331,14 +331,26 @@ public class LoginActivity extends AppCompatActivity {
                     Log.e("Login STR_Phone_Number :", "" + STR_Phone_Number);
                     Log.e("Login STR_User_Type :", "" + STR_User_Type);
 
+                    if (STR_User_Type.equalsIgnoreCase("Buyer")) {
 
-                    Toast.makeText(LoginActivity.this, "Login Successfully ", Toast.LENGTH_SHORT).show();
-                    Intent in = new Intent(LoginActivity.this, MainBuyerActivity.class);
-                    in.putExtra("EXIT", "0");
-                    in.putExtra("USERTYPE", STR_User_Type);
-                    in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    LoginActivity.this.startActivity(in);
-                    finish();
+                        Toast.makeText(LoginActivity.this, "Login Successfully ", Toast.LENGTH_SHORT).show();
+                        Intent in = new Intent(LoginActivity.this, MainBuyerActivity.class);
+                        in.putExtra("EXIT", "0");
+                        in.putExtra("USERTYPE", STR_User_Type);
+                        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        LoginActivity.this.startActivity(in);
+                        finish();
+                    } else {
+
+                        Toast.makeText(LoginActivity.this, "Login Successfully ", Toast.LENGTH_SHORT).show();
+                        Intent in = new Intent(LoginActivity.this, MainSellerActivity.class);
+                        in.putExtra("EXIT", "0");
+                        in.putExtra("USERTYPE", STR_User_Type);
+                        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        LoginActivity.this.startActivity(in);
+                        finish();
+                    }
+
                 } else if (result.equalsIgnoreCase("unsuccessful")) {
 
                     /**************** Start Animation ****************/
