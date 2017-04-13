@@ -566,7 +566,7 @@ public class InventorySingleOrderActivity extends AppCompatActivity {
                     SubCatPage.putExtra("MainCatID", MainCategory_ID);
                     SubCatPage.putExtra("SubCatName", Category_Name_for_Sub_Category);
 //                    SubCatPage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    MainActivity.this.startActivity(SubCatPage);
+                    MainBuyerActivity.this.startActivity(SubCatPage);
 //                    finish();*//*
 
                 }

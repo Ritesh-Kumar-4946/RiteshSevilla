@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.ritesh.sevilla.Constant.Appconstant;
@@ -65,7 +64,7 @@ public class SplashActivity extends AppCompatActivity {
                         && !Appconstant.str_login_test.toString().trim().equals("")) {
 
                     Log.e("Login detail found :", "Go to Main Screen");
-                    Intent Gomainscreen = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent Gomainscreen = new Intent(getApplicationContext(), MainBuyerActivity.class);
                     startActivity(Gomainscreen);
                     finish();
                 }

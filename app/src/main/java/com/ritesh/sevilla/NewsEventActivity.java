@@ -170,6 +170,14 @@ public class NewsEventActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
+
+        TB_news_event.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed(); // Implemented by activity
+            }
+        });
+
         News_Event_rowItems = new ArrayList<NewsEventActivity>();
         News_Event_id = new ArrayList<>();
         News_Event_tittles = new ArrayList<>();
@@ -198,14 +206,6 @@ public class NewsEventActivity extends AppCompatActivity {
                             .text("Please Your Internet Connectivity..!!"));
 
         }
-
-
-        TB_news_event.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed(); // Implemented by activity
-            }
-        });
 
 
 

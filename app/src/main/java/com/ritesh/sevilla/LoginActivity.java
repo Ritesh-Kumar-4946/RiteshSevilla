@@ -19,21 +19,14 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.ritesh.sevilla.Constant.Appconstant;
-import com.ritesh.sevilla.Constant.HttpUrlPath;
 import com.ritesh.sevilla.Constant.Utils;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -340,7 +333,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                     Toast.makeText(LoginActivity.this, "Login Successfully ", Toast.LENGTH_SHORT).show();
-                    Intent in = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent in = new Intent(LoginActivity.this, MainBuyerActivity.class);
                     in.putExtra("EXIT", "0");
                     in.putExtra("USERTYPE", STR_User_Type);
                     in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

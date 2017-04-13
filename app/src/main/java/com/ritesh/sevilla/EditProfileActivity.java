@@ -549,7 +549,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void ProfileImagePicker() {
         QuickTipDialog = new Dialog(EditProfileActivity.this);
-//                callFeeDialog = new Dialog(MainActivity.this);
+//                callFeeDialog = new Dialog(MainBuyerActivity.this);
         QuickTipDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         QuickTipDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         QuickTipDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

@@ -74,7 +74,7 @@ import me.relex.circleindicator.CircleIndicator;
  * Created by ritesh on 9/2/17.
  */
 @SuppressWarnings("deprecation")
-public class MainActivity extends AppCompatActivity {
+public class MainBuyerActivity extends AppCompatActivity {
 
     @BindView(R.id.drawerLayout)
     DrawerLayout drawer;
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
             Str_Get_User_Type = "",
             Str_Get_Status = "";
 
-    List<MainActivity> rowItems;
+    List<MainBuyerActivity> rowItems;
     private ArrayList<String> cat_images;
     private ArrayList<String> cat_names;
     private ArrayList<String> cat_id;
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_buyer);
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar_Main);
@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
         User_ID = Appconstant.sh.getString("id", null);
         Str_Get_User_Type = Appconstant.sh.getString("usertype", null);
         Log.e("User_ID from SharedPref :", "" + User_ID);
-        Log.e("MainActivity Login User Type :", "" + Str_Get_User_Type);
+        Log.e("MainBuyerActivity Login User Type :", "" + Str_Get_User_Type);
         if (Str_Get_User_Type != null && Str_Get_User_Type.equalsIgnoreCase("Seller")) {
             rl_Dr_Publicate_New.setVisibility(View.VISIBLE);
         } else {
@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
 
             SnackbarManager.show(
-                    Snackbar.with(MainActivity.this)
+                    Snackbar.with(MainBuyerActivity.this)
                             .position(Snackbar.SnackbarPosition.TOP)
                             .margin(15, 15)
                             .backgroundDrawable(R.drawable.snackbar_custom_layout)
@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
 
             SnackbarManager.show(
-                    Snackbar.with(MainActivity.this)
+                    Snackbar.with(MainBuyerActivity.this)
                             .position(Snackbar.SnackbarPosition.TOP)
                             .margin(15, 15)
                             .backgroundDrawable(R.drawable.snackbar_custom_layout)
@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
         /*recycler data (Start 02 of 03)*/
         /*image settin by universal image loader */
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).build();
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(MainActivity.this).defaultDisplayImageOptions(defaultOptions).build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(MainBuyerActivity.this).defaultDisplayImageOptions(defaultOptions).build();
         ImageLoader.getInstance().init(config);
         /*image settin by universal image loader */
 
@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
         /*circular progress bar (End)*/
 
 
-        rowItems = new ArrayList<MainActivity>();
+        rowItems = new ArrayList<MainBuyerActivity>();
         cat_images = new ArrayList<>();
         cat_names = new ArrayList<>();
         cat_id = new ArrayList<>();
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         main_recylerView.setLayoutManager(mLayoutManager);
-        main_recylerView.addItemDecoration(new MainActivity.EqualSpaceItemDecoration(5));
+        main_recylerView.addItemDecoration(new MainBuyerActivity.EqualSpaceItemDecoration(5));
 
 
         if (Utils.isConnected(getApplicationContext())) {
@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
 
             SnackbarManager.show(
-                    Snackbar.with(MainActivity.this)
+                    Snackbar.with(MainBuyerActivity.this)
                             .position(Snackbar.SnackbarPosition.TOP)
                             .margin(15, 15)
                             .backgroundDrawable(R.drawable.snackbar_custom_layout)
@@ -332,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
 
         /*image setting by universal image loader */
         DisplayImageOptions defaultOptionsrecycler = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).build();
-        ImageLoaderConfiguration configrecycler = new ImageLoaderConfiguration.Builder(MainActivity.this).defaultDisplayImageOptions(defaultOptionsrecycler).build();
+        ImageLoaderConfiguration configrecycler = new ImageLoaderConfiguration.Builder(MainBuyerActivity.this).defaultDisplayImageOptions(defaultOptionsrecycler).build();
         ImageLoader.getInstance().init(configrecycler);
         /*image settin by universal image loader */
 
@@ -366,7 +366,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String URLProfileimage = STR_Fb_User_Image;
-                Intent intentprofileimage = new Intent(MainActivity.this, WebViewProfileImage.class);
+                Intent intentprofileimage = new Intent(MainBuyerActivity.this, WebViewProfileImage.class);
                 intentprofileimage.putExtra("URLP", URLProfileimage);
 
                 Log.e("********** URLProfileimage ********** :", " " + STR_Fb_User_Image);
@@ -420,7 +420,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     Intent MyCartPage = new Intent(getApplicationContext(), MyCartActivity.class);
-                    MainActivity.this.startActivity(MyCartPage);
+                    MainBuyerActivity.this.startActivity(MyCartPage);
 
                     return true;
                 }
@@ -436,7 +436,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
 //                Toast.makeText(getApplicationContext(), "Home Clicked", Toast.LENGTH_SHORT).show();
-                Intent GoMainScreen = new Intent(getApplicationContext(), MainActivity.class);
+                Intent GoMainScreen = new Intent(getApplicationContext(), MainBuyerActivity.class);
                 startActivity(GoMainScreen);
             }
         });
@@ -454,7 +454,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 Toast.makeText(getApplicationContext(), "Place Seller Clicked", Toast.LENGTH_SHORT).show();
-                /*Intent GoMainScreen = new Intent(getApplicationContext(), MainActivity.class);
+                /*Intent GoMainScreen = new Intent(getApplicationContext(), MainBuyerActivity.class);
                 startActivity(GoMainScreen);*/
             }
         });
@@ -534,7 +534,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainBuyerActivity.this);
                 builder.setMessage("Are you sure you want to Logout?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -584,7 +584,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
 
             SnackbarManager.show(
-                    Snackbar.with(MainActivity.this)
+                    Snackbar.with(MainBuyerActivity.this)
                             .position(Snackbar.SnackbarPosition.TOP)
                             .margin(15, 15)
                             .backgroundDrawable(R.drawable.snackbar_custom_layout)
@@ -647,7 +647,7 @@ public class MainActivity extends AppCompatActivity {
             ImagesArray.add(IMAGES[i]);
 
 
-        VP_banner_slidder.setAdapter(new CustomPagerAdapter(MainActivity.this, ImagesArray));
+        VP_banner_slidder.setAdapter(new CustomPagerAdapter(MainBuyerActivity.this, ImagesArray));
         CI_indicator.setViewPager(VP_banner_slidder);
         NUM_PAGES = IMAGES.length;
 
@@ -676,7 +676,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 currentPage = position;
                 Log.e("Curent Page :", "" + currentPage);
-//                Toast.makeText(MainActivity.this, "Curent Page" + "" + currentPage, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainBuyerActivity.this, "Curent Page" + "" + currentPage, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -811,7 +811,7 @@ public class MainActivity extends AppCompatActivity {
                         .duration(700)
                         .playOn(rl_cart_badgeview_main);
                 /**************** End Animation ****************/
-                CategoryAdapter categoryAdapter = new MainActivity.CategoryAdapter(MainActivity.this, mystring);
+                CategoryAdapter categoryAdapter = new MainBuyerActivity.CategoryAdapter(MainBuyerActivity.this, mystring);
                 main_recylerView.setAdapter(categoryAdapter);
 
 
@@ -894,6 +894,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("Str_Get_user_image :", "" + Str_Get_user_image);
 
                     TV_user_profile_name.setText(Str_Get_user_name);
+                    TV_user_profile_type.setText(Str_Get_User_Type);
 
 
                     ImageLoader imageLoader = ImageLoader.getInstance();
@@ -922,7 +923,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.e("onPostExecute Sub_cat_id size is Zero ", "ooppss");
                     SnackbarManager.show(
-                            Snackbar.with(MainActivity.this)
+                            Snackbar.with(MainBuyerActivity.this)
                                     .position(Snackbar.SnackbarPosition.TOP)
                                     .margin(15, 15)
                                     .backgroundDrawable(R.drawable.snackbar_custom_layout)
@@ -1000,7 +1001,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.e("onPostExecute Error ", "ooppss");
                     SnackbarManager.show(
-                            Snackbar.with(MainActivity.this)
+                            Snackbar.with(MainBuyerActivity.this)
                                     .position(Snackbar.SnackbarPosition.TOP)
                                     .margin(15, 15)
                                     .backgroundDrawable(R.drawable.snackbar_custom_layout)
@@ -1012,7 +1013,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private class CategoryAdapter extends RecyclerView.Adapter<MainActivity.CategoryAdapter.MyViewHolder> {
+    private class CategoryAdapter extends RecyclerView.Adapter<MainBuyerActivity.CategoryAdapter.MyViewHolder> {
 
         private Context mContext;
         private List<BeanMainCategory> arrayList;
@@ -1043,15 +1044,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public MainActivity.CategoryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public MainBuyerActivity.CategoryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.activity_main_category_grid_items, parent, false);
 
-            return new MainActivity.CategoryAdapter.MyViewHolder(itemView);
+            return new MainBuyerActivity.CategoryAdapter.MyViewHolder(itemView);
         }
 
         @Override
-        public void onBindViewHolder(final MainActivity.CategoryAdapter.MyViewHolder holder, final int position) {
+        public void onBindViewHolder(final MainBuyerActivity.CategoryAdapter.MyViewHolder holder, final int position) {
 
             holder.CatName.setText(Html.fromHtml(arrayList.get(position).getUsername()));
 
@@ -1106,7 +1107,7 @@ public class MainActivity extends AppCompatActivity {
                     SubCatPage.putExtra("MainCatID", MainCategory_ID);
                     SubCatPage.putExtra("SubCatName", Category_Name_for_Sub_Category);
 //                    SubCatPage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    MainActivity.this.startActivity(SubCatPage);
+                    MainBuyerActivity.this.startActivity(SubCatPage);
 //                    finish();
 
                 }
@@ -1169,13 +1170,13 @@ public class MainActivity extends AppCompatActivity {
 //            case R.id.menu_search:
     // Single menu item is selected do something
     // Ex: launching new activity/screen or show alert message
-//                Toast.makeText(MainActivity.this, "Search is Selected", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainBuyerActivity.this, "Search is Selected", Toast.LENGTH_SHORT).show();
 //                return true;
 
 //            case R.id.menu_cart:
-//                Toast.makeText(MainActivity.this, "Cart is Selected", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainBuyerActivity.this, "Cart is Selected", Toast.LENGTH_SHORT).show();
                 /*Intent SubCatPage = new Intent(getApplicationContext(), MyCartActivity.class);
-                MainActivity.this.startActivity(SubCatPage);*/
+                MainBuyerActivity.this.startActivity(SubCatPage);*/
 
 
 //                return true;
@@ -1193,7 +1194,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         moveTaskToBack(true);
-                        MainActivity.this.finish();
+                        MainBuyerActivity.this.finish();
 
                         finish();
                     }

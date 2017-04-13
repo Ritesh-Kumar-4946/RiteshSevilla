@@ -33,16 +33,12 @@ import com.facebook.login.widget.LoginButton;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.ritesh.sevilla.Constant.Appconstant;
-import com.ritesh.sevilla.Constant.HttpUrlPath;
 import com.ritesh.sevilla.Constant.Utils;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,13 +46,10 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -414,7 +407,7 @@ public class LoginSelectActivity extends AppCompatActivity {
                     Log.e(" STR_User_Socail_Status_Message onPostExecute:", "" + STR_User_Socail_Status_Message);
                     Toast.makeText(LoginSelectActivity.this, "Login Successfully ", Toast.LENGTH_SHORT).show();
 
-                    Intent intentFbLogin = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intentFbLogin = new Intent(getApplicationContext(), MainBuyerActivity.class);
                     intentFbLogin.putExtra("EXIT", "0");
                     intentFbLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intentFbLogin);
@@ -438,7 +431,7 @@ public class LoginSelectActivity extends AppCompatActivity {
                     Log.e(" STR_User_Socail_User_image :", "" + STR_User_Socail_User_image);
 
                     Toast.makeText(LoginSelectActivity.this, "Login Successfully ", Toast.LENGTH_SHORT).show();
-                    Intent intentFbLogin = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intentFbLogin = new Intent(getApplicationContext(), MainBuyerActivity.class);
                     intentFbLogin.putExtra("EXIT", "0");
                     intentFbLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intentFbLogin);

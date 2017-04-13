@@ -132,6 +132,19 @@ public class NewsEventSingleActivity extends AppCompatActivity {
         updateValues();
 
 
+        setSupportActionBar(TB_news_event_single);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+
+        TB_news_event_single.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed(); // Implemented by activity
+            }
+        });
+
         DisplayImageOptions defaultOptionss = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
                 .cacheOnDisk(true)

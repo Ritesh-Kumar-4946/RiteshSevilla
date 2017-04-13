@@ -552,7 +552,7 @@ public class GetDeliveryAddress extends AppCompatActivity {
 
                     Log.e("Get_ClearCart_Result :", "" + Get_ClearCart_Result);
 
-                    Intent GoMainScreen = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent GoMainScreen = new Intent(getApplicationContext(), MainBuyerActivity.class);
                     GoMainScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(GoMainScreen);
                     finish();
