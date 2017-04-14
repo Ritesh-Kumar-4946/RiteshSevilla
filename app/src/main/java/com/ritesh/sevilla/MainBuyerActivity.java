@@ -483,7 +483,7 @@ public class MainBuyerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-                Toast.makeText(getApplicationContext(), "Edit Profile Clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Edit Profile Clicked", Toast.LENGTH_SHORT).show();
                 Intent GoEditScreen = new Intent(getApplicationContext(), EditProfileActivity.class);
                 startActivity(GoEditScreen);
             }
@@ -540,11 +540,14 @@ public class MainBuyerActivity extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Appconstant.editor.remove("loginTest");
+                                Appconstant.editor.clear();
                                 Appconstant.editor.commit();
                                 disconnectFromFacebook();
                                 Toast.makeText(getApplicationContext(), "You have successfully logout",
                                         Toast.LENGTH_SHORT).show();
                                 Intent GoLoginscreen = new Intent(getApplicationContext(), LoginSelectActivity.class);
+                                GoLoginscreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                GoLoginscreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(GoLoginscreen);
                                 finish();
                             }

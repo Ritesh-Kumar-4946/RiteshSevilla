@@ -15,6 +15,7 @@ public class Appconstant {
     public static SharedPreferences.Editor editor;                // editor
     public static SharedPreferences sh;             // sharedpreference variable
     public static String str_login_test;                         // for checking the value of islogin in splash screen
+    public static String str_login_usertype;                         // for checking the value of usertype in splash screen
     public static final String MyPREFERENCES = "myprefe";
 
 }

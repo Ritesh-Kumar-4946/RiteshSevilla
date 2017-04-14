@@ -30,6 +30,7 @@
     <string name="edt_contact_support_email_hint_text">Enter Your Email</string>
     <string name="edt_contact_support_phone_hint_text">Enter Your Phone Number</string>
     <string name="edt_product_price_hint">Product Price</string>
+    <string name="edt_product_description_hint">Product Description</string>
     <string name="edt_contact_support_query_hint">What can we help with?</string>
     <string name="edt_product_name_allowed_text">0123456789abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="edt_contact_support_allowed_number">+0123456789</string>
@@ -41,6 +42,7 @@
     <string name="tv_order_total_price">00</string>
     <string name="tv_order_status">Status</string>
     <string name="tv_order_btn_detail">Detail</string>
+    <string name="tv_no_product_found">No Product Found click here for add Product</string>
     <string name="btn_address_continue_payment">Continue to payment</string>
     <string name="btn_update">Update</string>
     <string name="spinner_hint">Buyer</string>
@@ -72,6 +74,7 @@
     <string name="toolbar_image">Logo Image</string>
     <string name="drawer_image_home">Home Image</string>
     <string name="dr_tv_home">Home</string>
+    <string name="dr_tv_my_product">My Product</string>
     <string name="dr_tv_home_seller">My Product</string>
     <string name="dr_tv_delivery">Delivery Address</string>
     <string name="toolbar_tv_payment_check">Payment</string>
@@ -114,6 +117,7 @@
     <string name="tv_toolbar_inventory_order">Inventory History</string>
     <string name="tv_toolbar_news_event">News/Events</string>
     <string name="tv_toolbar_subcategory_name">SubCategory Name</string>
+    <string name="tv_toolbar_single_product_name">Product Detail</string>
     <string name="tv_toolbar_my_cart">My Cart</string>
     <string name="tv_toolbar_order_detail_text">Order Number :</string>
     <string name="tv_toolbar_order_detail_number">Order Number</string>
@@ -139,6 +143,7 @@
     <string name="tv_my_cart_checkout_bracket_open">(</string>
     <string name="tv_my_cart_checkout_bracket_closed">)</string>
     <string name="tv_subcategory_single_product_add_cart">ADD TO CART</string>
+    <string name="tv_single_product_delete">DELETE PRODUCT</string>
     <string name="tv_my_address_confirm">CONFIRM</string>
     <string name="tv_my_address_edit_address">Edit Address</string>
     <string name="tv_subcategory_single_product_quantity_number">00</string>

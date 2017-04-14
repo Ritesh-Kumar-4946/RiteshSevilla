@@ -332,22 +332,22 @@ public class LoginActivity extends AppCompatActivity {
                     Log.e("Login STR_User_Type :", "" + STR_User_Type);
 
                     if (STR_User_Type.equalsIgnoreCase("Buyer")) {
-
+                        Log.e("Yooooooo Login STR_User_Type :", "" + STR_User_Type);
                         Toast.makeText(LoginActivity.this, "Login Successfully ", Toast.LENGTH_SHORT).show();
-                        Intent in = new Intent(LoginActivity.this, MainBuyerActivity.class);
-                        in.putExtra("EXIT", "0");
-                        in.putExtra("USERTYPE", STR_User_Type);
-                        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        LoginActivity.this.startActivity(in);
+                        Intent MainBuyer = new Intent(LoginActivity.this, MainBuyerActivity.class);
+                        MainBuyer.putExtra("EXIT", "0");
+                        MainBuyer.putExtra("USERTYPE", STR_User_Type);
+                        MainBuyer.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(MainBuyer);
                         finish();
-                    } else {
-
+                    } else if (STR_User_Type.equalsIgnoreCase("Seller")){
+                        Log.e("Wowoooooo Login STR_User_Type :", "" + STR_User_Type);
                         Toast.makeText(LoginActivity.this, "Login Successfully ", Toast.LENGTH_SHORT).show();
-                        Intent in = new Intent(LoginActivity.this, MainSellerActivity.class);
-                        in.putExtra("EXIT", "0");
-                        in.putExtra("USERTYPE", STR_User_Type);
-                        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        LoginActivity.this.startActivity(in);
+                        Intent MainSeller = new Intent(LoginActivity.this, MainSellerActivity.class);
+                        MainSeller.putExtra("EXIT", "0");
+                        MainSeller.putExtra("USERTYPE", STR_User_Type);
+                        MainSeller.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(MainSeller);
                         finish();
                     }
 

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainSellerActivity">
 
 
     <android.support.v7.widget.Toolbar
@@ -26,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:text="@string/dr_tv_home"
+                android:text="@string/dr_tv_my_product"
                 android:textColor="@color/text_color_white"
                 android:textSize="18sp" />
 
@@ -66,6 +68,48 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scrollbars="vertical" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_no_product_found"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/gv_seller_product_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_noo_image" />
+
+                    <ImageView
+                        android:id="@+id/iv_no_product_found"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:background="@color/main_grid_overlay_semitransparent"
+                        android:scaleType="fitCenter" />
+
+                    <TextView
+                        android:id="@+id/tv_no_product_found"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="@string/tv_no_product_found"
+                        android:textColor="@color/text_color_black"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+
 
             </RelativeLayout>
 
@@ -136,7 +180,8 @@
                         android:id="@+id/rl_profileprogressbar_seller"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true">
+                        android:layout_centerInParent="true"
+                        android:visibility="gone">
 
                         <ProgressBar
                             android:id="@+id/profileprogressbar_seller"
@@ -243,9 +288,8 @@
                     </RelativeLayout>
 
 
-
                     <RelativeLayout
-                        android:id="@+id/rl_dr_place_seller"
+                        android:id="@+id/rl_dr_order_sales_mode"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_below="@id/rl_dr_home_seller"
@@ -283,12 +327,11 @@
                     </RelativeLayout>
 
 
-
                     <RelativeLayout
-                        android:id="@+id/rl_dr_inventory_seller"
+                        android:id="@+id/rl_dr_my_shipment"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_below="@id/rl_dr_place_seller"
+                        android:layout_below="@id/rl_dr_order_sales_mode"
                         android:background="@drawable/drawable_list_item_click_effect">
 
                         <RelativeLayout
@@ -327,7 +370,7 @@
                         android:id="@+id/rl_dr_publicate_new_seller"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_below="@id/rl_dr_inventory_seller"
+                        android:layout_below="@id/rl_dr_my_shipment"
                         android:background="@drawable/drawable_list_item_click_effect">
 
                         <RelativeLayout

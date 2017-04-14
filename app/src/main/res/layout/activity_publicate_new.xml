@@ -371,7 +371,7 @@
                         android:layout_below="@id/tv_product_description"
                         android:background="@drawable/et_background"
                         android:gravity="top|center_vertical"
-                        android:hint="@string/edt_product_price_hint"
+                        android:hint="@string/edt_product_description_hint"
                         android:inputType="textMultiLine"
                         android:padding="10dp"
                         android:textColor="@color/text_black_color"

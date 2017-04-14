@@ -2,6 +2,7 @@ package com.ritesh.sevilla;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -987,13 +988,18 @@ public class PublicateNewActivity extends AppCompatActivity {
 
             if (!iserror) {
                 if (Str_publicate_new_Result.equalsIgnoreCase("success")) {
-
+                    Log.e("GoMainSellerScreen ", "OK");
                     SnackbarManager.show(
                             Snackbar.with(PublicateNewActivity.this)
                                     .position(Snackbar.SnackbarPosition.TOP)
                                     .margin(15, 15)
                                     .backgroundDrawable(R.drawable.snackbar_custom_layout)
                                     .text("Product Published..!!"));
+
+                    Intent GoMainSellerScreen = new Intent(PublicateNewActivity.this, MainSellerActivity.class);
+                    GoMainSellerScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(GoMainSellerScreen);
+                    finish();
 
 
                 } else {

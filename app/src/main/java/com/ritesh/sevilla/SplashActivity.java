@@ -47,6 +47,7 @@ public class SplashActivity extends AppCompatActivity {
 
         // check here if user is login or not
         Appconstant.str_login_test = Appconstant.sh.getString("loginTest", null);
+        Appconstant.str_login_usertype = Appconstant.sh.getString("usertype", null);
 
         if (getIntent().getBooleanExtra("EXIT", false)) {
             finish();
@@ -64,9 +65,18 @@ public class SplashActivity extends AppCompatActivity {
                         && !Appconstant.str_login_test.toString().trim().equals("")) {
 
                     Log.e("Login detail found :", "Go to Main Screen");
-                    Intent Gomainscreen = new Intent(getApplicationContext(), MainBuyerActivity.class);
-                    startActivity(Gomainscreen);
-                    finish();
+                    if (Appconstant.str_login_usertype.equalsIgnoreCase("Buyer")) {
+                        Log.e("Login User Type :", "Buyer");
+                        Intent Gomainscreen = new Intent(getApplicationContext(), MainBuyerActivity.class);
+                        startActivity(Gomainscreen);
+                        finish();
+
+                    } else if (Appconstant.str_login_usertype.equalsIgnoreCase("Seller")) {
+                        Log.e("Login User Type :", "Seller");
+                        Intent Gomainscreen = new Intent(getApplicationContext(), MainSellerActivity.class);
+                        startActivity(Gomainscreen);
+                        finish();
+                    }
                 }
                 /* if user login test is false on oncreate then redirect the user to login & registration page */
                 else {
