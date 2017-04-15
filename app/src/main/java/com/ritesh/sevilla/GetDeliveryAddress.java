@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
@@ -337,6 +338,9 @@ public class GetDeliveryAddress extends AppCompatActivity {
                     TV_my_address_user_city.setText(Html.fromHtml(Get_user_address_city));
                     TV_my_address_user_zip.setText(Html.fromHtml(Get_user_address_zipcode));
 
+                    Toast.makeText(GetDeliveryAddress.this, "Check your Address",
+                            Toast.LENGTH_SHORT).show();
+
                 } else if (Get_user_address_result.equalsIgnoreCase("unsuccessfull")) {
 
                     Log.e("********* UserGetAddressJsontask *********", "unsuccessfull ERROR");
@@ -448,7 +452,6 @@ public class GetDeliveryAddress extends AppCompatActivity {
                                     .text("Order Placed.. Successfully"));
 
 
-
                     if (Utils.isConnected(getApplication())) {
                         ClearCartJsontask task = new ClearCartJsontask();
                         task.execute();
@@ -506,7 +509,7 @@ public class GetDeliveryAddress extends AppCompatActivity {
             RL_my_address_progress.setVisibility(View.VISIBLE);
             Log.e("User_ID From Shared Preference :", "" + User_ID);
             Log.e("Clear Cart URL :",
-                    "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/clear_cart.php?user_id="+User_ID);
+                    "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/clear_cart.php?user_id=" + User_ID);
 
         }
 
@@ -515,12 +518,12 @@ public class GetDeliveryAddress extends AppCompatActivity {
             Log.e("******* NOW ClearCartJsontask TASK IS in doInBackground *******", "YES");
 
             HttpClient clientClearCart = new DefaultHttpClient();
-            HttpPost postClearCart  = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/clear_cart.php?user_id=" + User_ID);
+            HttpPost postClearCart = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/clear_cart.php?user_id=" + User_ID);
 
             try {
 
                 HttpResponse responseClearCart = clientClearCart.execute(postClearCart);
-                String objectClearCart  = EntityUtils.toString(responseClearCart .getEntity());
+                String objectClearCart = EntityUtils.toString(responseClearCart.getEntity());
                 Log.e("*******objectClearCart******** :", "" + objectClearCart);
 
                 //JSONArray js = new JSONArray(object);
@@ -579,7 +582,6 @@ public class GetDeliveryAddress extends AppCompatActivity {
         }
 
     }
-
 
 
 }

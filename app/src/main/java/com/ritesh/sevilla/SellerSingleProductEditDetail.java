@@ -376,6 +376,7 @@ public class SellerSingleProductEditDetail extends AppCompatActivity {
 
     }
 
+
     private void updateValuesImage() {
         CircularProgressDrawable circularProgressDrawable;
         CircularProgressDrawable.Builder b = new CircularProgressDrawable.Builder(this)

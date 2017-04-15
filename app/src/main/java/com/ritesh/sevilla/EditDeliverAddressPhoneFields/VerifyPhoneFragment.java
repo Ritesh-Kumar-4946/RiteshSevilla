@@ -17,6 +17,7 @@
 package com.ritesh.sevilla.EditDeliverAddressPhoneFields;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -31,6 +32,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -41,7 +43,9 @@ import com.ritesh.sevilla.Constant.Appconstant;
 import com.ritesh.sevilla.Constant.Utils;
 import com.ritesh.sevilla.GetDeliveryAddress;
 import com.ritesh.sevilla.LoginActivity;
+import com.ritesh.sevilla.MainSellerActivity;
 import com.ritesh.sevilla.R;
+import com.ritesh.sevilla.SellerSingleProductEditDetail;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -938,16 +942,14 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                     SP_user_state.setItems(resultState);
                     Get_user_state_default = resultState.get(0);
 
-                    for(int i=0;i<resultState.size();i++)
-                    {
-                        String countryName=resultState.get(i);
-                        if(countryName.equals(resultState))//for default selection
+                    for (int i = 0; i < resultState.size(); i++) {
+                        String countryName = resultState.get(i);
+                        if (countryName.equals(resultState))//for default selection
                         {
                             SP_user_state.setSelectedIndex(i);
 
                         }
                     }
-
 
 
                     Log.e("Get_user_state_default ", "" + Get_user_state_default);
@@ -1053,10 +1055,9 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                     SP_user_city.setItems(resultCity);
                     Get_user_city_default = resultCity.get(0);
 
-                    for(int i=0;i<resultCity.size();i++)
-                    {
-                        String countryName=resultCity.get(i);
-                        if(countryName.equals(resultCity))//for default selection
+                    for (int i = 0; i < resultCity.size(); i++) {
+                        String countryName = resultCity.get(i);
+                        if (countryName.equals(resultCity))//for default selection
                         {
                             SP_user_city.setSelectedIndex(i);
 
@@ -1296,7 +1297,8 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                 if (Update_user_address_Result.equalsIgnoreCase("successfull")) {
 
                     Log.e("No Error :", "Update_user_address_Result successfull  OK");
-
+                    Toast.makeText(getActivity(), "Address save in our DataBase ",
+                            Toast.LENGTH_SHORT).show();
                     Log.e("Update_user_address_Result :", "" + Update_user_address_Result);
                     Log.e("Update_user_address_Status :", "" + Update_user_address_Status);
                     Log.e("Update_user_address_message :", "" + Update_user_address_message);
@@ -1315,6 +1317,12 @@ public class VerifyPhoneFragment extends BaseFlagFragment {
                     ET_address_user_address.setText(Html.fromHtml(Get_user_address_address));
                     ET_address_phone.setText(Html.fromHtml(Get_user_address_phone_number));
                     ET_address_user_zip_code.setText(Html.fromHtml(Get_user_address_zipcode));
+
+                    Intent GoDeliveryScreen = new Intent(getActivity(), GetDeliveryAddress.class);
+                    GoDeliveryScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(GoDeliveryScreen);
+                    getActivity().finish();
+
 
                 } else if (Get_user_address_result.equalsIgnoreCase("unsuccessfull")) {
 
