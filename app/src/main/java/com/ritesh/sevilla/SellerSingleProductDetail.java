@@ -1,6 +1,7 @@
 package com.ritesh.sevilla;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,11 +10,15 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.facebook.FacebookSdk;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
@@ -32,6 +37,7 @@ import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import fr.castorflex.android.circularprogressbar.CircularProgressDrawable;
@@ -77,7 +83,7 @@ public class SellerSingleProductDetail extends AppCompatActivity {
     CircularProgressBar CPB_single_product_main_progressbar;
 
 
-    @BindView(R.id.rl_single_product_imageprogress)
+    @BindView(R.id.rl_single_product_image_progres)
     RelativeLayout RL_single_product_imageprogress;
 
     CircularProgressBar CPB_single_product_image_progressbar;
@@ -85,6 +91,8 @@ public class SellerSingleProductDetail extends AppCompatActivity {
 
     String
             User_ID = "",
+            Str_Get_SellerProduct_Delete_Status = "",
+            Str_Get_SellerProduct_Delete_Result = "",
             SellerSingleProduct_Status = "",
             SellerSingleProduct_ID = "",
             SellerSingleProduct_User_ID = "",
@@ -152,6 +160,106 @@ public class SellerSingleProductDetail extends AppCompatActivity {
                             .text("Please Your Internet Connectivity..!!"));
 
         }
+
+
+        CV_single_product_edit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                    Log.e("Action ", "Down");
+                    CV_single_product_edit_pressed.setVisibility(View.VISIBLE);
+                    CV_single_product_edit.setVisibility(View.GONE);
+
+                    return true;
+                }
+
+                if (event.getAction() == MotionEvent.ACTION_MOVE) {
+
+                    Log.e("Action ", "Move");
+                    CV_single_product_edit_pressed.setVisibility(View.VISIBLE);
+                    CV_single_product_edit.setVisibility(View.GONE);
+
+                    return true;
+
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                    Log.e("Action ", "Up");
+
+                    CV_single_product_edit_pressed.setVisibility(View.GONE);
+                    CV_single_product_edit.setVisibility(View.VISIBLE);
+
+
+                    new SweetAlertDialog(SellerSingleProductDetail.this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Are you sure?")
+                            .setContentText("Won't be able to recover this Action!")
+                            .setCancelText("No,cancel..!")
+                            .setConfirmText("Yes,Remove!")
+                            .showCancelButton(true)
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+
+                                    Log.e("Cancell Click :", "OK");
+                                    // reuse previous dialog instance, keep widget user state, reset them if you need
+                                    sDialog.setTitleText("Cancelled!")
+                                            .setContentText("Your Product is safe :)")
+                                            .setConfirmText("OK")
+                                            .showCancelButton(false)
+                                            .setCancelClickListener(null)
+                                            .setConfirmClickListener(null)
+                                            .changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                                }
+                            })
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    Log.e("Deleted Click :", "OK");
+
+                                    if (Utils.isConnected(getApplicationContext())) {
+                                        SellerSingleProductDeleteJsontask task = new SellerSingleProductDeleteJsontask();
+                                        task.execute();
+                                    } else {
+
+                                        SnackbarManager.show(
+                                                Snackbar.with(SellerSingleProductDetail.this)
+                                                        .position(Snackbar.SnackbarPosition.TOP)
+                                                        .margin(15, 15)
+                                                        .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                                        .text("Please Your Internet Connectivity..!!"));
+
+                                    }
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+
+
+                    return true;
+                }
+
+
+                return false;
+            }
+        });
+
+
+        RL_single_product_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("Edit Btn Clicked ", "OK");
+                Log.e("Edit Btn ProductId Send for Edit", "" + SellerSingleProductId_Recived);
+
+                Intent GoEditProductScreen = new Intent(SellerSingleProductDetail.this, SellerSingleProductEditDetail.class);
+                GoEditProductScreen.putExtra("ProductID", SellerSingleProductId_Recived);
+                GoEditProductScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(GoEditProductScreen);
+                finish();
+            }
+        });
 
 
     }
@@ -308,6 +416,91 @@ public class SellerSingleProductDetail extends AppCompatActivity {
 
                 } else {
                     Log.e("onPostExecute Sub_cat_id size is Zero ", "ooppss");
+                    SnackbarManager.show(
+                            Snackbar.with(SellerSingleProductDetail.this)
+                                    .position(Snackbar.SnackbarPosition.TOP)
+                                    .margin(15, 15)
+                                    .backgroundDrawable(R.drawable.snackbar_custom_layout)
+                                    .text("No Data Found"));
+                }
+            }
+        }
+
+    }
+
+
+    private class SellerSingleProductDeleteJsontask extends AsyncTask<String, Void, String> {
+
+        boolean iserror = false;
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            //  loginprogressbar.setVisibility(View.VISIBLE);
+            Log.e("******* NOW MyCartListItemDeleteJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("******* NOW MyCartListItemDeleteJsontask WEB SERVICE IS RUNNING *******", "YES");
+            Log.e("User_ID onPreExecute :", "" + User_ID);
+            Log.e("SellerSingleProductId_Recived onPreExecute :", "" + SellerSingleProductId_Recived);
+            RL_single_product_main_progress.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            Log.e("******* NOW SellerSingleProductDeleteJsontask IS doInBackground RUNNING *******", "YES");
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost("http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/delete_product.php?product_id=" + SellerSingleProductId_Recived
+                    + "&user_id=" + User_ID);
+
+
+            Log.e("URL SellerSingleProductDeleteJsontask :", "" +
+                    "http://sevilla.centrocomercial.com.es/wp-content/plugins/webserv/delete_product.php?product_id=" + SellerSingleProductId_Recived
+                    + "&user_id=" + User_ID);
+
+            try {
+                HttpResponse response = client.execute(post);
+                String Deleteobject = EntityUtils.toString(response.getEntity());
+                Log.e("*******SellerSingleProductDeleteJsontask Delete object******** :", "" + Deleteobject);
+
+                //JSONArray js = new JSONArray(object);
+                JSONObject jobect = new JSONObject(Deleteobject);
+                Str_Get_SellerProduct_Delete_Status = jobect.getString("status");
+                if (Str_Get_SellerProduct_Delete_Status.equalsIgnoreCase("OK")) {
+                    Str_Get_SellerProduct_Delete_Result = jobect.getString("result");
+
+                }
+
+            } catch (Exception e) {
+                Log.v("22", "22" + e.getMessage());
+                e.printStackTrace();
+                iserror = true;
+            }
+
+            return Str_Get_SellerProduct_Delete_Status;
+        }
+
+        @Override
+        protected void onPostExecute(String result1) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result1);
+            RL_single_product_main_progress.setVisibility(View.GONE);
+            if (!iserror) {
+                if (Str_Get_SellerProduct_Delete_Status.equalsIgnoreCase("OK")) {
+                    /*new SweetAlertDialog(SellerSingleProductDetail.this, SweetAlertDialog.SUCCESS_TYPE)
+                            .setTitleText("Product Deleted")
+                            .setContentText("Product List is updated!")
+                            .show();*/
+
+                    Log.e("Str_Get_SellerProduct_Delete_Status :", "" + Str_Get_SellerProduct_Delete_Status);
+                    Log.e("Str_Get_SellerProduct_Delete_Result :", "" + Str_Get_SellerProduct_Delete_Result);
+
+                    Intent GoSellerMainScreen = new Intent(SellerSingleProductDetail.this, MainSellerActivity.class);
+                    GoSellerMainScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(GoSellerMainScreen);
+                    finish();
+
+                } else {
+                    Log.e("onPostExecute Error ", "ooppss");
                     SnackbarManager.show(
                             Snackbar.with(SellerSingleProductDetail.this)
                                     .position(Snackbar.SnackbarPosition.TOP)

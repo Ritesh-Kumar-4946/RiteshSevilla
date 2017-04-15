@@ -45,608 +45,610 @@
         android:layout_below="@id/toolbar_main_seller">
 
 
-    <!--main screen dashboard items (Start)-->
-    <FrameLayout
-        android:id="@+id/containerView_seller"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="-5dp">
-
-        <RelativeLayout
-            android:id="@+id/rl_main_dashboard_seller"
+        <!--main screen dashboard items (Start)-->
+        <FrameLayout
+            android:id="@+id/containerView_seller"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_margin="-5dp">
 
             <RelativeLayout
-                android:id="@+id/rl_main_recyle_seller"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view_seller"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scrollbars="vertical" />
-
-                <RelativeLayout
-                    android:id="@+id/rl_no_product_found"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:id="@+id/gv_seller_product_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_noo_image" />
-
-                    <ImageView
-                        android:id="@+id/iv_no_product_found"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:background="@color/main_grid_overlay_semitransparent"
-                        android:scaleType="fitCenter" />
-
-                    <TextView
-                        android:id="@+id/tv_no_product_found"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center"
-                        android:text="@string/tv_no_product_found"
-                        android:textColor="@color/text_color_black"
-                        android:textSize="20sp" />
-
-                </RelativeLayout>
-
-
-            </RelativeLayout>
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_gridview_main_seller_progress"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:padding="3dp"
-            android:visibility="gone">
-
-            <fr.castorflex.android.circularprogressbar.CircularProgressBar
-                android:id="@+id/gridview_main_seller_progressbar_circular"
+                android:id="@+id/rl_main_dashboard_seller"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:indeterminate="true"
-                android:indeterminateOnly="false"
-                app:cpb_colors="@array/gplus_colors" />
-
-        </RelativeLayout>
-
-    </FrameLayout>
-    <!--main screen dashboard items (End)-->
-
-
-    <!--left <drawer oppen items> -->
-    <RelativeLayout
-        android:id="@+id/rl_left_slidingdrawer_seller"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start">
-
-        <!-- android:layout_gravity="start" -->
-
-        <RelativeLayout
-            android:id="@+id/SliderRelativelayout_seller"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RelativeLayout
-                android:id="@+id/rl_dr_header_seller"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="@color/mainscreen_toolbar">
+                android:orientation="vertical">
 
                 <RelativeLayout
-                    android:id="@+id/rl_profiel_imageview_seller"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp">
+                    android:id="@+id/rl_main_recyle_seller"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/profile_image_seller"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="@drawable/ic_profile_image_bg"
-                        android:src="@drawable/the_app_guru"
-                        app:civ_border_color="#FFFFFFFF"
-                        app:civ_border_width="2dp" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_seller"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="vertical" />
 
                     <RelativeLayout
-                        android:id="@+id/rl_profileprogressbar_seller"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/rl_no_product_found"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_centerInParent="true"
                         android:visibility="gone">
 
-                        <ProgressBar
-                            android:id="@+id/profileprogressbar_seller"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_centerHorizontal="true"
-                            android:indeterminate="false"
-                            android:max="100"
-                            android:progressDrawable="@drawable/circular_progress_bar" />
+                        <ImageView
+                            android:id="@+id/gv_seller_product_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_noo_image" />
+
+                        <ImageView
+                            android:id="@+id/iv_no_product_found"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:background="@color/main_grid_overlay_semitransparent"
+                            android:scaleType="fitCenter" />
+
+                        <TextView
+                            android:id="@+id/tv_no_product_found"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:text="@string/tv_no_product_found"
+                            android:textColor="@color/text_color_black"
+                            android:textSize="20sp" />
 
                     </RelativeLayout>
 
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/rl_user_detail_text_seller"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="10dp"
-                    android:layout_toEndOf="@id/rl_profiel_imageview_seller"
-                    android:layout_toRightOf="@id/rl_profiel_imageview_seller">
-
-                    <TextView
-                        android:id="@+id/tv_user_progile_name_seller"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="3"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="@string/user_name"
-                        android:textColor="#FFFFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_user_profile_type_seller"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_user_progile_name_seller"
-                        android:ems="3"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="@string/user_account_type"
-                        android:textColor="#FFFFFFFF"
-                        android:textSize="15sp"
-                        android:textStyle="normal" />
 
                 </RelativeLayout>
 
 
             </RelativeLayout>
 
-            <ScrollView
-                android:id="@+id/sv_dr_items_seller"
+            <RelativeLayout
+                android:id="@+id/rl_gridview_main_seller_progress"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:padding="3dp"
+                android:visibility="gone">
+
+                <fr.castorflex.android.circularprogressbar.CircularProgressBar
+                    android:id="@+id/gridview_main_seller_progressbar_circular"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:indeterminate="true"
+                    android:indeterminateOnly="false"
+                    app:cpb_colors="@array/gplus_colors" />
+
+            </RelativeLayout>
+
+        </FrameLayout>
+        <!--main screen dashboard items (End)-->
+
+
+        <!--left <drawer oppen items> -->
+        <RelativeLayout
+            android:id="@+id/rl_left_slidingdrawer_seller"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start">
+
+            <!-- android:layout_gravity="start" -->
+
+            <RelativeLayout
+                android:id="@+id/SliderRelativelayout_seller"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/rl_dr_header_seller"
-                android:background="@color/sb__text_color">
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
-                    android:id="@+id/rl_drawer_items_seller"
+                    android:id="@+id/rl_dr_header_seller"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="150dp"
+                    android:background="@color/mainscreen_toolbar">
 
                     <RelativeLayout
-                        android:id="@+id/rl_dr_home_seller"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:background="@drawable/drawable_list_item_click_effect">
+                        android:id="@+id/rl_profiel_imageview_seller"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/profile_image_seller"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/ic_profile_image_bg"
+                            android:src="@drawable/the_app_guru"
+                            app:civ_border_color="#FFFFFFFF"
+                            app:civ_border_width="2dp" />
 
                         <RelativeLayout
-                            android:id="@+id/rl_iv_home_seller"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="10dp"
-                            android:padding="8dp">
+                            android:id="@+id/rl_profileprogressbar_seller"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:visibility="gone">
 
-                            <ImageView
-                                android:id="@+id/iv_home_seller"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/ic_home"
-                                android:contentDescription="@string/drawer_image_home" />
+                            <ProgressBar
+                                android:id="@+id/profileprogressbar_seller"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_centerHorizontal="true"
+                                android:indeterminate="false"
+                                android:max="100"
+                                android:progressDrawable="@drawable/circular_progress_bar" />
 
                         </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/tv_home_seller"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="15dp"
-                            android:layout_toEndOf="@id/rl_iv_home_seller"
-                            android:gravity="center_vertical"
-                            android:text="@string/dr_tv_home_seller"
-                            android:textColor="@color/text_black_color"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:id="@+id/rl_dr_order_sales_mode"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_below="@id/rl_dr_home_seller"
-                        android:background="@drawable/drawable_list_item_click_effect">
-
-                        <RelativeLayout
-                            android:id="@+id/rl_iv_place_seller"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="10dp"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:id="@+id/iv_place_seller"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/ic_place_holder"
-                                android:contentDescription="@string/drawer_image_home" />
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/tv_place_seller"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="15dp"
-                            android:layout_toEndOf="@id/rl_iv_place_seller"
-                            android:gravity="center_vertical"
-                            android:text="@string/dr_tv_order_sales_mode"
-                            android:textColor="@color/text_black_color"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:id="@+id/rl_dr_my_shipment"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_below="@id/rl_dr_order_sales_mode"
-                        android:background="@drawable/drawable_list_item_click_effect">
-
-                        <RelativeLayout
-                            android:id="@+id/rl_iv_inventory_seller"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="10dp"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:id="@+id/iv_inventory_seller"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/ic_inventry"
-                                android:contentDescription="@string/drawer_image_home" />
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/tv_inventory_seller"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="15dp"
-                            android:layout_toEndOf="@id/rl_iv_inventory_seller"
-                            android:gravity="center_vertical"
-                            android:text="@string/dr_tv_shipment_seller"
-                            android:textColor="@color/text_black_color"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:id="@+id/rl_dr_publicate_new_seller"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_below="@id/rl_dr_my_shipment"
-                        android:background="@drawable/drawable_list_item_click_effect">
-
-                        <RelativeLayout
-                            android:id="@+id/rl_iv_publicate_new_seller"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="10dp"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:id="@+id/iv_publicate_new_seller"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/ic_publicate_new"
-                                android:contentDescription="@string/drawer_image_home" />
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/tv_publicate_new_seller"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="15dp"
-                            android:layout_toEndOf="@id/rl_iv_publicate_new_seller"
-                            android:gravity="center_vertical"
-                            android:text="@string/dr_tv_publicate_new"
-                            android:textColor="@color/text_black_color"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:id="@+id/rl_dr_edit_profile_seller"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_below="@id/rl_dr_publicate_new_seller"
-                        android:background="@drawable/drawable_list_item_click_effect">
-
-                        <RelativeLayout
-                            android:id="@+id/rl_iv_edit_profile_seller"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="10dp"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:id="@+id/iv_edit_profile_seller"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/ic_edit_profile"
-                                android:contentDescription="@string/drawer_image_home" />
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/tv_edit_profile_seller"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="15dp"
-                            android:layout_toEndOf="@id/rl_iv_edit_profile_seller"
-                            android:gravity="center_vertical"
-                            android:text="@string/dr_tv_edit_profile"
-                            android:textColor="@color/text_black_color"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-
-
-                    <!--hide-->
-                    <RelativeLayout
-                        android:id="@+id/rl_dr_message_seller"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_below="@id/rl_dr_edit_profile_seller"
-                        android:background="@drawable/drawable_list_item_click_effect"
-                        android:visibility="gone">
-
-                        <RelativeLayout
-                            android:id="@+id/rl_iv_message_seller"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="10dp"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:id="@+id/iv_message_seller"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/ic_message"
-                                android:contentDescription="@string/drawer_image_home" />
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/tv_message_seller"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="15dp"
-                            android:layout_toEndOf="@id/rl_iv_message_seller"
-                            android:gravity="center_vertical"
-                            android:text="@string/dr_tv_message"
-                            android:textColor="@color/text_black_color"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-                    <!--hide-->
-
-
-                    <RelativeLayout
-                        android:id="@+id/rl_dr_contact_support_seller"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_below="@id/rl_dr_message_seller"
-                        android:background="@drawable/drawable_list_item_click_effect">
-
-                        <RelativeLayout
-                            android:id="@+id/rl_iv_contact_support_seller"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="10dp"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:id="@+id/iv_contact_support_seller"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/ic_contact_support"
-                                android:contentDescription="@string/drawer_image_home" />
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/tv_contact_support_seller"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="15dp"
-                            android:layout_toEndOf="@id/rl_iv_contact_support_seller"
-                            android:gravity="center_vertical"
-                            android:text="@string/dr_tv_contact_support"
-                            android:textColor="@color/text_black_color"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/rl_dr_about_us_seller"
+                        android:id="@+id/rl_user_detail_text_seller"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_below="@id/rl_dr_contact_support_seller"
-                        android:background="@drawable/drawable_list_item_click_effect">
-
-                        <RelativeLayout
-                            android:id="@+id/rl_iv_about_us_seller"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="10dp"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:id="@+id/iv_about_us_seller"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/ic_about_us"
-                                android:contentDescription="@string/drawer_image_home" />
-
-                        </RelativeLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="10dp"
+                        android:layout_toEndOf="@id/rl_profiel_imageview_seller"
+                        android:layout_toRightOf="@id/rl_profiel_imageview_seller">
 
                         <TextView
-                            android:id="@+id/tv_about_us_seller"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="15dp"
-                            android:layout_toEndOf="@id/rl_iv_about_us_seller"
-                            android:gravity="center_vertical"
-                            android:text="@string/dr_tv_about_us"
-                            android:textColor="@color/text_black_color"
-                            android:textSize="15sp"
+                            android:id="@+id/tv_user_progile_name_seller"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="3"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="@string/user_name"
+                            android:textColor="#FFFFFFFF"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_user_profile_type_seller"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_user_progile_name_seller"
+                            android:ems="3"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="@string/user_account_type"
+                            android:textColor="#FFFFFFFF"
+                            android:textSize="15sp"
+                            android:textStyle="normal" />
 
                     </RelativeLayout>
 
-                    <RelativeLayout
-                        android:id="@+id/rl_dr_news_event_seller"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_below="@id/rl_dr_about_us_seller"
-                        android:background="@drawable/drawable_list_item_click_effect">
-
-                        <RelativeLayout
-                            android:id="@+id/rl_iv_news_event_seller"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="10dp"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:id="@+id/iv_news_event_seller"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/ic_news_event"
-                                android:contentDescription="@string/drawer_image_home" />
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/tv_news_event_seller"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="15dp"
-                            android:layout_toEndOf="@id/rl_iv_news_event_seller"
-                            android:gravity="center_vertical"
-                            android:text="@string/dr_tv_news_event"
-                            android:textColor="@color/text_black_color"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rl_dr_logout_seller"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_below="@id/rl_dr_news_event_seller"
-                        android:background="@drawable/drawable_list_item_click_effect">
-
-                        <RelativeLayout
-                            android:id="@+id/rl_iv_logout_seller"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="10dp"
-                            android:padding="8dp">
-
-                            <ImageView
-                                android:id="@+id/iv_logout_seller"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/ic_logout"
-                                android:contentDescription="@string/drawer_image_home" />
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/tv_logout_seller"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="15dp"
-                            android:layout_toEndOf="@id/rl_iv_logout_seller"
-                            android:gravity="center_vertical"
-                            android:text="@string/dr_tv_logout"
-                            android:textColor="@color/text_black_color"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
 
                 </RelativeLayout>
 
-            </ScrollView>
+                <ScrollView
+                    android:id="@+id/sv_dr_items_seller"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_dr_header_seller"
+                    android:background="@color/sb__text_color">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_drawer_items_seller"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_home_seller"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_home_seller"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_home_seller"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_home"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_home_seller"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_home_seller"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_home_seller"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_order_sales_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_home_seller"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_place_seller"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_place_seller"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_place_holder"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_place_seller"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_place_seller"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_order_sales_mode"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_my_shipment"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_order_sales_mode"
+                            android:background="@drawable/drawable_list_item_click_effect"
+                            android:visibility="gone">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_inventory_seller"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_inventory_seller"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_inventry"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_inventory_seller"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_inventory_seller"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_shipment_seller"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_publicate_new_seller"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_my_shipment"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_publicate_new_seller"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_publicate_new_seller"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_publicate_new"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_publicate_new_seller"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_publicate_new_seller"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_publicate_new"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_edit_profile_seller"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_publicate_new_seller"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_edit_profile_seller"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_edit_profile_seller"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_edit_profile"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_edit_profile_seller"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_edit_profile_seller"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_edit_profile"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+
+                        <!--hide-->
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_message_seller"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_edit_profile_seller"
+                            android:background="@drawable/drawable_list_item_click_effect"
+                            android:visibility="gone">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_message_seller"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_message_seller"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_message"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_message_seller"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_message_seller"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_message"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+                        <!--hide-->
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_contact_support_seller"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_message_seller"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_contact_support_seller"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_contact_support_seller"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_contact_support"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_contact_support_seller"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_contact_support_seller"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_contact_support"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_about_us_seller"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_contact_support_seller"
+                            android:background="@drawable/drawable_list_item_click_effect"
+                            android:visibility="gone">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_about_us_seller"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_about_us_seller"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_about_us"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_about_us_seller"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_about_us_seller"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_about_us"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_news_event_seller"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_about_us_seller"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_news_event_seller"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_news_event_seller"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_news_event"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_news_event_seller"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_news_event_seller"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_news_event"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_dr_logout_seller"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/rl_dr_news_event_seller"
+                            android:background="@drawable/drawable_list_item_click_effect">
+
+                            <RelativeLayout
+                                android:id="@+id/rl_iv_logout_seller"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="10dp"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_logout_seller"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ic_logout"
+                                    android:contentDescription="@string/drawer_image_home" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tv_logout_seller"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="15dp"
+                                android:layout_toEndOf="@id/rl_iv_logout_seller"
+                                android:gravity="center_vertical"
+                                android:text="@string/dr_tv_logout"
+                                android:textColor="@color/text_black_color"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </ScrollView>
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
-
-
-    </RelativeLayout>
-    <!--left <drawer oppen items> -->
+        <!--left <drawer oppen items> -->
 
 
     </android.support.v4.widget.DrawerLayout>

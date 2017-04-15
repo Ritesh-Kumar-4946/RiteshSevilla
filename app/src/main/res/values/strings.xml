@@ -15,7 +15,9 @@
     <string name="user_account_type">Account Type</string>
     <string name="btn_signup">Sign Up</string>
     <string name="tv_publicate_new_text">Publish your product</string>
+    <string name="tv_edit_product_detail_text">Edit your product</string>
     <string name="tv_category_text">Category</string>
+    <string name="tv_category_text_disable">Category Name</string>
     <string name="tv_product_name_text">Product Name</string>
     <string name="tv_contact_support_name_text">User Name</string>
     <string name="tv_contact_support_email_text">User Email</string>
@@ -35,6 +37,7 @@
     <string name="edt_product_name_allowed_text">0123456789abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="edt_contact_support_allowed_number">+0123456789</string>
     <string name="tv_sbucategory_text">Subcategory</string>
+    <string name="tv_sbucategory_text_disable">Subcategory Name</string>
     <string name="tv_order_no_text">Order No. :</string>
     <string name="tv_order_date_text">Order Date :</string>
     <string name="tv_order_date">Order Date</string>
@@ -123,6 +126,7 @@
     <string name="tv_toolbar_order_detail_number">Order Number</string>
     <string name="tv_toolbar_address">My Address</string>
     <string name="tv_toolbar_publicate_new">Publicate New</string>
+    <string name="tv_toolbar_edit_product">Edit Product Detail</string>
     <string name="tv_toolbar_contact_support">Contact Support</string>
     <string name="tv_toolbar_subcategory_product">SubCategory Product</string>
     <string name="tv_subcategory_product_list_tittle">Product Name</string>
@@ -139,6 +143,7 @@
     <string name="tv_my_cart_checkout">TOTAL</string>
     <string name="tv_my_cart_checkout_text">Checkout</string>
     <string name="tv_btn_publicate_text">Publicate Now</string>
+    <string name="tv_btn_update_text">UPDATE Now</string>
     <string name="tv_btn_contact_support_text">Send</string>
     <string name="tv_my_cart_checkout_bracket_open">(</string>
     <string name="tv_my_cart_checkout_bracket_closed">)</string>

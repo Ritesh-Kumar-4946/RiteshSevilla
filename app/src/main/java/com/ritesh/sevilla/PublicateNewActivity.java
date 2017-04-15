@@ -52,7 +52,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -155,6 +157,8 @@ public class PublicateNewActivity extends AppCompatActivity {
             Str_Get_SubCategory_Value = "",
             Str_Set_SubCategory_Value = "",
             Str_GetSet_SubCategory_ID = "";
+
+    String timeStamp = "";
 
     ArrayList<String> MAIN_CATEGORY_LIST = new ArrayList<String>();
     ArrayList<String> MAIN_CATEGORY_LISTID = new ArrayList<String>();
@@ -585,6 +589,9 @@ public class PublicateNewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                timeStamp = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
+                final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
+                        java.util.Locale.getDefault());
                 new PickerBuilder(PublicateNewActivity.this, PickerBuilder.SELECT_FROM_CAMERA)
                         .setOnImageReceivedListener(new PickerBuilder.onImageReceivedListener() {
                             @Override
@@ -592,6 +599,11 @@ public class PublicateNewActivity extends AppCompatActivity {
 //                                Toast.makeText(PublicateNewActivity.this, "Got image - " + imageUri, Toast.LENGTH_LONG).show();
                                 IV_product_image.setImageURI(imageUri);
                                 Log.e("imageUri path SELECT_FROM_CAMERA :", "" + imageUri);
+                                Log.e("timeStamp :", "" + timeStamp);
+                                Log.e("timeStamp :", "" + timeStamp);
+                                Log.e("format String:", "" + format.getTimeZone().toString());
+                                Log.e("format :", "" + format);
+                                Log.e("format :", "" + format);
                                 File f = new File(imageUri.getPath());
                                 Str_publicate_newImage_path = imageUri.getPath();
                                 Log.e("Str_publicate_newImage_path SELECT_FROM_CAMERA :", "" + Str_publicate_newImage_path);
@@ -603,7 +615,7 @@ public class PublicateNewActivity extends AppCompatActivity {
                                 QuickTipDialog.dismiss();
                             }
                         })
-                        .setImageName("PublicateImage")
+                        .setImageName("PublicateImage_"+timeStamp)
                         .setImageFolderName("SevillaFolder")
                         .withTimeStamp(false)
                         .setCropScreenColor(Color.CYAN)

@@ -140,6 +140,7 @@ public class MainSellerActivity extends AppCompatActivity {
             Str_Get_SellerProduct_list = "",
             Str_Get_SellerProduct_list_result = "",
             Str_Get_SellerProduct_status = "",
+            Str_Get_SellerProduct_Count = "",
             Str_Get_SellerProduct_list_Main_result = "",
             Str_Get_SellerProduct_id = "",
             Seller_Product_id = "",
@@ -536,6 +537,7 @@ public class MainSellerActivity extends AppCompatActivity {
                 Log.e("************Json data*******************", " " + objSellerProduct);
                 JSONObject jsonObject = new JSONObject(objSellerProduct);
                 Str_Get_SellerProduct_status = jsonObject.getString("status");
+                Str_Get_SellerProduct_Count = jsonObject.getString("seller_product_count");
                 Str_Get_SellerProduct_list_Main_result = jsonObject.getString("result");
                 Str_Get_SellerProduct_list = jsonObject.getString("seller_product_list");
                 Log.e("************Json Product_Catagories data*******************", " " + Str_Get_SellerProduct_list);
@@ -593,6 +595,7 @@ public class MainSellerActivity extends AppCompatActivity {
             if (SellerProduct_id.size() > 0) {
                 Log.e(" ********** SellerProduct_id ********** ", "" + SellerProduct_id);
                 RL_no_product_found.setVisibility(View.GONE);
+                Toast.makeText(MainSellerActivity.this, Str_Get_SellerProduct_Count + " Product found", Toast.LENGTH_SHORT).show();
                 SellerProductAdapter sellerProductAdapter = new SellerProductAdapter(MainSellerActivity.this, mystring);
                 RV_seller.setAdapter(sellerProductAdapter);
 

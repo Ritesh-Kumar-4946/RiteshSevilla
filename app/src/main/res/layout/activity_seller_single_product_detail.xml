@@ -72,7 +72,7 @@
                         android:src="@drawable/ic_noo_image" />
 
                     <RelativeLayout
-                        android:id="@+id/rl_single_product_imageprogress"
+                        android:id="@+id/rl_single_product_image_progres"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_centerInParent="true"
